@@ -15,6 +15,7 @@ const [comment,setComment] = useState(false)
   if (post?.user?.username === session?.user?.username){
    return 
     }
+
   return (
     <div  style={{
           background: "rgba(10,5,25,0.9)",
@@ -51,7 +52,7 @@ const [comment,setComment] = useState(false)
       {/* Actions */}
       <div className="flex justify-between items-center text-gray-600 text-sm m-4">
         <span className="flex items-center gap-1 hover:text-red-500">
-          <Like postId={post?._id}/>
+          <Like postId={post?._id} isLiked={post?.isLiked} />
         </span>
 
         <span className="flex items-center gap-1 hover:text-blue-500">

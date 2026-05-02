@@ -6,6 +6,7 @@ import { useState } from 'react'
 import ProfileSkeleton from './loading/profielSkelton.js'
 import FollowButton from "@/components/followButton.js";
 import { useRouter } from "next/navigation";
+import StartmessageButton from './messagecomp/startmessageButton.js'
 const Profile = (userName) => {
   console.log(userName.username);
  
@@ -98,6 +99,9 @@ if(loading===true){
         )} 
         {
          !isAdmin && <FollowButton userId ={user?._id} isFollowingInitial ={isFollowing} />
+        }
+        {
+         !isAdmin && <StartmessageButton recipientId={user?._id} />
         }
             <div className="flex gap-6 mt-3 text-black">
               <div>

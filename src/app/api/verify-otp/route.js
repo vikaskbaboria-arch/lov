@@ -7,9 +7,7 @@ export const POST =async(req)=>{
             await connectDB();
             const {email,otp}= await req.json();
             const user= await User.findOne({email:email});
-            if(!user){
-                return NextResponse.json({error:"User email not found"},{status:403})
-            }
+           
             if(user.isVerified===true){
                 return NextResponse.json({error:"This account is already verified"},{status:400})
             }

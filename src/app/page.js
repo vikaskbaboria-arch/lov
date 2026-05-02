@@ -11,7 +11,7 @@ import LandingPage from "@/components/LandingPage";
 export default function Home() {
  const {data:session,status} =useSession();
 const [posts, setPosts] = useState([]);
-
+const [openCreatePost, setOpenCreatePost] = useState(false);
 useEffect(() => {
   async function fetchPosts() {
     try{
@@ -53,8 +53,13 @@ if(!session){
         <div className="flex-1 flex flex-col gap-6">
           
           {/* Create Post */}
-          <CreatePost/>
-       
+      
+          <button
+            onClick={() => setOpenCreatePost((prev) => !prev)}
+            className="bg-blue-500 text-white px-4 py-2 rounded-full self-start"
+          >
+            {openCreatePost ? "Close" : "Create Post"}
+          </button>   {openCreatePost && <CreatePost className=""/>}
           {/* Posts */}
           {posts?.map((post) => (
             <PostCard key={post._id} post={post} />

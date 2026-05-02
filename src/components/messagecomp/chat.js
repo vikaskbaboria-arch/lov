@@ -4,7 +4,7 @@ import SentMessage from './sentMessage';
 
 import { useSession } from 'next-auth/react';
 const Chat = ({convId, members}) => {
-  const [chat,setChat]= useState();
+  const [chat,setChat]= useState([]);
   const [otherUser,setOtherUser] = useState();
   const {data:session,status} = useSession()
    const bottomRef = useRef(null);
@@ -22,12 +22,12 @@ const Chat = ({convId, members}) => {
           }
         })
         const data = await res.json();
-       
-        setChat(data)
+      
+setChat(Array.isArray(data) ? data : []);
        }
        fetchMessage();
    
-  },[])
+  },[convId])
    
      
   // 🔥 auto scroll to latest message
@@ -39,6 +39,8 @@ const Chat = ({convId, members}) => {
   }
 
   console.log(chat)
+ 
+
   return (
 <div className="h-full w-full flex flex-col bg-[#0a0519] ">
 
@@ -63,7 +65,14 @@ const Chat = ({convId, members}) => {
       </div>
 
       {/* 🔥 Messages */}
-      <div className="flex-1 overflow-y-auto p-4 flex flex-col gap-2 no-scrollbar">
+    { 
+    (chat.length === 0) ? (
+      <div className="flex-1 flex items-center justify-center text-gray-500">
+        No messages yet. Say hi! 👋
+      </div>
+    ) : (
+
+    <div className="flex-1 overflow-y-auto p-4 flex flex-col gap-2 no-scrollbar">
         {chat?.map((m, i) => (
           <div
             key={i}
@@ -90,7 +99,7 @@ const Chat = ({convId, members}) => {
 
         {/* 👇 scroll anchor */}
         <div ref={bottomRef} />
-      </div>
+      </div>)}
 
       {/* 🔥 Input */}
       <div className="flex-shrink-0 border-t border-white/10 p-3 bg-[#0a0519]">

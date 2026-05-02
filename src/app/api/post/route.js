@@ -34,6 +34,8 @@ const userObjectId = new mongoose.Types.ObjectId(session?.user?.id);
 
 export const GET = async () => {
   try {
+    const session = await getServerSession(authOptions);
+
     await connectDB();
     const posts = await Post.aggregate([
       {  
@@ -117,6 +119,9 @@ export const GET = async () => {
     $addFields: {
       totalComments: { $size: "$comments" },
       totalLikes: { $size: "$likes" },
+      isLiked: {
+        $in: [new mongoose.Types.ObjectId(session?.user?.id), "$likes.userId"]
+      }
      
     }
   },

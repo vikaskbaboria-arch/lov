@@ -8,6 +8,7 @@ import { NextResponse } from "next/server";
 export const POST = async (req)=>{
         try{
          await connectDB();
+         
          const session  = await getServerSession(authOptions);
            if(!session){
             return NextResponse.json({error:"Not authenticated"},{status:401})
