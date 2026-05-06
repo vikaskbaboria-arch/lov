@@ -1,13 +1,12 @@
 import cloudinary from "@/lib/cloudinary.js";
 import { NextResponse } from "next/server";
-import fs from "fs/promises";
-import path from "path";
+import streamifier from "streamifier";
 
 export const POST = async (req) => {
   try {
     const formData = await req.formData();
     const file = formData.get("image");
-  
+
     if (!file) {
       return NextResponse.json(
         { error: "No image found" },
@@ -15,38 +14,37 @@ export const POST = async (req) => {
       );
     }
 
-    // File -> Buffer
+    // file -> buffer
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
 
-    // create temp uploads folder
-    const uploadDir = path.join(process.cwd(), "public/uploads");
-    await fs.mkdir(uploadDir, { recursive: true });
+    // upload buffer directly to cloudinary
+    const response = await new Promise((resolve, reject) => {
 
-    // create unique local path
-    const filePath = path.join(uploadDir, `${Date.now()}-${file.name}`);
+      const stream = cloudinary.uploader.upload_stream(
+        {
+          folder: "post",
+        },
+        (error, result) => {
+          if (error) reject(error);
+          else resolve(result);
+        }
+      );
 
-    // save file locally
-    await fs.writeFile(filePath, buffer);
-
-    // upload local path to cloudinary
-    const response = await cloudinary.uploader.upload(filePath, {
-      folder: "post",
-      use_filename: true,
-      format: "jpg",
+      streamifier.createReadStream(buffer).pipe(stream);
     });
-
-    // delete local temp file
-    await fs.unlink(filePath);
 
     return NextResponse.json(
       {
         success: true,
-        data: response
+        data: response,
       },
       { status: 200 }
     );
+
   } catch (error) {
+    console.error(error);
+
     return NextResponse.json(
       { error: error.message },
       { status: 500 }

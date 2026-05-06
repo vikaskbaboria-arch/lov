@@ -22,7 +22,8 @@
     "nodemailer": "^7.0.13",
     "path": "^0.12.7",
     "react": "19.2.3",
-    "react-dom": "19.2.3"
+    "react-dom": "19.2.3",
+    "streamifier": "^0.1.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
