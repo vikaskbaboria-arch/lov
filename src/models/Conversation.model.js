@@ -7,7 +7,7 @@ const conversationSchema= new Schema({
         required:true,
     
     }],
-    lastmessage:{
+    lastMessage:{
         type:String
     },
      lastMessageAt: {

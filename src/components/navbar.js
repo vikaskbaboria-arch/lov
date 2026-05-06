@@ -16,17 +16,11 @@ const Navar = () => {
   }
   return (
     <>
-        <nav style={{
-    position: "sticky", top: 0, left: 0, right: 0, zIndex: 100,
-    padding: "1rem 2rem",
-    
-    background: "rgba(10,5,20,0.7)",
-    backdropFilter: "blur(16px)",
-    borderBottom: "1px solid rgba(255,45,120,0.15)",
-  }} className="w-full bg-black text-white px-6  mb-0 flex items-center justify-between shadow-md">
+        <nav  className="sticky top-0 z-50 w-full mx-auto px-6 py-4 flex  items-center justify-between   
+             text-white shadow-md bg-white/5 backdrop-blur-md">
       
       {/* Logo */}
-      <div className="text-xl font-bold cursor-pointer">
+      <div className="text-xl font-bold cursor-pointer" style={{  fontFamily: "'VT323', 'Courier New', monospace",}}>
         <Link  href="/"><GlitchText className='text-2xl' text="lov" /></Link>
       </div>
 
@@ -44,7 +38,7 @@ const Navar = () => {
         
         {/* Home */}
    
-          <Link href="/">Home</Link>
+    
    
         {/* Messages */}
         <button className="hover:text-blue-400 transition" >

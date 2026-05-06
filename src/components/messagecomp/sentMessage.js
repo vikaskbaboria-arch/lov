@@ -28,7 +28,7 @@ const SentMessage = ({ convId, senderId }) => {
       {/* Messages */}
       <div style={{
         padding: "0.8rem 1.2rem",
-        borderTop: "1px solid rgba(255,255,255,0.06)",
+      
         display: "flex", gap: "0.6rem", alignItems: "center",
       }}>
        
@@ -39,11 +39,11 @@ const SentMessage = ({ convId, senderId }) => {
           placeholder="Type a message..."
           tyle={{
           flex: 1, background: "rgba(255,255,255,0.05)",
-          border: "1px solid rgba(255,255,255,0.1)",
+       
           borderRadius: "10px", padding: "0.5rem 0.9rem",
           color: "rgba(255,255,255,0.3)", fontSize: "0.8rem", fontFamily: "monospace",
         }}
-          className="flex-1 border rounded-lg px-3 py-2 outline-none"
+          className="flex-1 border rounded-lg px-3 py-2 border-none outline-none focus:outline-none "
         />
         <div  onClick={handleSend} style={{
           width: "36px", height: "36px", borderRadius: "10px",

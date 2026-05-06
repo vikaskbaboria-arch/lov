@@ -20,8 +20,13 @@ export const POST =async(req)=>{
               return NextResponse.json({error:"converastion does not exist"},{status:402})
         }
         const message =await Message.create({senderId:senderId,conversationId:convId,text:text})
+        const conversationUpdate = await Conversation.findByIdAndUpdate(convId,{ $set: {
+      lastMessage: text.trim(),
+      updatedAt: new Date(),
+    }, },{new:true})
+        console.log(conversationUpdate)
         return NextResponse.json(message,{status:200})
-
+    
     } catch (error) {
         console.error(error)
         return NextResponse.json({error},{status:500})

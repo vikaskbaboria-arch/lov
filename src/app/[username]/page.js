@@ -7,7 +7,7 @@ const ProfilePage = async({ params }) => {
   
  console.log(username);
   return (
-    <Profile username={username} /> // ✅ correct
+    <Profile username={username} classname="h-[93vh]" /> // ✅ correct
   )
 }
 

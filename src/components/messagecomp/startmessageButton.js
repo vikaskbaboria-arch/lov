@@ -21,7 +21,7 @@ const StartmessageButton = ({ recipientId }) => {
 
     }
   return (
-    <button onClick={startMessage} className="bg-blue-500 text-white px-4 py-2 rounded-full">
+    <button onClick={startMessage} className="bg-white/5 border-1 border-white/10 px-4 py-1.5 rounded-full text-sm font-medium transition  w-52">
 Message
   </button>
   )

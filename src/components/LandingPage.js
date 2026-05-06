@@ -1,6 +1,7 @@
 "use client"
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 const GlitchText = ({ text, className = "" }) => {
   return (
@@ -80,10 +81,10 @@ const NavBar = () => (
     position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
     padding: "1rem 2rem",
     display: "flex", alignItems: "center", justifyContent: "space-between",
-    background: "rgba(10,5,20,0.7)",
+   
     backdropFilter: "blur(16px)",
     borderBottom: "1px solid rgba(255,45,120,0.15)",
-  }}>
+  }} className="bg-white/5">
     <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
       <span style={{
         fontSize: "1.8rem", fontWeight: 900,
@@ -137,6 +138,10 @@ const HeroSection = () => {
  }
  const LoginPage =()=>{
   router.push('/login/')
+ }
+ const {data:session} = useSession();
+ if(session){
+  router.push('/')
  }
   return (
     <section style={{
@@ -562,7 +567,7 @@ export default function LOVLandingPage() {
         ::-webkit-scrollbar-thumb { background: linear-gradient(#ff2d78, #a855f7); border-radius: 4px; }
       `}</style>
       <div style={{
-        background: "radial-gradient(ellipse at top, #1a0530 0%, #060210 45%, #000 100%)",
+        background: "radial-gradient(ellipse at top, #0a0a0a 0%, #050505 45%, #000 100%)",
         minHeight: "100vh",
       }}>
         <NavBar />

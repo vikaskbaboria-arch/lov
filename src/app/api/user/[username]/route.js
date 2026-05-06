@@ -72,8 +72,13 @@ export const GET = async (req,context)=>{
    //  ],
     as: "followersData"
   }
-},
-
+},{
+$lookup:{
+     from:"users",
+     localField:"following.followingId",
+       foreignField:"_id",
+       as:"followingData"
+}},
      
      {
       $addFields:{
@@ -87,6 +92,8 @@ export const GET = async (req,context)=>{
     profilePic: 1,
     followersCount: 1,
     followingCount: 1,
+    "followingData.username": 1,
+    "followingData.profilePic": 1,
     "followersData.username": 1,
     "followersData.profilePic": 1,
     totalPosts:1,

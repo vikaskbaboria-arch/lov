@@ -13,7 +13,7 @@ const {convId} = await params
   const data = await res.json()
     
   return (
-    <div className='text-white h-[calc(100vh-62px)]'>
+    <div className='text-white h-full'>
      <Providers><Chat convId ={convId }  members={data}/></Providers>
       
     </div>

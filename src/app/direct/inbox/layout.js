@@ -21,7 +21,7 @@ export default async function Layout({ children }) {
  }
    
   return (
-    <div className="flex  h-[91vh] overflow-hidden  ">
+    <div className="flex  h-[100vh] overflow-hidden  ">
       
       {/* LEFT - Inbox */}
       <div className="w-1/3 border-r overflow-y-auto ">

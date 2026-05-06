@@ -37,21 +37,21 @@ const EditProfile = ({setEdit}) => {
 
   return (
     
-  <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+  <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
     
     {/* Modal Box */}
-    <div className="bg-white w-full max-w-md rounded-2xl shadow-lg p-6 relative">
+    <div className="bg-gray-900 w-full max-w-md rounded-2xl shadow-lg p-6 relative border border-gray-700">
       
       {/* Close Button */}
       <button
         onClick={() => setEdit(false)}
-        className="absolute top-3 right-3 text-gray-500 hover:text-black"
+        className="absolute top-3 right-3 text-gray-400 hover:text-white"
       >
         ✕
       </button>
 
       {/* Title */}
-      <h2 className="text-xl text-black/80 font-semibold text-center mb-4">
+      <h2 className="text-xl text-white font-semibold text-center mb-4">
         Edit Profile
       </h2>
 
@@ -60,37 +60,38 @@ const EditProfile = ({setEdit}) => {
         <img
           src={session?.user?.profilePic || 'https://via.placeholder.com/150'}
           alt="profile"
-          className="w-24 h-24 rounded-full border mb-2"
+          className="w-24 h-24 rounded-full border border-gray-600 mb-2"
         />
-        <input type="file" accept="image/*" onChange={handleImage} className="text-sm" />
+        <input type="file" accept="image/*" onChange={handleImage} className="text-sm text-white bg-gray-800 border border-gray-600 rounded px-2 py-1" />
       </div>
 
       {/* Username */}
       <div className="mb-3">
-        <label className="text-sm text-gray-600">Username</label>
+        <label className="text-sm text-gray-300">Username</label>
         <input
           type="text"
           placeholder="Enter username"
           onChange={(e)=>setProfile({...profile,username:e.target.value})}
-          className="w-full border rounded-lg px-3 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-400"
+          className="w-full bg-gray-800 border border-gray-600 rounded-lg px-3 py-2 mt-1 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
         />
       </div>
         <div className="mb-3">
-        <label className="text-sm text-gray-600">Username</label>
+        <label className="text-sm text-gray-300">Name</label>
         <input
           type="text"
           placeholder="Enter name"
           onChange={(e)=>setProfile({...profile,name:e.target.value})}
-          className="w-full border rounded-lg px-3 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-400"
+          className="w-full bg-gray-800 border border-gray-600 rounded-lg px-3 py-2 mt-1 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
         />
       </div>
       {/* Bio */}
       <div className="mb-3">
-        <label className="text-sm text-gray-600">Bio</label>
+        <label className="text-sm text-gray-300">Bio</label>
         <textarea
           onChange={(e)=>setProfile({...profile,bio:e.target.value})}
           placeholder="Write something..."
-          className="w-full border rounded-lg px-3 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-400"
+          className="w-full bg-gray-800 border border-gray-600 rounded-lg px-3 py-2 mt-1 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent resize-none"
+          rows="3"
         />
       </div>
 
@@ -98,11 +99,11 @@ const EditProfile = ({setEdit}) => {
       <div className="flex justify-end gap-3 mt-4">
         <button
           onClick={() => setEdit(false)}
-          className="px-4 py-2 rounded-lg bg-gray-200 hover:bg-gray-300"
+          className="px-4 py-2 rounded-lg bg-gray-700 hover:bg-gray-600 text-white transition-colors"
         >
           Cancel
         </button>
-        <button onClick={()=>handleChange()} className="px-4 py-2 rounded-lg bg-blue-500 text-white hover:bg-blue-600">
+        <button onClick={()=>handleChange()} className="px-4 py-2 rounded-lg bg-gradient-to-r from-pink-500 to-purple-600 text-white hover:from-pink-600 hover:to-purple-700 transition-all">
           Save
         </button>
       </div>

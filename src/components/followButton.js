@@ -40,11 +40,11 @@ const FollowButton = ({ userId, isFollowingInitial }) => {
     <button
       onClick={HandleFollow}
       disabled={loading}
-      className={`px-4 py-1.5 rounded-full text-sm font-medium transition 
+      className={`w-54 px-4 py-1.5 rounded-full text-sm font-medium transition 
         ${
           isFollowing
-            ? "bg-gray-200 text-black hover:bg-gray-300"
-            : "bg-blue-500 text-white hover:bg-blue-600"
+            ? "bg-white/5 text-white hover:bg-white hover:text-black border-1 border-white/10  backdrop-blur-md"
+            : "bg-white text-black hover:bg-white/5 hover:text-white border-2 border-white "
         }
         ${loading && "opacity-50 cursor-not-allowed"}
       `}

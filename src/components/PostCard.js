@@ -1,6 +1,7 @@
 "use client";
 import { Heart, MessageCircle, Share2 } from "lucide-react";
 import { useSession } from 'next-auth/react'
+import { motion } from "framer-motion";
 import Comment from "./post/comment";
 import { useRouter } from "next/navigation";
 import Like from "./post/like";
@@ -17,54 +18,120 @@ const [comment,setComment] = useState(false)
     }
 
   return (
-    <div  style={{
-          background: "rgba(10,5,25,0.9)",
-          border: "1px solid rgba(168,85,247,0.2)",
-          borderRadius: "14px", 
-          backdropFilter: "blur(20px)",
-        }} className=" rounded-2xl shadow-md  w-full max-w-xl mx-auto mb-4 ">
-      
-      {/* User Info */}
-      <div className="flex p-4 items-center gap-3 mb-3" onClick={()=>handleClick()}>
-        <img
-          src={post?.user?.profilePic}
-          alt="avatar"
-          className="w-10 h-10 rounded-full object-cover"
-        />
-        <div>
-          <h3 className="font-semibold text-sm">{post?.user?.username}</h3>
-          <p className="text-xs text-gray-500">{new Date(post.createdAt).toLocaleDateString()}</p>
-        </div>
+  <motion.div
+  initial={{ opacity: 0, y: 25 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.4 }}
+  className="w-full max-w-xl mx-auto border-b border-neutral-900 px-5 py-4 text-white"
+>
+
+  {/* HEADER (from your article UI) */}
+  <div className="flex items-center gap-2.5 mb-3 cursor-pointer" onClick={handleClick}>
+    
+    <img
+      src={post?.user?.profilePic}
+      alt="avatar"
+      className="w-9 h-9 rounded-full object-cover border border-neutral-800"
+    />
+
+    <div className="flex-1 min-w-0">
+      <div className="flex items-center gap-1.5 text-[14px] font-medium">
+        {post?.user?.username}
       </div>
 
-      {/* Post Content */}
-    
-
-      {/* Post Image */}
-     {post.photo && (
-        <img
-          src={post.photo} alt="" loading="lazy"
-          style={{ width: "100%", display: "block", maxHeight: 420, objectFit: "cover" }}
-        />
-      )}
-        <p className="text-sm mt-3 mb-1 mx-4">{post.caption}</p>
-
-      {/* Actions */}
-      <div className="flex justify-between items-center text-gray-600 text-sm m-4">
-        <span className="flex items-center gap-1 hover:text-red-500">
-          <Like postId={post?._id} isLiked={post?.isLiked} />
-        </span>
-
-        <span className="flex items-center gap-1 hover:text-blue-500">
-          <MessageCircle onClick={()=>setComment(!comment)} size={18} />
-           {comment && <Comment postId={post?._id} comment={post?.comments}/> }
-        </span>
-
-        <button className="flex items-center gap-1 hover:text-green-500">
-          <Share2 size={18} />
-          Share
-        </button>
+      <div className="text-[12px] text-neutral-500">
+        {new Date(post.createdAt).toLocaleDateString()}
       </div>
     </div>
+
+    <button className="p-1.5 rounded-md text-neutral-600 hover:bg-neutral-900">
+      ···
+    </button>
+  </div>
+
+  {/* IMAGE */}
+  {post.photo && (
+    <div className="w-full aspect-square rounded-lg overflow-hidden border border-neutral-900 mb-3">
+      <motion.img
+        src={post.photo}
+        alt=""
+        whileHover={{ scale: 1.02 }}
+        transition={{ duration: 0.3 }}
+        className="w-full h-full object-cover"
+      />
+    </div>
+  )}
+ {/* CAPTION */}
+  <div className="">
+    {post.caption && (
+    <p className="text-[14px] text-neutral-200 mb-1.5">
+      {post.caption}
+    </p>
+  )}
+  </div>
+
+   <p className="text-[13px] text-neutral-500">
+  <span className="text-neutral-300 font-medium">
+    {post?.comments?.[0]?.user?.name}
+  </span>{" "}
+  {post?.comments?.[0]?.text}
+</p>
+
+   <div className=" border-t border-neutral-900"></div>
+  {/* ACTIONS (your UI style + your logic) */}
+  <div className="flex  items-center -mx-1.5   text-sm">
+ 
+  
+    {/* LIKE (your logic stays) */}
+    <span className="flex items-center gap-2 px-2 mt-3 hover:bg-neutral-900 rounded-md transition">
+
+      <Like postId={post?._id} isLiked={post?.isLiked} />
+      <span className="text-neutral-300">
+        {post?.totalLikes || 0}
+      </span>
+    </span>
+
+    {/* COMMENT */}
+    <span className="flex items-center gap-2 px-2 py-1.5 hover:bg-neutral-900 rounded-md transition">
+      <motion.div whileTap={{ scale: 1.2 }}>
+        <MessageCircle
+          onClick={() => setComment(!comment)}
+          size={16}
+          className="cursor-pointer text-neutral-500 hover:text-neutral-300"
+        />
+      </motion.div>
+    </span>
+
+    {/* SHARE */}
+    <button className="flex items-center gap-2 px-2 py-1.5 hover:bg-neutral-900 rounded-md text-neutral-500 hover:text-neutral-300 transition">
+      <Share2 size={16} />
+    </button>
+
+    <div className="ml-auto"></div>
+
+    {/* SAVE */}
+    <button className="px-2 py-1.5 text-neutral-500 hover:text-neutral-300">
+      🔖
+    </button>
+  </div>
+
+
+
+  {/* COMMENTS PREVIEW */}
+  {/* <p className="text-[13px] text-neutral-500">
+    <span className="text-neutral-300 font-medium">
+      {post?.comments?.[0]?.user}
+    </span>{" "}
+    {post?.comments?.[0]?.text}
+  </p> */}
+
+  {/* COMMENT SECTION */}
+  {comment && (
+    <div className="pt-3">
+      <Comment postId={post?._id} comment={post?.comments} />
+    </div>
+  )}
+
+</motion.div>
   );
 }

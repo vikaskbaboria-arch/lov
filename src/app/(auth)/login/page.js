@@ -127,11 +127,10 @@ const LoginPage = () => {
 );
   
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#060210] relative overflow-hidden">
+    <div className="min-h-[91vh] flex items-center justify-center bg-black relative overflow-hidden">
       
       {/* Glow background (same vibe as your hero) */}
-      <div className="absolute w-[300px] h-[300px] bg-pink-500/20 blur-3xl rounded-full top-20 left-20" />
-      <div className="absolute w-[250px] h-[250px] bg-purple-500/20 blur-3xl rounded-full bottom-20 right-20" />
+     
          {hearts.map((s, i) => <FloatingHeart key={i} style={s} />)}
 
       {/* Card */}

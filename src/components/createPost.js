@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 
-const CreatePost = () => {
+const CreatePost = ({setOpen}) => {
   const [caption, setCaption] = useState('')
   const [preview, setPreview] = useState(null)
   const [image, setImage] = useState(null)
   const [isAnonymous, setIsAnonymous] = useState(false)
-
+  const[close,setClose] = useState(false)
   useEffect(() => {
     return () => {
       if (preview) URL.revokeObjectURL(preview)
@@ -46,17 +46,28 @@ const CreatePost = () => {
     console.log('Post response:', data2)
   }
 
-  
+  if(close){
+    return null;
+  }
 
   return (
-    <div className="mx-auto max-w-3xl p-4 sm:p-6">
-      <div className="rounded-3xl bg-gradient-to-br from-violet-600 via-fuchsia-800 to-purple-800 px-6 py-7 shadow-2xl shadow-fuchsia-500/20 ring-1 ring-white/10 sm:px-8">
+    <>
+   
+ 
+    <div className="fixed inset-0 z-50 flex items-center justify-center" onClick={() => setOpen(false)}> 
+      
+      <div  onClick={(e) => e.stopPropagation()} className="rounded-3xl bg-gradient-to-br from-violet-600 via-fuchsia-800 to-purple-800 px-6 py-7 shadow-2xl shadow-fuchsia-500/20 ring-1 ring-white/10 sm:px-8">
+         <button    className="absolute top-3 right-3 text-gray-500 hover:text-black" onClick={() => setOpen(false)}>close</button>
         <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <h2 className="text-2xl font-semibold text-white">Create a New Post</h2>
             <p className="mt-1 text-sm text-violet-100/85">
               Add a caption, upload an image, and share your story.
             </p>
+            <div>
+       
+        
+      </div>
           </div>
           <div className="flex items-center gap-3">
             <button
@@ -119,6 +130,8 @@ const CreatePost = () => {
         </div>
       </div>
     </div>
+    
+   </>
   )
 }
 

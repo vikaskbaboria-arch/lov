@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react";
+import SidePanel from "@/components/home/sidePane"
 import Navar from "@/components/navbar";
 import Loading from "@/components/loading/loading.js";
 import CreatePost from "@/components/createPost.js";
@@ -8,21 +9,27 @@ import PostCard from "@/components/PostCard.js";
 import getPostData from "@/lib/getPostData.js";
 import { useSession } from 'next-auth/react'
 import LandingPage from "@/components/LandingPage";
+import PostCar from "@/components/justMe.js";
+import UserSuggest from "@/components/home/userSuggest";
 export default function Home() {
  const {data:session,status} =useSession();
 const [posts, setPosts] = useState([]);
 const [openCreatePost, setOpenCreatePost] = useState(false);
+const [loading, setLoading] = useState(true);
 useEffect(() => {
   async function fetchPosts() {
     try{
       const postData = await getPostData();
       setPosts(postData);
+      setLoading(false);
     }
     catch(error){
       console.error("Error fetching posts:", error);
+    
     }
   }
   fetchPosts();
+  
 }, []);
 
 console.log("Posts in Home component:", posts)
@@ -35,66 +42,44 @@ if (status === "loading") {
 if(!session){
     return <LandingPage/>
 }
+if(loading === true){
+  return <Loading/>
+}
   return (
-    <div className="bg-black pt-6">
+
+    <>
  
-     {/* <CreatePost/> */}
-        <div className="flex max-w-6xl mx-auto  gap-6 px-4">
-        
-        {/* Left Sidebar */}
-        <div className="hidden md:flex flex-col gap-4 w-1/4">
-          <div className="bg-gray-800 p-4 rounded-xl">🏠 Home</div>
-          <div className="bg-gray-800 p-4 rounded-xl">🔥 Explore</div>
-          <div className="bg-gray-800 p-4 rounded-xl">💬 Messages</div>
-          <div className="bg-gray-800 p-4 rounded-xl">👤 Profile</div>
-        </div>
+<div className="bg-black min-h-screen ">
+   <Navar />
 
-        {/* Feed (Main Content) */}
-        <div className="flex-1 flex flex-col gap-6">
-          
-          {/* Create Post */}
-      
-          <button
-            onClick={() => setOpenCreatePost((prev) => !prev)}
-            className="bg-blue-500 text-white px-4 py-2 rounded-full self-start"
-          >
-            {openCreatePost ? "Close" : "Create Post"}
-          </button>   {openCreatePost && <CreatePost className=""/>}
-          {/* Posts */}
-          {posts?.map((post) => (
-            <PostCard key={post._id} post={post} />
-          ))}
-        </div>
+    <div className="max-w-6xl mx-auto flex gap-6 px-4 pr-32">
+    <div className="flex-1 flex flex-col gap-6 max-w-xl mx-auto">
+      <UserSuggest />
 
-        {/* Right Sidebar */}
-        <div className="hidden lg:flex flex-col gap-4 w-1/4">
-          
-          {/* Suggestions */}
-          <div className="bg-gray-800 p-4 rounded-xl">
-            <h3 className="font-semibold mb-3">Suggestions</h3>
-            {[1, 2, 3].map((user) => (
-              <div key={user} className="flex justify-between items-center mb-2">
-                <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 bg-gray-600 rounded-full"></div>
-                  <p>user_{user}</p>
-                </div>
-                <button className="text-blue-400">Follow</button>
-              </div>
-            ))}
-          </div>
-
-          {/* Trends */}
-          <div className="bg-gray-800 p-4 rounded-xl">
-            <h3 className="font-semibold mb-3">Trends</h3>
-            <p>#coding</p>
-            <p>#webdev</p>
-            <p>#startup</p>
-          </div>
-        </div>
-
-      </div>
+      {posts?.map((post) => (
+        <PostCard key={post._id} post={post} />
+      ))}
     </div>
-  
+  </div>
+
+  {/* RIGHT SIDEBAR (STICKED TO SCREEN RIGHT) */}
+  <div className="hidden lg:block fixed top-[70px] right-6 w-[300px]">
+    <SidePanel />
+  </div>
+
+  {/* FLOATING BUTTON */}
+  {openCreatePost ? (
+    <CreatePost setOpen={setOpenCreatePost} />
+  ) : (
+    <button
+      onClick={() => setOpenCreatePost(true)}
+      className="fixed bottom-6 right-6 bg-white/10 text-2xl text-white px-5 py-3 rounded-full shadow-lg hover:bg-white/20 transition z-50"
+    >
+      +
+    </button>
+  )}
+</div>
+  </>
   );
 }
 

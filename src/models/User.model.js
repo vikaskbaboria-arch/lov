@@ -1,6 +1,6 @@
 import mongoose,{Schema} from "mongoose";
 import bcrypt from "bcrypt";
-
+import {INTERESTS} from "../contants/interest.js";
 const UserSchema = new Schema({
     username:{
         required:true,
@@ -9,6 +9,10 @@ const UserSchema = new Schema({
         maxlength:20,
         unique:true
     },
+    campus:{
+        type:String
+    }
+    ,
     email:{
         type:String,
         required:true,
@@ -43,12 +47,31 @@ const UserSchema = new Schema({
         type:String,
         maxlength:160,
         
-    },
+    }
+    ,
     lastSeen:{
         type:Date,
         default:Date.now()
-            }
+            },
 
+   interests: {
+      type: [
+        {
+          type: String,
+          enum: INTERESTS,
+          lowercase: true
+        }
+      ],
+      default: [],
+      validate: [
+        {
+          validator: function (arr) {
+            return arr.length <= 10;
+          },
+          message: "You can select up to 10 interests only"
+        }
+      ]
+    },
 
 },{timestamps:true});
 

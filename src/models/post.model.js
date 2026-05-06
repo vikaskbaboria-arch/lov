@@ -26,6 +26,9 @@ const postSchema = new Schema({
     totalComments:{
          type:Number,
          default:0
+    },
+    tags:{
+        type:[String]
     }
 },{timestamps:true})
 

@@ -123,18 +123,18 @@ const FloatingHeart = ({ style }) => (
   ];
   return (
     <div style={{
-      minHeight: "100vh", display: "flex", flexDirection: "column",
+     display: "flex", flexDirection: "column",
       alignItems: "center", justifyContent: "center",
       position: "relative", overflow: "hidden",
       padding: "6rem 2rem 4rem",
       
-    }}>
+    }} className="min-h-[91vh] ">
   <style>{`
         @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
        
      
         body {
-          background: #060210;
+          background: black;
           color: white;
           font-family: 'Courier New', monospace;
           overflow-x: hidden;
@@ -144,24 +144,7 @@ const FloatingHeart = ({ style }) => (
       {/* Animated Background */}
      
       {/* Glow blobs */}
-      <div style={{
-        position: "absolute", top: "20%", left: "15%",
-        width: "320px", height: "320px", borderRadius: "50%",
-        background: "radial-gradient(circle, rgba(255,45,120,0.18) 0%, transparent 70%)",
-        filter: "blur(40px)",
-      }} /> 
-      <div style={{
-        position: "absolute", top: "20%", left: "15%",
-        width: "320px", height: "320px", borderRadius: "50%",
-        background: "radial-gradient(circle, rgba(255,45,120,0.18) 0%, transparent 70%)",
-        filter: "blur(40px)",
-      }} />
-      <div style={{
-        position: "absolute", top: "30%", right: "15%",
-        width: "280px", height: "280px", borderRadius: "50%",
-        background: "radial-gradient(circle, rgba(168,85,247,0.18) 0%, transparent 70%)",
-        filter: "blur(40px)",
-      }} />
+  
       {hearts.map((s, i) => <FloatingHeart key={i} style={s} />)}
 
 
