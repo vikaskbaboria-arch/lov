@@ -2,10 +2,11 @@
 import React, { useEffect } from 'react'
 import { useSession } from 'next-auth/react'
 import { useState } from 'react'
+import { INTERESTS } from '@/contants/interest'
 const EditProfile = ({setEdit}) => {
     const { data: session ,update} = useSession();
-    const [profile,setProfile] = useState({username:session?.user?.username,bio:"",profilePic:session?.user?.profilePic,name:session?.user?.name})
-    
+    const [profile,setProfile] = useState({username:session?.user?.username,bio:"",profilePic:session?.user?.profilePic,name:session?.user?.name,interests:[]})
+    const[selectedInterests,setSelectedInterests] = useState([]);
     const [image,setImage] = useState(null)
     console.log(session?.user?.profilePic);
     const handleImage = (e) => {
@@ -26,21 +27,39 @@ const EditProfile = ({setEdit}) => {
      const res2 = await fetch('/api/user/update',{
       method:'PUT',
       headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({profilePic:data?.data?.secure_url,bio:profile.bio,username:profile.username, name:profile.name})
+      body:JSON.stringify({profilePic:data?.data?.secure_url,bio:profile.bio,username:profile.username, name:profile.name, interests:profile.interests})
      })
      const data2= await res2.json();
       // console.log(data2);
       update({profilePic:data?.data?.secure_url,username:profile.username})
     
     }
+ const toggleInterest = (interest) => {
 
+  let updated;
+
+  if (selectedInterests.includes(interest)) {
+    updated = selectedInterests.filter(
+      (item) => item !== interest
+    );
+  } else {
+    updated = [...selectedInterests, interest];
+  }
+
+  setSelectedInterests(updated);
+
+  setProfile({
+    ...profile,
+    interests: updated,
+  });
+};
 
   return (
     
-  <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
+  <div className="fixed inset-0  bg-black/70 flex items-center justify-center z-50">
     
     {/* Modal Box */}
-    <div className="bg-gray-900 w-full max-w-md rounded-2xl shadow-lg p-6 relative border border-gray-700">
+    <div className="bg-gray-900 w-full max-w-4xl rounded-2xl shadow-lg p-6 relative border border-gray-700">
       
       {/* Close Button */}
       <button
@@ -94,7 +113,24 @@ const EditProfile = ({setEdit}) => {
           rows="3"
         />
       </div>
-
+        <div className="mb-3">
+        <label className="text-sm text-gray-300">Interests</label>
+        <div className="flex flex-wrap gap-2 mt-1">
+          {INTERESTS.map((interest) => (
+            <button
+              key={interest}
+              onClick={() => toggleInterest(interest)}
+              className={`px-3 py-1 rounded-full text-sm ${
+                selectedInterests.includes(interest)
+                  ? 'bg-purple-600 text-white'
+                  : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+              }`}
+            >
+              {interest}
+            </button>
+          ))}
+        </div>
+        </div>
       {/* Buttons */}
       <div className="flex justify-end gap-3 mt-4">
         <button

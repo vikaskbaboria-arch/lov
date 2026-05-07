@@ -23,7 +23,7 @@ const [loading,setLoading] = useState(true)
 const isAdmin = session?.user?.username === userName.username;
 
 
-const [user,setUser] = useState({_id:"", username:"",bio:"",profilePic:"", })
+const [user,setUser] = useState({_id:"", username:"",bio:"",profilePic:"", interests:[]})
 
 
 
@@ -144,17 +144,14 @@ if(loading===true){
           {/* TAGS */}
           <div className="mt-4 flex flex-wrap justify-center gap-2 sm:justify-start">
 
-            <span className="rounded-full border border-neutral-800 bg-neutral-900/60 px-3 py-1 text-xs text-neutral-300">
-              photography
-            </span>
-
-            <span className="rounded-full border border-neutral-800 bg-neutral-900/60 px-3 py-1 text-xs text-neutral-300">
-              music
-            </span>
-
-            <span className="rounded-full border border-neutral-800 bg-neutral-900/60 px-3 py-1 text-xs text-neutral-300">
-              coding
-            </span>
+      {user?.interests?.slice(0, 5).map((interest) => (
+  <span
+    key={interest}
+    className="rounded-full border border-neutral-800 bg-neutral-900/60 px-3 py-1 text-xs text-neutral-300"
+  >
+    {interest}
+  </span>
+))}
 
           </div>
 
