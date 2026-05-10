@@ -11,9 +11,15 @@ export const GET = async (req, context) =>{
         const session = await getServerSession(authOptions)
          const params = await context.params; 
         const userId = params?.id
+        const isAdmin = session?.user?.id === userId;
          const postData = await Post.aggregate([
                {  
-                 $match:{ user: new mongoose.Types.ObjectId(userId) }
+         $match: {
+  user: new mongoose.Types.ObjectId(userId),
+  ...(isAdmin
+    ? {}
+    : { isAnonymous: { $ne: true } }),
+}
                },
               {
            $lookup: {

@@ -59,7 +59,7 @@ const EditProfile = ({setEdit}) => {
   <div className="fixed inset-0  bg-black/70 flex items-center justify-center z-50">
     
     {/* Modal Box */}
-    <div className="bg-gray-900 w-full max-w-4xl rounded-2xl shadow-lg p-6 relative border border-gray-700">
+    <div className="bg-black/90 w-full max-w-4xl rounded-2xl shadow-lg p-6 relative border border-gray-700">
       
       {/* Close Button */}
       <button

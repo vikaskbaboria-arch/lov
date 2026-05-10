@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 
-const SentMessage = ({ convId, senderId }) => {
+const SentMessage = ({ convId, senderId, setChat }) => {
   const [text, setText] = useState("");
   const [messages, setMessages] = useState([]);
 
@@ -16,7 +16,7 @@ const SentMessage = ({ convId, senderId }) => {
     })
     const data = await res.json()
     console.log(data)
-
+  
   setText("")
     // frontend only → just store locally
    

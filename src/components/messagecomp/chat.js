@@ -4,6 +4,7 @@ import SentMessage from './sentMessage';
 import getDateLabel from "@/helpers/getDateLabel"
 import ChatSkeleton from '@/components/loading/chatSkelton';
 import { useSession } from 'next-auth/react';
+import { pusherClient } from "@/lib/pusherClient";
 const Chat = ({convId, members}) => {
   const [chat,setChat]= useState([]);
   const [loading,setLoading] = useState(true);
@@ -30,19 +31,53 @@ setLoading(false);
        fetchMessage();
    
   },[convId])
-   
+   useEffect(() => {
+
+  if (!convId) return;
+
+  const channel = pusherClient.subscribe(
+    `conversation-${convId}`
+  );
+
+  channel.bind("new-message", (message) => {
+
+    setChat((prev) => {
+
+      // prevent duplicate messages
+      const exists = prev?.some(
+        (m) => m?._id === message._id
+      );
+
+      if (exists) return prev;
+
+      return [...prev, message];
+    });
+
+  });
+
+  return () => {
+
+    channel.unbind_all();
+
+    pusherClient.unsubscribe(
+      `conversation-${convId}`
+    );
+  };
+
+}, [convId]);
      
   // 🔥 auto scroll to latest message
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [chat]);
+  
    if(status==="loading" || loading){
     return <ChatSkeleton/>
   }
 
   console.log(chat)
  
- const otherUser = members.find(m=>m._id !== senderId)
+ const otherUser = members?.find(m=>m?._id !== senderId)
 let lastDate =""
   return (
  <div className="h-full w-full flex flex-col bg-neutral-950 text-neutral-100">
@@ -76,25 +111,32 @@ let lastDate =""
         <div className="flex-1 overflow-y-auto px-4 py-4 flex flex-col gap-2.5">
 
           {chat.map((m, i) => {
-            const isMine = m?.senderId?._id === senderId;
+           const isMine =
+  m?.senderId?._id === senderId ||
+  m?.senderId === senderId;
              const label = getDateLabel(m.createdAt);
 
            const showDate = label !== lastDate;
            lastDate = label;
             return (
               <div
-                key={i}
-                className={`flex w-full ${
-                  isMine ? "justify-end" : "justify-start"
-                }`}
+                key={m._id}
+                
               >
                
-                {/* Avatar (only for other user) */}
                {showDate && (
-        <div className="w-full text-center text-xs mx-auto    text-neutral-500  ">
-          {label}
-        </div>
-      )}      
+    <div className="flex justify-center my-4">
+      <span className="rounded-full bg-neutral-900 px-3 py-1 text-[11px] text-neutral-500">
+        {label}
+      </span>
+    </div>
+  )}
+
+  <div
+    className={`flex w-full ${
+      isMine ? "justify-end" : "justify-start"
+    }`}
+  >   
  
                 {/* Message Bubble */}
                 <div
@@ -122,16 +164,18 @@ let lastDate =""
                   </div>
                 </div>
               </div>
+              </div>
             );
           })}
 
           <div ref={bottomRef} />
         </div>
+        
       )}
 
       {/* 🔥 INPUT */}
       <div >
-        <SentMessage convId={convId} senderId={senderId} />
+        <SentMessage convId={convId} senderId={senderId} setChat={setChat} />
       </div>
     
     </div>

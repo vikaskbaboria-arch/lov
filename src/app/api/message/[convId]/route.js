@@ -4,7 +4,7 @@ import Message from "@/models/Message.model";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { NextResponse } from "next/server";
-
+import { pusherServer } from "@/lib/pusher";
 export const GET = async(req,{params})=>{
     try {
         const session = getServerSession(authOptions)

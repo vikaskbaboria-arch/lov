@@ -21,6 +21,8 @@
     "next-cloudinary": "^6.17.5",
     "nodemailer": "^7.0.13",
     "path": "^0.12.7",
+    "pusher": "^5.3.3",
+    "pusher-js": "^8.5.0",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "streamifier": "^0.1.1"

@@ -4,6 +4,7 @@ import Message from "@/models/Message.model";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { NextResponse } from "next/server";
+import { pusherServer } from "@/lib/pusher";
 export const POST =async(req)=>{
     try {
         await connectDB();
@@ -20,6 +21,11 @@ export const POST =async(req)=>{
               return NextResponse.json({error:"converastion does not exist"},{status:402})
         }
         const message =await Message.create({senderId:senderId,conversationId:convId,text:text})
+        await pusherServer.trigger(
+  `conversation-${convId}`,
+  "new-message",
+  message
+);
         const conversationUpdate = await Conversation.findByIdAndUpdate(convId,{ $set: {
       lastMessage: text.trim(),
       updatedAt: new Date(),
