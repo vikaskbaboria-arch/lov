@@ -77,7 +77,9 @@ setLoading(false);
 
   console.log(chat)
  
- const otherUser = members?.find(m=>m?._id !== senderId)
+const otherUser = Array.isArray(members)
+  ? members.find((m) => m?._id !== senderId)
+  : null;
 let lastDate =""
   return (
  <div className="h-full w-full flex flex-col bg-neutral-950 text-neutral-100">
@@ -110,7 +112,7 @@ let lastDate =""
       ) : (
         <div className="flex-1 overflow-y-auto px-4 py-4 flex flex-col gap-2.5">
 
-          {chat.map((m, i) => {
+          {chat?.map((m, i) => {
            const isMine =
   m?.senderId?._id === senderId ||
   m?.senderId === senderId;
