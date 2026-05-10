@@ -21,7 +21,7 @@ const[showFollowers,setShowFollowers] = useState(false);
 const[showFollowing,setShowFollowing] = useState(false);
 const [loading,setLoading] = useState(true)
 const isAdmin = session?.user?.username === userName.username;
-
+const[postType,setPostType] = useState("user")
 
 const [user,setUser] = useState({_id:"", username:"",bio:"",profilePic:"", interests:[]})
 
@@ -229,25 +229,35 @@ if(loading===true){
 
     <div className="flex items-center justify-center gap-10 p-3 text-sm">
 
-      <button className="border-b border-neutral-100 pb-3 font-medium text-neutral-100">
+      <button 
+        className={`
+          ${postType === "user" ?  "border-b border-neutral-100" : ""}
+           pb-3 font-medium text-neutral-100`}
+        onClick={() => setPostType("user")}
+      >
         Posts
       </button>
 
       <button className="pb-3 text-neutral-500 hover:text-neutral-300 transition">
         Saved
       </button>
-
-      <button className="pb-3 text-neutral-500 hover:text-neutral-300 transition">
-        Tagged
+{isAdmin &&
+      <button className={`
+        ${postType === "annonymous" ? "border-b border-neutral-100" : ""}
+         pb-3 font-medium text-neutral-100
+      `}  onClick={() => setPostType("annonymous")}>
+        {
+          isAdmin ? "Annonymus" : ""
+        }
       </button>
-
+}
     </div>
   </div>
 
   {/* POSTS */}
   <div className="mt-4">
     {posts.length > 0 ? (
-      <UserPosts posts={posts} isAdmin={isAdmin} />
+      <UserPosts posts={posts} isAdmin={isAdmin}  type={postType}/>
     ) : (
       <div className="flex items-center justify-center py-20 text-neutral-500">
         No posts available.

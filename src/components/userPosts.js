@@ -2,14 +2,15 @@
 import React, { useState } from "react";
 import PostModal from "./PostModal";
 
-const UserPosts = ({ posts = [], isAdmin }) => {
+const UserPosts = ({ posts = [], isAdmin , type}) => {
   const [selectedPost, setSelectedPost] = useState(null);
   console.log("UserPosts received posts:", posts);
+  const filteredPosts = type === "annonymous" ? posts.filter(post => post.isAnonymous) : posts.filter(post => !post.isAnonymous);
   return (
     <>
       {/* 🔹 Grid */}
       <div className="max-w-5xl mx-auto mt-4 grid grid-cols-3 md:grid-cols-3  gap-3  p-2   ">
-        {posts.map((post) => (
+        {filteredPosts.map((post) => (
           <div
             key={post._id}
             className="relative h-[300px] cursor-pointer group "
