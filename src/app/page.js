@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react";
+import CreateNgl from "@/components/nglComp/createNgl";
 import SidePanel from "@/components/home/sidePane"
 import Navar from "@/components/navbar";
 import Loading from "@/components/loading/loading.js";

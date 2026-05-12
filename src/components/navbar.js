@@ -54,8 +54,8 @@ const Navar = () => {
 
         {/* Profile */}
         <div className="rounded-full bg-gray-700 cursor-pointer" >
-         
-          <img onClick={()=>handleLink()}  src={session?.user?.profilePic} alt=""  className='rounded-full h-9 w-9'/>
+         <Link href={`/${session?.user?.username}`}>
+          <img src={session?.user?.profilePic} alt=""  className='rounded-full h-9 w-9'/></Link>
         </div>
       </div>
     </nav>

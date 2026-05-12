@@ -1,5 +1,5 @@
 "use client";
-
+import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import InboxSkeleton from "../loading/inboxSkelton";
@@ -85,6 +85,9 @@ const Inbox = ({ chats }) => {
           return (
             <motion.div
               key={conv._id}
+              onMouseEnter={() => {
+        router.prefetch(`/${conv._id}`);
+      }}
               onClick={() => openBos(conv)}
             initial={{ opacity: 0, y: 4 }}
             animate={{ opacity: 1, y: 0 }}
