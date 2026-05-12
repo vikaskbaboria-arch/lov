@@ -17,16 +17,22 @@ const Chat = ({convId, members}) => {
   const senderId = session?.user?.id
   useEffect(()=>{
        const fetchMessage=async()=>{
-        const res = await fetch(`/api/message/${convId}`,{
-          method:'GET',
-          headers:{
-            'content-type':'application/json'
-          }
-        })
-        const data = await res.json();
-      
-setChat(Array.isArray(data) ? data : []);
-setLoading(false);
+         try {
+    const res = await fetch(`/api/message/${convId}`);
+
+    if (!res.ok) {
+      throw new Error("Failed to fetch messages");
+    }
+
+    const data = await res.json();
+
+    setChat(Array.isArray(data) ? data : []);
+  } catch (error) {
+    console.log(error);
+    setChat([]);
+  } finally {
+    setLoading(false);
+  }
        }
        fetchMessage();
    
@@ -45,7 +51,7 @@ setLoading(false);
 
       // prevent duplicate messages
       const exists = prev?.some(
-        (m) => m?._id === message._id
+        (m) => m?._id === message?._id
       );
 
       if (exists) return prev;
