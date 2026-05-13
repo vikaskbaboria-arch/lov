@@ -7,7 +7,7 @@ import Chat from '@/components/messagecomp/chat'
 const Pah = async({params}) => {
   const session = await getServerSession(authOptions)
 const {convId} = await params
-  const res = await fetch(`http://localhost:3000/api/conversation/c/${convId}`,{
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/conversation/c/${convId}`,{
     method:'GET'
   })
   const data = await res.json()
