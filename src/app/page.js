@@ -50,7 +50,7 @@ if(loading === true){
 
     <>
  
-<div className="bg-black min-h-screen ">
+<div className="bg-black min-h-screen  ">
    <Navar />
 
     <div className="max-w-6xl mx-auto flex gap-6 px-4 pr-32">

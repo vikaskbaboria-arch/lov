@@ -9,7 +9,7 @@ export default async function Layout({ children }) {
   
   
    const userId = session?.user?.id
-   const res = await fetch(`${process.env.NEXTAUTH_URL}/api/conversation/${userId}`,{
+   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/conversation/${userId}`,{
     method:'GET',
     headers:{
       'content-type':'application/json'

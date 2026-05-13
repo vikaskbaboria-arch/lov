@@ -83,9 +83,9 @@ const Chat = ({convId, members}) => {
 
   console.log(chat)
  
-const otherUser = Array.isArray(members)
-  ? members.find((m) => m?._id !== senderId)
-  : null;
+// const otherUser = Array.isArray(members)
+//   ? members.find((m) => m?._id !== senderId)
+//   : null;
 let lastDate =""
   return (
  <div className="h-full w-full flex flex-col bg-neutral-950 text-neutral-100">
@@ -93,7 +93,7 @@ let lastDate =""
       {/* 🔥 HEADER */}
       <div className="flex-shrink-0 px-4 py-3 flex items-center gap-3 border-b border-neutral-800">
 
-        <img
+        {/* <img
           src={otherUser?.profilePic || "/default.png"}
           alt=""
           className="w-9 h-9 rounded-full object-cover ring-1 ring-neutral-800"
@@ -106,7 +106,7 @@ let lastDate =""
           <div className="text-xs text-neutral-500">
             Active now
           </div>
-        </div>
+        </div> */}
 
       </div>
 
