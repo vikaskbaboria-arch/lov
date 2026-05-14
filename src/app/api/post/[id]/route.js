@@ -20,8 +20,11 @@ export async function DELETE(request, { params }) {
     const {id} = await params;
     console.log("postId");
     console.log(id);
+    
     const post = await Post.findById(id);
-
+  if(post.user.toString() !== user._id.toString()) {
+    return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+  }
     if (!post) {
       return NextResponse.json({ message: "Post not found" }, { status: 404 });
     }

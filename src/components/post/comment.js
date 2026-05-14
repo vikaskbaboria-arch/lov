@@ -21,50 +21,71 @@ const Comment = ({postId,comment}) => {
   };
     
   return (
-    <div className="w-full max-w-md mx-auto p-4 bg-zinc-900 text-white rounded-2xl shadow-lg">
-      
-      {/* Input Box */}
-      <div className="flex gap-2 mb-4">
-        <input
-          type="text"
-          placeholder="Write a comment..."
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-          className="flex-1 p-2 rounded-xl bg-zinc-800 outline-none"
-        />
-        <button
-          onClick={handleSubmit}
-          className="px-4 py-2 bg-blue-600 rounded-xl hover:bg-blue-700"
-        >
-          Send
-        </button>
-      </div>
+    <div className="w-full text-white">
 
-      {/* Comments List */}
-      <div className="flex flex-col gap-3 max-h-60 overflow-y-auto">
-        {comments.length === 0 ? (
-          <p className="text-gray-400 text-sm">No comments yet</p>
-        ) : (
-          comments.map((c) => (
-            <div key={c._id} className="text-white">
-              <div className="flex items-center gap-2 mb-1">
-           <span className="w-8 h-8 rounded-full overflow-hidden">
-            <img src={c.user.profilePic} alt={c.user.name} />
-           </span>
-           
-           <span className=" font-semibold">{c.user.name}</span>
-           
-           <span className="text-sm">{c.text}</span>
-              </div>
-         
-             
+  {/* INPUT */}
+  <div className="flex items-center gap-3 border-t border-neutral-900 pt-4 pb-3">
+    
+    <input
+      type="text"
+      placeholder="Add a comment..."
+      value={text}
+      onChange={(e) => setText(e.target.value)}
+      className="flex-1 bg-transparent outline-none text-[14px] text-neutral-200 placeholder:text-neutral-600"
+    />
 
-           
+    <button
+      onClick={handleSubmit}
+      className="text-[13px] font-medium text-blue-500 hover:text-blue-400 transition"
+    >
+      Comment
+    </button>
+  </div>
+
+  {/* COMMENTS */}
+  <div className="flex flex-col gap-5 max-h-72 overflow-y-auto pt-3 scrollbar-hide">
+    
+    {comments?.length === 0 ? (
+      <p className="text-[13px] text-neutral-600">
+        No comments yet
+      </p>
+    ) : (
+      comments?.map((c) => (
+        <div key={c._id} className="flex gap-3">
+          
+          {/* AVATAR */}
+          <img
+            src={c.user.profilePic}
+            alt={c.user.name}
+            className="w-8 h-8 rounded-full object-cover"
+          />
+
+          {/* COMMENT */}
+          <div className="flex-1">
+            
+            <p className="text-[14px] text-neutral-300 leading-6">
+              <span className="font-semibold text-white mr-1">
+                {c.user.name}
+              </span>
+              {c.text}
+            </p>
+
+            {/* OPTIONAL ACTIONS */}
+            <div className="flex items-center gap-4 mt-1 text-[12px] text-neutral-600">
+              <span className="cursor-pointer hover:text-neutral-400">
+                Reply
+              </span>
+
+              <span className="cursor-pointer hover:text-neutral-400">
+                Like
+              </span>
             </div>
-          ))
-        )}
-      </div>
-    </div>
+          </div>
+        </div>
+      ))
+    )}
+  </div>
+</div>
   );
 };
 

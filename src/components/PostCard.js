@@ -1,6 +1,7 @@
 "use client";
 import { Heart, MessageCircle, Share2 } from "lucide-react";
 import { useSession } from 'next-auth/react'
+import PostDeleteButton from "./post/postDeleteButton";
 import { motion } from "framer-motion";
 import Comment from "./post/comment";
 import { useRouter } from "next/navigation";
@@ -8,16 +9,70 @@ import Like from "./post/like";
 import { useState } from "react";
 export default function PostCard({ post }) {
 const [comment,setComment] = useState(false)
+const [menu,setmenu] = useState(false)
        const router = useRouter()
     const {data:session} =useSession();
     const handleClick = ()=>{
       router.push(`/${post?.user?.username}`)
     }
-  if (post?.user?.username === session?.user?.username){
-   return 
-    }
+const isAdmin = session?.user?.id=== post?.user?._id
 
   return (
+    <>
+    {menu && (
+      <div onClick={() => setmenu(false)} className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center px-4">
+        <div onClick={(e) => e.stopPropagation()} className="w-full max-w-sm overflow-hidden rounded-2xl border border-neutral-900 bg-[#0a0a0a] text-white shadow-2xl">
+          
+          {/* HEADER */}
+          <div className="flex items-center justify-between border-b border-neutral-900 px-5 py-4">
+            <h2 className="text-[15px] font-semibold">
+              Post options
+            </h2>
+
+            <button onClick={() => setmenu(false)} className="rounded-md p-1 text-neutral-500 hover:bg-neutral-900 hover:text-white transition">
+              ✕
+            </button>
+          </div>
+
+          {/* OPTIONS */}
+          <div className="p-2">
+
+            {/* DELETE */}
+            { isAdmin &&  <div className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-red-500 hover:bg-red-500/10 transition">
+              <span className="text-[18px]">🗑️</span>
+
+              <span className="text-[14px] font-medium">
+                <PostDeleteButton id ={post._id}/>
+              </span>
+            </div>}
+          
+
+            {/* COPY */}
+            <button  onClick={() => {
+    navigator.clipboard.writeText(
+      `${window.location.origin}/post/${post._id}`
+    );
+  }} className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-neutral-300 hover:bg-neutral-900 transition">
+              <span className="text-[18px]">🔗</span>
+
+              <span className="text-[14px] font-medium">
+                Copy link
+              </span>
+            </button>
+
+            {/* REPORT */}
+            <button className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-neutral-300 hover:bg-neutral-900 transition">
+              <span className="text-[18px]">🚩</span>
+
+              <span className="text-[14px] font-medium">
+                Report
+              </span>
+            </button>
+
+          </div>
+        </div>
+      </div>
+    )}
   <motion.div
   initial={{ opacity: 0, y: 25 }}
   animate={{ opacity: 1, y: 0 }}
@@ -44,7 +99,7 @@ const [comment,setComment] = useState(false)
       </div>
     </div>
 
-    <button className="p-1.5 rounded-md text-neutral-600 hover:bg-neutral-900">
+    <button onClick={(e)=> {e.stopPropagation(); setmenu(!menu)}} className="p-1.5 rounded-md text-neutral-600 hover:bg-neutral-900">
       ···
     </button>
   </div>
@@ -83,7 +138,7 @@ const [comment,setComment] = useState(false)
  
   
     {/* LIKE (your logic stays) */}
-    <span className="flex items-center gap-2 px-2 mt-3 hover:bg-neutral-900 rounded-md transition">
+    <span className="flex items-center gap-2 px-2  rounded-md transition">
 
       <Like postId={post?._id} isLiked={post?.isLiked} />
       <span className="text-neutral-300">
@@ -132,6 +187,6 @@ const [comment,setComment] = useState(false)
     </div>
   )}
 
-</motion.div>
+</motion.div></>
   );
 }

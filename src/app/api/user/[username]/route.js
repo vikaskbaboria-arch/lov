@@ -21,6 +21,7 @@ export const GET = async (req,context)=>{
    //    isFollowing = !! follow
    
    // }
+   
          const [user] = await User.aggregate([
          {$match:{username:params?.username}},
          {

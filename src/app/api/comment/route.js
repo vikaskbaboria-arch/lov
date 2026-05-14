@@ -30,6 +30,7 @@ export const POST = async(req)=>{
         if(!post){
             return NextResponse.json({error:"Post not found"},{status:404})
         }
+        
         const comment = await Comment.create({user:userId,postId:postId,text:text})
         return NextResponse.json(comment,{status:200})
     } catch (error) {

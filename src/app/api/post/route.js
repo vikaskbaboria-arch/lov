@@ -22,9 +22,10 @@ const userObjectId = new mongoose.Types.ObjectId(session?.user?.id);
     if (!user) {
       return NextResponse.json({ error: "User account not found" }, { status: 401 });
     }
-
+     
     const post = await Post.create({ user: user._id, caption, photo: pic, isAnonymous: isAnonymous || false });
     console.log('Post created:', post);
+    
     return NextResponse.json({ post }, { status: 200 });
   } catch (error) {
     console.error(error);

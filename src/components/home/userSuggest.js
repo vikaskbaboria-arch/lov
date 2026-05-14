@@ -71,7 +71,7 @@ useEffect(()=>{
             {/* Info */}
             <div>
               <p className="text-[13px] font-medium text-white leading-tight">
-                {u.name}
+                {u.username}
               </p>
               <p className="text-[11px] text-neutral-500 mt-0.5">
                 {u?.meta}
