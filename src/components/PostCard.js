@@ -1,5 +1,6 @@
 "use client";
 import { Heart, MessageCircle, Share2 } from "lucide-react";
+import  Image  from 'next/image';
 import { useSession } from 'next-auth/react'
 import PostDeleteButton from "./post/postDeleteButton";
 import { motion } from "framer-motion";
@@ -21,7 +22,7 @@ const isAdmin = session?.user?.id=== post?.user?._id
     <>
     {menu && (
       <div onClick={() => setmenu(false)} className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center px-4">
-        <div onClick={(e) => e.stopPropagation()} className="w-full max-w-sm overflow-hidden rounded-2xl border border-neutral-900 bg-[#0a0a0a] text-white shadow-2xl">
+        <div onClick={(e) => e.stopPropagation()} className="w-full max-w-sm overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-950 text-neutral-100 shadow-2xl">
           
           {/* HEADER */}
           <div className="flex items-center justify-between border-b border-neutral-900 px-5 py-4">
@@ -83,9 +84,11 @@ const isAdmin = session?.user?.id=== post?.user?._id
   {/* HEADER (from your article UI) */}
   <div className="flex items-center gap-2.5 mb-3 cursor-pointer" onClick={handleClick}>
     
-    <img
+    <Image
       src={post?.user?.profilePic}
       alt="avatar"
+      width={36}
+      height={36}
       className="w-9 h-9 rounded-full object-cover border border-neutral-800"
     />
 
@@ -110,6 +113,7 @@ const isAdmin = session?.user?.id=== post?.user?._id
       <motion.img
         src={post.photo}
         alt=""
+        loading="lazy"
         whileHover={{ scale: 1.02 }}
         transition={{ duration: 0.3 }}
         className="w-full h-full object-cover"

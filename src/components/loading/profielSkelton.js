@@ -3,7 +3,7 @@ import React from "react";
 
 const ProfileSkeleton = () => {
   return (
-    <div className="min-h-screen bg-black text-white animate-pulse">
+    <div className="min-h-screen bg-neutral-950 text-neutral-100 animate-pulse">
 
       {/* Profile Section */}
       <div className="max-w-4xl mx-auto p-6">

@@ -1,5 +1,6 @@
 "use client"
 import { useState, useEffect, useCallback } from "react";
+import  Image  from 'next/image';
 
 // ─── Mock Data ────────────────────────────────────────────────────────────────
 
@@ -222,8 +223,10 @@ function CreatePost({ onPost }) {
       transition: "border-color 0.2s",
     }}>
       <div style={{ display: "flex", gap: 12, alignItems: "flex-start" }}>
-        <img
+        <Image
           src={CURRENT_USER.avatar} alt=""
+          width={38}
+          height={38}
           style={{ width: 38, height: 38, borderRadius: "50%", objectFit: "cover", flexShrink: 0, marginTop: 2 }}
         />
         <div style={{ flex: 1 }}>
@@ -308,9 +311,11 @@ function PostCard({ post, onLike }) {
     >
       {/* Header */}
       <div style={{ display: "flex", alignItems: "center", gap: 12, padding: "14px 18px 10px" }}>
-        <img
+        <Image
           src={post.isAnonymous ? "https://i.pravatar.cc/150?img=70" : post.user.avatar}
           alt=""
+          width={40}
+          height={40}
           style={{
             width: 40, height: 40, borderRadius: "50%", objectFit: "cover", flexShrink: 0,
             filter: post.isAnonymous ? "grayscale(1) blur(3px)" : "none",
@@ -348,8 +353,10 @@ function PostCard({ post, onLike }) {
 
       {/* Image */}
       {post.image && (
-        <img
+        <Image
           src={post.image} alt="" loading="lazy"
+          width={700}
+          height={440}
           style={{ width: "100%", display: "block", maxHeight: 420, objectFit: "cover" }}
         />
       )}
@@ -522,7 +529,7 @@ function SuggestionsSidebar() {
     <aside style={{ position: "sticky", top: 24 }}>
       {/* Current user */}
       <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 22 }}>
-        <img src={CURRENT_USER.avatar} alt="" style={{ width: 38, height: 38, borderRadius: "50%", objectFit: "cover" }} />
+        <Image src={CURRENT_USER.avatar} alt="" width={38} height={38} style={{ width: 38, height: 38, borderRadius: "50%", objectFit: "cover" }} />
         <div>
           <div style={{ fontSize: 13, fontWeight: 600, color: C.textPrimary }}>{CURRENT_USER.name}</div>
           <div style={{ fontSize: 12, color: C.textMuted }}>{CURRENT_USER.handle}</div>
@@ -535,7 +542,7 @@ function SuggestionsSidebar() {
 
       {SUGGESTIONS.map(s => (
         <div key={s.id} style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 14 }}>
-          <img src={s.avatar} alt="" style={{ width: 32, height: 32, borderRadius: "50%", objectFit: "cover", flexShrink: 0 }} />
+          <Image src={s.avatar} alt="" width={32} height={32} style={{ width: 32, height: 32, borderRadius: "50%", objectFit: "cover", flexShrink: 0 }} />
           <div style={{ flex: 1, minWidth: 0 }}>
             <div style={{ fontSize: 13, fontWeight: 500, color: C.textPrimary, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{s.name}</div>
             <div style={{ fontSize: 11, color: C.textMuted }}>{s.mutuals} mutual</div>

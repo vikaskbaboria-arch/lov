@@ -22,7 +22,7 @@ const GlitchText = ({ text, className = "" }) => {
           clip-path: polygon(0 0, 100% 0, 100% 40%, 0 40%);
         }
         .glitch-wrapper::after {
-          color: #00f0ff;
+          color: #10b981;
           animation: glitch2 3s infinite;
           clip-path: polygon(0 60%, 100% 60%, 100% 100%, 0 100%);
         }

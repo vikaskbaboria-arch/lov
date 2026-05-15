@@ -1,5 +1,6 @@
 "use client"
 import React, { useEffect } from 'react'
+import  Image  from 'next/image';
 import EditProfile from './editProfile.js'
 import PostDeleteButton from './post/postDeleteButton.js'
 import { useSession } from 'next-auth/react'
@@ -98,9 +99,11 @@ if(loading===true){
         {/* AVATAR */}
         <div className="relative shrink-0">
           <div className="rounded-full p-[2px] ring-1 ring-neutral-800">
-            <img
+            <Image
               src={user?.profilePic || "https://via.placeholder.com/150"}
               alt="profile"
+              width={160}
+              height={160}
               className="h-32 w-32 rounded-full object-cover sm:h-40 sm:w-40"
             />
           </div>
@@ -125,8 +128,8 @@ if(loading===true){
               🎓 verified
             </span>
 
-            <span className="inline-flex items-center gap-1 rounded-full border border-neutral-800 bg-gradient-to-b from-neutral-900 to-neutral-950 px-2.5 py-0.5 text-[11px] font-medium text-neutral-100">
-              💜 92% match
+            <span className="inline-flex items-center gap-1 rounded-full border border-neutral-800 bg-gradient-to-b from-neutral-900 to-neutral-950 px-2.5 py-0.5 text-[11px] font-medium text-emerald-400">
+              92% match
             </span>
 
           </div>
@@ -147,7 +150,7 @@ if(loading===true){
       {user?.interests?.slice(0, 5).map((interest) => (
   <span
     key={interest}
-    className="rounded-full border border-neutral-800 bg-neutral-900/60 px-3 py-1 text-xs text-neutral-300"
+    className="rounded-full border border-black pb-2 bg-white/10 px-2 py-1 text-center text-xs text-neutral-300"
   >
     {interest}
   </span>

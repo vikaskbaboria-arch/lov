@@ -95,7 +95,7 @@ const FloatingHeart = ({ style }) => (
       <defs>
         <linearGradient id="hg" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stopColor="#ff2d78" />
-          <stop offset="100%" stopColor="#a855f7" />
+          <stop offset="100%" stopColor="#10b981" />
         </linearGradient>
       </defs>
     </svg>
@@ -164,7 +164,7 @@ const FloatingHeart = ({ style }) => (
             placeholder="User Name"
             value={form.name}
             onChange={handleChange}
-            className="w-full bg-black/40 border border-gray-700 p-3 rounded-lg outline-none focus:border-purple-400"
+            className="lov-input p-3"
           />
 
           {/* Email + OTP */}
@@ -175,7 +175,7 @@ const FloatingHeart = ({ style }) => (
               placeholder="Email"
               value={form.email}
               onChange={handleChange}
-              className="flex-1 bg-black/40 border border-gray-700 p-3 rounded-lg outline-none focus:border-purple-400"
+              className="lov-input flex-1 p-3"
             />
 
             <button  
@@ -190,7 +190,7 @@ const FloatingHeart = ({ style }) => (
             backdropFilter: "blur(8px)",
             transition: "all 0.2s",
           }}
-            onMouseEnter={e => { e.target.style.borderColor = "#a855f7"; e.target.style.color = "#a855f7"; e.target.style.boxShadow = "0 0 20px rgba(168,85,247,0.3)"; }}
+            onMouseEnter={e => { e.target.style.borderColor = "#ff2d78"; e.target.style.color = "#ff2d78"; e.target.style.boxShadow = "0 0 20px rgba(255,45,120,0.3)"; }}
             onMouseLeave={e => { e.target.style.borderColor = "rgba(255,255,255,0.25)"; e.target.style.color = "rgba(255,255,255,0.8)"; e.target.style.boxShadow = "none"; }}
               className=" px-4 rounded-lg font-medium "
             >
@@ -206,7 +206,7 @@ const FloatingHeart = ({ style }) => (
               placeholder="Password"
               value={form.password}
               onChange={handleChange}
-              className="w-full bg-black/40 border border-gray-700 p-3 rounded-lg outline-none focus:border-purple-400 pr-10"
+              className="lov-input w-full p-3 pr-10"
             />
 
             <button
@@ -230,7 +230,7 @@ const FloatingHeart = ({ style }) => (
               placeholder="Enter OTP"
               value={form.otp}
               onChange={handleChange}
-              className="flex-1 bg-black/40 border border-gray-700 p-3 rounded-lg outline-none focus:border-purple-400"
+              className="lov-input flex-1 p-3"
             />
               <button style={{
             padding: "0.85rem 2.2rem",
@@ -242,7 +242,7 @@ const FloatingHeart = ({ style }) => (
             backdropFilter: "blur(8px)",
             transition: "all 0.2s",
           }}
-            onMouseEnter={e => { e.target.style.borderColor = "#a855f7"; e.target.style.color = "#a855f7"; e.target.style.boxShadow = "0 0 20px rgba(168,85,247,0.3)"; }}
+            onMouseEnter={e => { e.target.style.borderColor = "#ff2d78"; e.target.style.color = "#ff2d78"; e.target.style.boxShadow = "0 0 20px rgba(255,45,120,0.3)"; }}
             onMouseLeave={e => { e.target.style.borderColor = "rgba(255,255,255,0.25)"; e.target.style.color = "rgba(255,255,255,0.8)"; e.target.style.boxShadow = "none"; }} onClick={()=>verifyOtp()}
                className =" px-4 rounded-lg font-medium "
             >
@@ -252,7 +252,7 @@ const FloatingHeart = ({ style }) => (
 
           {/* Register */}
           <button  
-          className="w-full bg-purple-500  p-3 rounded-lg font-semibold " onClick={()=>register()}>
+          className="w-full lov-btn-primary p-3 font-semibold" onClick={()=>register()}>
             Register
           </button>
 

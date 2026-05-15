@@ -140,7 +140,7 @@ ${
 
                 {/* unread dot example */}
                 {conv?.unread > 0 && (
-                  <span className="ml-2 inline-flex h-2 w-2 rounded-full bg-sky-400" />
+                  <span className="ml-2 inline-flex h-2 w-2 rounded-full bg-pink-500" />
                 )}
               </div>
             </div>

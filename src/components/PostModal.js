@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import  Image  from 'next/image';
 import { useSession } from "next-auth/react";
 import Comment from "./post/comment";
 import PostDeleteButton from "./post/postDeleteButton";
@@ -18,7 +19,7 @@ const PostModal = ({ post, onClose }) => {
 >
      {menu && (
       <div onClick={() => setmenu(false)} className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center px-4">
-        <div onClick={(e) => e.stopPropagation()} className="w-full max-w-sm overflow-hidden rounded-2xl border border-neutral-900 bg-[#0a0a0a] text-white shadow-2xl">
+        <div onClick={(e) => e.stopPropagation()} className="w-full max-w-sm overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-950 text-neutral-100 shadow-2xl">
           
           {/* HEADER */}
           <div className="flex items-center justify-between border-b border-neutral-900 px-5 py-4">
@@ -69,26 +70,31 @@ const PostModal = ({ post, onClose }) => {
     )}
   <div
     onClick={(e) => e.stopPropagation()}
-    className="w-full max-w-6xl h-[90vh] bg-black border border-neutral-900 rounded-2xl overflow-hidden flex text-white shadow-2xl"
+    className="w-full max-w-6xl h-[90vh] bg-neutral-950 border border-neutral-800 rounded-2xl overflow-hidden flex text-neutral-100 shadow-2xl"
   >
     
     {/* LEFT IMAGE */}
-    <div className="w-[58%] bg-black flex items-center justify-center border-r border-neutral-900">
-      <img
+    <div className="w-[58%] bg-neutral-950 flex items-center justify-center border-r border-neutral-800">
+      <Image
         src={post.photo}
         alt="post"
+        width={600}
+        height={600}
+        loading="lazy"
         className="w-full h-full object-contain"
       />
     </div>
 
     {/* RIGHT PANEL */}
-    <div className="w-[42%] flex flex-col bg-black">
+    <div className="w-[42%] flex flex-col bg-neutral-950">
 
       {/* HEADER */}
       <div className="flex items-center gap-3 px-5 py-4 border-b border-neutral-900">
-        <img
+        <Image
           src={post.user?.profilePic}
           alt={post.user?.username}
+          width={40}
+          height={40}
           className="w-10 h-10 rounded-full object-cover border border-neutral-800"
         />
 
@@ -110,8 +116,10 @@ const PostModal = ({ post, onClose }) => {
       {/* CAPTION */}
       <div className="px-5 py-4 border-b border-neutral-900">
         <div className="flex gap-3">
-          <img
+          <Image
             src={post.user?.profilePic}
+            width={32}
+            height={32}
             className="w-8 h-8 rounded-full object-cover"
           />
 
@@ -128,9 +136,11 @@ const PostModal = ({ post, onClose }) => {
       <div className="flex-1 overflow-y-auto px-5 py-4 space-y-5 scrollbar-hide">
         {post.comments?.map((c) => (
           <div key={c._id} className="flex gap-3">
-            <img
+            <Image
               src={c.user?.profilePic}
               alt={c.user?.name}
+              width={32}
+              height={32}
               className="w-8 h-8 rounded-full object-cover"
             />
 

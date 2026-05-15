@@ -1,5 +1,6 @@
 "use client"
 import React from 'react'
+import  Image  from 'next/image';
 import GlitchText from './ui/GlitchText'
 import Link from 'next/link'
 import { signOut } from 'next-auth/react'
@@ -16,8 +17,7 @@ const Navar = () => {
   }
   return (
     <>
-        <nav  className="sticky top-0 z-50 w-full mx-auto px-6 py-4 flex  items-center justify-between   
-             text-white shadow-md bg-white/5 backdrop-blur-md">
+        <nav  className="sticky top-0 z-50 w-full mx-auto px-6 py-4 flex items-center justify-between border-b border-neutral-800 text-neutral-100 bg-neutral-950/80 backdrop-blur-md">
       
       {/* Logo */}
       <div className="text-xl font-bold cursor-pointer" style={{  fontFamily: "'VT323', 'Courier New', monospace",}}>
@@ -29,7 +29,7 @@ const Navar = () => {
         <input
           type="text"
           placeholder="Search users..."
-          className="w-full px-4 py-2 rounded-lg bg-gray-800 text-white outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full px-4 py-2 rounded-lg bg-neutral-900 text-white outline-none focus:ring-2 focus:ring-pink-500/30"
         />
       </div> */}
 
@@ -41,21 +41,21 @@ const Navar = () => {
     
    
         {/* Messages */}
-        <button className="hover:text-blue-400 transition" >
+        <button className="hover:text-pink-400 transition" >
         <Link href="/direct/inbox">
           Messages
         </Link>
         </button>
 
         {/* Notifications */}
-        <button className="hover:text-blue-400 transition" onClick={()=>signOut()}>
+        <button className="hover:text-pink-400 transition" onClick={()=>signOut()}>
           Logout
         </button>
 
         {/* Profile */}
-        <div className="rounded-full bg-gray-700 cursor-pointer" >
+        <div className="rounded-full ring-1 ring-neutral-800 cursor-pointer" >
          <Link href={`/${session?.user?.username}`}>
-          <img src={session?.user?.profilePic} alt=""  className='rounded-full h-9 w-9'/></Link>
+          <Image src={session?.user?.profilePic} alt="" width={36} height={36} className='rounded-full h-9 w-9'/></Link>
         </div>
       </div>
     </nav>

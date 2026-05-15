@@ -1,14 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import  Image  from 'next/image';
 import CreateNgl from "../nglComp/createNgl";
-const suggestedUsers = [
-  { id: 1, name: "Leila Hassan", handle: "leila.h", sub: "Suggested for you", emoji: "🍵" },
-  { id: 2, name: "Dev Patel", handle: "devbuilds", sub: "Followed by priya.sharma", emoji: "📐" },
-  { id: 3, name: "Zara Okafor", handle: "zara.ok", sub: "Suggested for you", emoji: "🌙" },
-  { id: 4, name: "Camille Droit", handle: "camille.d", sub: "Followed by jake", emoji: "🎭" },
-  { id: 5, name: "Sam Park", handle: "samparknyc", sub: "Suggested for you", emoji: "🎵" },
-];
+
 
 export default function SidePanel() {
   
@@ -56,7 +51,7 @@ useEffect(()=>{
             className="flex items-center gap-2.5 py-2 group"
           >
             <div className="w-9 h-9 shrink-0 rounded-full bg-neutral-900 border border-neutral-800 flex items-center justify-center text-base group-hover:border-neutral-600 transition-colors duration-150">
-              <img src={u?.author?.profilePic} className="w-9 h-9 rounded-full" alt="" />
+              <Image src={u?.author?.profilePic} width={36} height={36} className="w-9 h-9 rounded-full" alt="" />
             </div>
 
             <div className="flex-1 min-w-0">

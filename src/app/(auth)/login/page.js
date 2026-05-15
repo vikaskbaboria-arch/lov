@@ -107,7 +107,7 @@ const LoginPage = () => {
       <defs>
         <linearGradient id="hg" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stopColor="#ff2d78" />
-          <stop offset="100%" stopColor="#a855f7" />
+          <stop offset="100%" stopColor="#10b981" />
         </linearGradient>
       </defs>
     </svg>
@@ -127,7 +127,7 @@ const LoginPage = () => {
 );
   
   return (
-    <div className="min-h-[91vh] flex items-center justify-center bg-black relative overflow-hidden">
+    <div className="min-h-[91vh] flex items-center justify-center bg-neutral-950 relative overflow-hidden">
       
       {/* Glow background (same vibe as your hero) */}
      
@@ -137,7 +137,7 @@ const LoginPage = () => {
       <div className="relative z-10 w-full max-w-md p-8 rounded-2xl backdrop-blur-xl border border-pink-500/20 bg-white/5 shadow-[0_0_40px_rgba(255,45,120,0.2)]">
 
         {/* Logo */}
-        <h1 className="text-4xl font-bold text-center mb-2 font-mono tracking-widest bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-400 bg-clip-text text-transparent">
+        <h1 className="text-4xl font-bold text-center mb-2 font-mono tracking-widest bg-gradient-to-r from-pink-500 to-emerald-400 bg-clip-text text-transparent">
           LOV
         </h1>
 
@@ -165,14 +165,14 @@ const LoginPage = () => {
             placeholder="password"
             value={form.password}
             onChange={handleChange}
-            className="bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white outline-none focus:border-purple-500 focus:shadow-[0_0_10px_rgba(168,85,247,0.5)] transition"
+            className="lov-input rounded-lg px-4 py-2"
           />
 
           {/* Button */}
           <button
             type="submit"
             disabled={loading}
-            className="mt-2 py-2 rounded-lg font-mono font-bold tracking-wide bg-gradient-to-r from-pink-500 to-purple-500 hover:scale-105 transition shadow-[0_0_20px_rgba(255,45,120,0.5)] disabled:opacity-50"
+            className="mt-2 py-2 rounded-lg font-mono font-bold tracking-wide bg-pink-500 hover:bg-pink-600 transition disabled:opacity-50"
           >
             {loading ? "logging in..." : "login"}
           </button>

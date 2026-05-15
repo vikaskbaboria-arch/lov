@@ -9,6 +9,11 @@ const UserSchema = new Schema({
         maxlength:20,
         unique:true
     },
+    gender:{
+        type:String,
+        enum:["male","female","binary","other"],
+        
+    },
     campus:{
         type:String
     }

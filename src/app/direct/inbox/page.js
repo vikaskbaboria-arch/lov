@@ -8,7 +8,7 @@ const MainBox = () => {
     
 
   return (
-    <div className="flex min-h-screen bg-black">
+    <div className="flex min-h-screen bg-neutral-950">
 
       {/* Sidebar */}
   

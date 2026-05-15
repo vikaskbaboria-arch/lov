@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import  Image  from 'next/image';
 
 const Comment = ({postId,comment}) => {
   const [text, setText] = useState("");
@@ -36,7 +37,7 @@ const Comment = ({postId,comment}) => {
 
     <button
       onClick={handleSubmit}
-      className="text-[13px] font-medium text-blue-500 hover:text-blue-400 transition"
+      className="text-[13px] font-medium text-pink-500 hover:text-pink-400 transition"
     >
       Comment
     </button>
@@ -54,9 +55,11 @@ const Comment = ({postId,comment}) => {
         <div key={c._id} className="flex gap-3">
           
           {/* AVATAR */}
-          <img
+          <Image
             src={c.user.profilePic}
             alt={c.user.name}
+            width={32}
+            height={32}
             className="w-8 h-8 rounded-full object-cover"
           />
 
