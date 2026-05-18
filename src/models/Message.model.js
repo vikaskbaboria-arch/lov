@@ -17,6 +17,10 @@ const messageSchema=new Schema({
          type:mongoose.Schema.Types.ObjectId,
         ref:'User',
         required:true
+    },
+    isread:{
+        type:Boolean,
+        default:false
     }
 },{timestamps:true})
 

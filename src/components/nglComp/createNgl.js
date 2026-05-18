@@ -21,7 +21,7 @@ const CreateNgl = () => {
              console.log(data)
     }
   return (
-<div className="w-full max-w-xl mx-auto p-4 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl shadow-2xl">
+<div className="top-[60px] sticky  w-full max-w-xl p-4 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl shadow-2xl">
   
   <textarea
     placeholder="Write something..."

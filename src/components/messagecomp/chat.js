@@ -1,6 +1,7 @@
 "use client"
 import React, { useEffect, useState ,useRef} from 'react'
 import SentMessage from './sentMessage';
+import Link from 'next/link';
 import getDateLabel from "@/helpers/getDateLabel"
 import ChatSkeleton from '@/components/loading/chatSkelton';
 import { useSession } from 'next-auth/react';
@@ -25,7 +26,7 @@ const Chat = ({convId, members}) => {
     }
 
     const data = await res.json();
-
+   
     setChat(Array.isArray(data) ? data : []);
   } catch (error) {
     console.log(error);
@@ -93,18 +94,21 @@ let lastDate =""
       {/* 🔥 HEADER */}
       <div className="flex-shrink-0 px-4 py-3 flex items-center gap-3 border-b border-neutral-800">
 
+
+       <Link href={`/${otherUser?.username}`} >
         <img
           src={otherUser?.profilePic || "/default.png"}
           alt=""
           className="w-9 h-9 rounded-full object-cover ring-1 ring-neutral-800"
         />
-
+</Link>
         <div>
-          <div className="text-sm font-semibold">
+          <Link href={`/${otherUser?.username}`} > <div className="text-sm font-semibold">
             {otherUser?.username || "Unknown User"}
-          </div>
-          <div className="text-xs text-neutral-500">
-            Active now
+          </div></Link>
+         
+          <div className={`text-xs ${otherUser?.isOnline ? "text-green-400" : "text-neutral-500"}`}>
+          {otherUser?.isOnline ?"Online":`Last seen ${getDateLabel(otherUser?.lastSeen)}`}
           </div>
         </div>
 
@@ -156,6 +160,11 @@ let lastDate =""
                 >
                   <p className="whitespace-pre-wrap break-words">
                     {m.text}
+                    {m.isread &&(
+                      <span className={`ml-1 text-xs ${isMine ? "text-green-500" : "text-neutral-500"}`}>
+                        ✅
+                      </span>
+                    )}
                   </p>
 
                   <div

@@ -44,7 +44,7 @@ useEffect(()=>{
         </button></div>
       </div>
 
-      <div className="flex flex-col">
+      <div className="flex flex-col overflow-auto max-h-[450px] no-scrollbar">
         {ngl?.map((u) => (
           <div
             key={u._id}
@@ -71,10 +71,13 @@ useEffect(()=>{
       {/* Footer */}
 
     </div>
-    {
+    <div className="bottom-[430px] sticky ">
+       {
       showNgl &&
       <CreateNgl/>
     }
+    </div>
+   
     </>
   );
 }

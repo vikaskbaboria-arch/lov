@@ -17,7 +17,7 @@ const Navar = () => {
   }
   return (
     <>
-        <nav  className="sticky top-0 z-50 w-full mx-auto px-6 py-4 flex items-center justify-between border-b border-neutral-800 text-neutral-100 bg-neutral-950/80 backdrop-blur-md">
+        <nav  className="sticky top-0 h-full z-50 w-full mx-auto px-6 py-4 flex items-center justify-between border-b border-neutral-800 text-neutral-100 bg-neutral-950/80 backdrop-blur-md">
       
       {/* Logo */}
       <div className="text-xl font-bold cursor-pointer" style={{  fontFamily: "'VT323', 'Courier New', monospace",}}>

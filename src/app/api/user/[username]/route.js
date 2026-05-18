@@ -90,6 +90,8 @@ $lookup:{
    },{
       $project: {
     username: 1,
+    isOnline:1,
+    lastSeen:1,
     interests:1,
     profilePic: 1,
     followersCount: 1,

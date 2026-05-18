@@ -24,7 +24,7 @@ const [loading,setLoading] = useState(true)
 const isAdmin = session?.user?.username === userName.username;
 const[postType,setPostType] = useState("user")
 
-const [user,setUser] = useState({_id:"", username:"",bio:"",profilePic:"", interests:[]})
+const [user,setUser] = useState({_id:"", username:"",bio:"",profilePic:"", interests:[],isOnline:false,lastSeen:""})
 
 
 
@@ -109,8 +109,8 @@ if(loading===true){
           </div>
 
           <span className="absolute bottom-2 right-2 flex items-center gap-1 rounded-full border border-neutral-800 bg-neutral-950/80 px-2 py-0.5 text-[10px] text-neutral-200 backdrop-blur">
-            <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-            active now
+            <span className={`h-1.5 w-1.5 rounded-full ${user?.isOnline ? 'bg-emerald-500' : 'bg-gray-500'}`} />
+            {user?.isOnline ? "active now": `offline`}
           </span>
         </div>
 

@@ -18,7 +18,7 @@ export  const GET = async(req,{params})=>{
                 return NextResponse.json({error:"Conversation not found"},{status:404})
               } 
             const conversation = await Conversation.findById(convId).
-            populate("members", "username profilePic   ")
+            populate("members", "username profilePic  isOnline lastSeen") 
       .sort({ createdAt: -1 })
       .lean();
           
