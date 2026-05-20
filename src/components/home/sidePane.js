@@ -15,7 +15,7 @@ useEffect(()=>{
       method:'GET'
     })
     const data= await res.json();
-    console.log(data)
+    //console.log(data)
     setNgl(data)
   }
   fetchData();

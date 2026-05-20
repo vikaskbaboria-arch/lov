@@ -5,7 +5,7 @@ const Following = ({ following = [] ,onClose}) => {
   if (!following?.length) {
     return <div className='fixed inset-0 z-50 flex items-center justify-center bg-neutral-950 text-neutral-100 p-4'>No following yet.</div>
   }
-  console.log('Following data:', following);
+  //console.log('Following data:', following);
 
   return (
     <>

@@ -18,8 +18,8 @@ export async function DELETE(request, { params }) {
       return NextResponse.json({ message: "User not found" }, { status: 404 });
     }
     const {id} = await params;
-    console.log("postId");
-    console.log(id);
+    //console.log("postId");
+    //console.log(id);
     
     const post = await Post.findById(id);
   if(post.user.toString() !== user._id.toString()) {

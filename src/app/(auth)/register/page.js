@@ -20,7 +20,7 @@ export default function RegisterPage() {
 
      })
      const data = await res.json()
-     console.log(data)
+     //console.log(data)
     } catch (error) {
         console.error(error)
     }
@@ -39,7 +39,7 @@ export default function RegisterPage() {
 
         })
         const data = await res.json();
-        console.log('conversation:', data)
+        //console.log('conversation:', data)
            const login = await signIn("credentials", {
       email: form.email,
       password: form.password,
@@ -79,7 +79,7 @@ const verifyOtp=async()=>{
             body:JSON.stringify({email:form.email,otp:form.otp})
         })
         const data = await res.json();
-        console.log("data :" + data)
+        //console.log("data :" + data)
     } catch (error) {
          console.error(error)
     }

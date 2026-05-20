@@ -46,7 +46,11 @@ const Navar = () => {
           Messages
         </Link>
         </button>
-
+         <button className="hover:text-pink-400 transition" >
+        <Link href="/dating">
+         dating
+        </Link>
+        </button>
         {/* Notifications */}
         <button className="hover:text-pink-400 transition" onClick={()=>signOut()}>
           Logout

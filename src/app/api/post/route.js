@@ -9,7 +9,7 @@ import mongoose from "mongoose"
 export const POST = async (req) => {
   try {await connectDB();
     const { caption, pic, isAnonymous } = await req.json();
-    console.log('Backend received:',  isAnonymous );
+    //console.log('Backend received:',  isAnonymous );
     const session = await getServerSession(authOptions);
    
 const userObjectId = new mongoose.Types.ObjectId(session?.user?.id);
@@ -24,7 +24,7 @@ const userObjectId = new mongoose.Types.ObjectId(session?.user?.id);
     }
      
     const post = await Post.create({ user: user._id, caption, photo: pic, isAnonymous: isAnonymous || false });
-    console.log('Post created:', post);
+    //console.log('Post created:', post);
     
     return NextResponse.json({ post }, { status: 200 });
   } catch (error) {

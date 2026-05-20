@@ -17,7 +17,7 @@ const Comment = ({postId,comment}) => {
       body:JSON.stringify({postId,text})
     })
     const data = await res.json()
-     console.log(data)
+     //console.log(data)
      setComments(comment)
   };
     

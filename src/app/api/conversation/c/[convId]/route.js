@@ -8,8 +8,8 @@ export  const GET = async(req,{params})=>{
             await connectDB();
           
             const {convId} = await params
-            console.log("convId")
-            console.log(convId)
+            //console.log("convId")
+            //console.log(convId)
             if(!convId){
                 return NextResponse.json({error:"Conversation ID is required"},{status:403})
             }
@@ -23,7 +23,7 @@ export  const GET = async(req,{params})=>{
       .lean();
           
     
-
+         
 
      
       

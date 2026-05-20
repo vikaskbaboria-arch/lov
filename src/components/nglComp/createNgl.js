@@ -18,7 +18,7 @@ const CreateNgl = () => {
              
              )
              const data = await res.json()
-             console.log(data)
+             //console.log(data)
     }
   return (
 <div className="top-[60px] sticky  w-full max-w-xl p-4 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl shadow-2xl">

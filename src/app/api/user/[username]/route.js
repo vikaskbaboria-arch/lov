@@ -93,6 +93,7 @@ $lookup:{
     isOnline:1,
     lastSeen:1,
     interests:1,
+    age:1,
     profilePic: 1,
     followersCount: 1,
     followingCount: 1,

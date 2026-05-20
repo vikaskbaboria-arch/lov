@@ -5,7 +5,7 @@ import PostModal from "./PostModal";
 
 const UserPosts = ({ posts = [], isAdmin , type}) => {
   const [selectedPost, setSelectedPost] = useState(null);
-  console.log("UserPosts received posts:", posts);
+  //console.log("UserPosts received posts:", posts);
   const filteredPosts = type === "annonymous" ? posts.filter(post => post.isAnonymous) : posts.filter(post => !post.isAnonymous);
   return (
     <>

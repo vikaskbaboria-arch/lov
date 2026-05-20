@@ -35,7 +35,7 @@ useEffect(()=>{
       }
     });
     const userData = await res.json();
-    console.log("userData in p",userData)
+    //console.log("userData in p",userData)
     setUsers(userData.users);
   };
   fetchUsers();

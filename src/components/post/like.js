@@ -19,7 +19,7 @@ const Like = ({postId,isLiked
     if(res.ok){
       setLiked(!liked)
     }
-    console.log(data)
+    //console.log(data)
   }
   
   return (

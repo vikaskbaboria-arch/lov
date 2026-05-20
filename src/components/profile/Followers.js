@@ -5,7 +5,7 @@ const Followers = ({ followers = [] ,onClose}) => {
   if (!followers?.length) {
     return <div className='fixed inset-0 z-50 flex items-center justify-center bg-neutral-950 text-neutral-100 p-4'>No followers yet.</div>
   }
-console.log('Followers data:', followers);
+//console.log('Followers data:', followers);
   return (
    <>
       {/* 🔹 Overlay (for outside click) */}

@@ -29,7 +29,7 @@ const Chat = ({convId, members}) => {
    
     setChat(Array.isArray(data) ? data : []);
   } catch (error) {
-    console.log(error);
+    //console.log(error);
     setChat([]);
   } finally {
     setLoading(false);
@@ -82,17 +82,19 @@ const Chat = ({convId, members}) => {
     return <ChatSkeleton/>
   }
 
-  console.log(chat)
+  //console.log(chat)
  
 const otherUser = Array.isArray(members)
   ? members.find((m) => m?._id !== senderId)
   : null;
 let lastDate =""
   return (
- <div className="h-full w-full flex flex-col bg-neutral-950 text-neutral-100">
+ <div className="h-full  w-full flex flex-col bg-neutral-950 text-neutral-100">
 
       {/* 🔥 HEADER */}
-      <div className="flex-shrink-0 px-4 py-3 flex items-center gap-3 border-b border-neutral-800">
+      <div className="flex-shrink-0 justify-between px-4 py-3 flex items-center gap-3 border-b border-neutral-800">
+
+ <div className='flex gap-4'>
 
 
        <Link href={`/${otherUser?.username}`} >
@@ -102,7 +104,7 @@ let lastDate =""
           className="w-9 h-9 rounded-full object-cover ring-1 ring-neutral-800"
         />
 </Link>
-        <div>
+        <div > 
           <Link href={`/${otherUser?.username}`} > <div className="text-sm font-semibold">
             {otherUser?.username || "Unknown User"}
           </div></Link>
@@ -111,7 +113,10 @@ let lastDate =""
           {otherUser?.isOnline ?"Online":`Last seen ${getDateLabel(otherUser?.lastSeen)}`}
           </div>
         </div>
-
+ </div>
+<span>
+  :
+</span>
       </div>
 
       {/* 🔥 MESSAGES */}
@@ -138,7 +143,7 @@ let lastDate =""
                
                {showDate && (
     <div className="flex justify-center my-4">
-      <span className="rounded-full bg-neutral-900 px-3 py-1 text-[11px] text-neutral-500">
+      <span className="  px-3 py-1 text-[11px] text-neutral-500">
         {label}
       </span>
     </div>

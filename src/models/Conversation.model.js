@@ -10,6 +10,11 @@ const conversationSchema= new Schema({
     lastMessage:{
         type:String
     },
+    type:{
+        type:String,
+        enum:["social","date"],
+        default:"social"
+    },
      lastMessageAt: {
     type: Date
   },

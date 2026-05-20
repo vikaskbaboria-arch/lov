@@ -30,7 +30,7 @@ export const POST =async(req)=>{
       lastMessage: text.trim(),
       updatedAt: new Date(),
     }, },{new:true})
-        console.log(conversationUpdate)
+        //console.log(conversationUpdate)
         return NextResponse.json(message,{status:200})
     
     } catch (error) {

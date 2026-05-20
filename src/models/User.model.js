@@ -9,6 +9,12 @@ const UserSchema = new Schema({
         maxlength:20,
         unique:true
     },
+    friends:[
+{
+    type:mongoose.Schema.Types.ObjectId,
+    ref:'User'
+}
+    ],
     gender:{
         type:String,
         enum:["male","female","binary","other"],
@@ -16,6 +22,11 @@ const UserSchema = new Schema({
     },
     campus:{
         type:String
+    },
+    age:{
+        type:Number,
+        min:16,
+        max:30
     }
     ,
     email:{
@@ -58,6 +69,10 @@ const UserSchema = new Schema({
         type:Date,
         default:Date.now()
             },
+    isPosted:{
+      type:Boolean,
+      default:false
+    },
 
    interests: {
       type: [
@@ -77,6 +92,31 @@ const UserSchema = new Schema({
         }
       ]
     },
+    datingPreferences:{
+   interestedIn:[{
+      type:String,
+      enum:["male","female","binary","other"]
+   }],
+
+   minAge:{
+      type:Number,
+      default:18
+   },
+
+   maxAge:{
+      type:Number,
+      default:30
+   }
+}
+,photos:{
+   type:[String],
+   default:[]
+}
+,
+isDatingEnabled:{
+    type:Boolean,
+    default:false
+}
 
 },{timestamps:true});
 

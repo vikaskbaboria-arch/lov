@@ -11,7 +11,7 @@
     
     )
         const data = await res.json()
-        console.log("Fetched post data:", data.posts)
+        //console.log("Fetched post data:", data.posts)
         return data.posts 
     } catch (error) {
         console.error("Error fetching post data:", error)

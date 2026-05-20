@@ -15,9 +15,9 @@ export const POST = async(req)=>{
            const session  = await getServerSession(authOptions);
         const userId = session?.user?.id
         const{postId,text} = await req.json();
-        console.log("post id",postId)
-        console.log("text",text)
-        console.log("userId",userId)
+        //console.log("post id",postId)
+        //console.log("text",text)
+        //console.log("userId",userId)
         if(!postId || !text){
             return NextResponse.json({error:"Caption and comment text are required"},{status:400})
         }

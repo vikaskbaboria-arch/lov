@@ -15,7 +15,7 @@ export default function StatusListener() {
          "status-update",
          (data) => {
 
-            console.log("Realtime Update:", data);
+            //console.log("Realtime Update:", data);
 
          }
       );

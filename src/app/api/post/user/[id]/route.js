@@ -115,7 +115,7 @@ export const GET = async (req, context) =>{
         return NextResponse.json(postData, {status:200})
      }
         catch(err){
-            console.log(err);
+            //console.log(err);
         }
 
 

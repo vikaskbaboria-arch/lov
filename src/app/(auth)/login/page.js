@@ -83,7 +83,7 @@ const LoginPage = () => {
     // frontend only
     setTimeout(() => {
       setLoading(false);
-      console.log(form);
+      //console.log(form);
     }, 1000);
   };
 

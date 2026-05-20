@@ -7,7 +7,7 @@ export default function PostCar({ post }) {
   const [saved, setSaved] = useState(post.saved);
   const [likeCount, setLikeCount] = useState(post.likes);
   const [likeAnim, setLikeAnim] = useState(false);
-  console.log("Rendering PostCar for post:", post);
+  //console.log("Rendering PostCar for post:", post);
   const handleLike = () => {
     const next = !liked;
     setLiked(next);

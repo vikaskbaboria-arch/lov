@@ -7,8 +7,8 @@ export  const GET = async(req,{params})=>{
             await connectDB();
           
             const {userId} = await params
-            console.log("userId")
-            console.log(userId)
+            //console.log("userId")
+            //console.log(userId)
             if(!userId){
                 return NextResponse.json({error:"User ID is required"},{status:403})
             }
@@ -32,7 +32,7 @@ export  const GET = async(req,{params})=>{
   }
 })
 
-      console.log(formatted)
+      //console.log(formatted)
       
             if(conversation.length === 0){
                 return NextResponse.json({message:"You don't have any conversations yet"})

@@ -11,8 +11,8 @@ export async function PATCH(req){
 
    const { userId, isOnline } = await req.json();
     
-console.log(userId);
-console.log(isOnline);
+//console.log(userId);
+//console.log(isOnline);
    const user = await User.findByIdAndUpdate(
       userId,
       {

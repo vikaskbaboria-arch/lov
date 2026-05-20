@@ -25,7 +25,7 @@ export const POST =async(req)=>{
               message:"Email verified"
              })
          } catch (error) {
-            console.log(error);
+            //console.log(error);
             return NextResponse.json({error:"Database connection failed. Please try again"});
          }
 }

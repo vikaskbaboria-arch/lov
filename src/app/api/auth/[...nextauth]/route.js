@@ -20,7 +20,7 @@ export const authOptions ={
                 }
                 
                 if(user.isVerified===false){
-                    console.log("verify your email")
+                    //console.log("verify your email")
                     return null
                 }
                  const isMatch = await user.isPasswordCorrect(
@@ -29,7 +29,7 @@ export const authOptions ={
 
 
             if (!isMatch) {
-              console.log("Password incorrect")
+              //console.log("Password incorrect")
               return null
             }
                 return{

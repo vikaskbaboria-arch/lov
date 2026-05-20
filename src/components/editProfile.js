@@ -6,10 +6,10 @@ import { useState } from 'react'
 import { INTERESTS } from '@/contants/interest'
 const EditProfile = ({setEdit}) => {
     const { data: session ,update} = useSession();
-    const [profile,setProfile] = useState({username:session?.user?.username,bio:"",profilePic:session?.user?.profilePic,name:session?.user?.name,interests:[]})
+    const [profile,setProfile] = useState({username:session?.user?.username,bio:"",profilePic:session?.user?.profilePic,name:session?.user?.name,interests:[],age:null})
     const[selectedInterests,setSelectedInterests] = useState([]);
     const [image,setImage] = useState(null)
-    console.log(session?.user?.profilePic);
+    //console.log(session?.user?.profilePic);
     const handleImage = (e) => {
       const file = e.target.files[0]
       if (!file) return
@@ -17,6 +17,7 @@ const EditProfile = ({setEdit}) => {
     }
 
     const handleChange =async()=>{
+    
     if(image){ const formdata = new FormData()
      formdata.append('image',image);
     
@@ -31,10 +32,10 @@ const EditProfile = ({setEdit}) => {
      const res2 = await fetch('/api/user/update',{
       method:'PUT',
       headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({profilePic:profile.profilePic,bio:profile.bio,username:profile.username, name:profile.name, interests:profile.interests})
+      body:JSON.stringify({profilePic:profile.profilePic,bio:profile.bio,username:profile.username, name:profile.name, interests:profile.interests,age:profile.age})
      })
      const data2= await res2.json();
-      // console.log(data2);
+      // //console.log(data2);
       update({profilePic:profile.profilePic,username:profile.username})
     
     }
@@ -47,8 +48,15 @@ const EditProfile = ({setEdit}) => {
           headers:{'Content-Type':'application/json'}
         })
         const data = await res.json();
-        console.log("interest",data)
-        setSelectedInterests(data?.interests ||[]);
+        //console.log("interest",data)
+        const interests = data?.interests || [];
+
+setSelectedInterests(interests);
+
+setProfile(prev => ({
+   ...prev,
+   interests,
+}));
       }
       fetchInterests();
     },[])
@@ -63,7 +71,7 @@ const EditProfile = ({setEdit}) => {
   } else {
     updated = [...selectedInterests, interest];
   }
-
+  
   setSelectedInterests(updated);
 
   setProfile({
@@ -71,6 +79,7 @@ const EditProfile = ({setEdit}) => {
     interests: updated,
   });
 };
+
 
   return (
     
@@ -131,6 +140,9 @@ const EditProfile = ({setEdit}) => {
           rows="3"
         />
       </div>
+      {/* age */}
+      <label className="text-sm text-neutral-400" >Age</label>
+      <input type="number" value={profile.age} onChange={(e)=>setProfile({...profile,age:e.target.value})}/>
         <div className="mb-3">
         <label className="text-sm text-neutral-400">Interests</label>
        <div className="mt-2">

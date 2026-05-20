@@ -1,6 +1,7 @@
 "use client"
 import React, { useEffect } from 'react'
 import  Image  from 'next/image';
+import FreindRequest from './FreindRequest.js';
 import EditProfile from './editProfile.js'
 import PostDeleteButton from './post/postDeleteButton.js'
 import { useSession } from 'next-auth/react'
@@ -12,7 +13,7 @@ import Following from './profile/Following.js'
 import StartmessageButton from './messagecomp/startmessageButton.js'
 import UserPosts from './userPosts.js'
 const Profile = (userName) => {
-  console.log(userName.username);
+  //console.log(userName.username);
  
 const { data: session ,update,status} = useSession();  
 const[isFollowing,setIsFollowing]= useState(false)
@@ -44,7 +45,7 @@ useEffect(()=>{
       
       })
       const data = await res.json();
-      console.log(data)
+      //console.log(data)
       setUser(data?.user)
       setIsFollowing(data?.isFollowing)
       
@@ -60,7 +61,7 @@ useEffect(()=>{
         headers:{'Content-Type':'application/json'},
       })
       const data = await res.json();
-      console.log(data)
+      //console.log(data)
       setPosts(data)
        setLoading(false)
     }
@@ -107,11 +108,11 @@ if(loading===true){
               className="h-32 w-32 rounded-full object-cover sm:h-40 sm:w-40"
             />
           </div>
-
-          <span className="absolute bottom-2 right-2 flex items-center gap-1 rounded-full border border-neutral-800 bg-neutral-950/80 px-2 py-0.5 text-[10px] text-neutral-200 backdrop-blur">
+{!isAdmin &&<span className="absolute bottom-2 right-2 flex items-center gap-1 rounded-full border border-neutral-800 bg-neutral-950/80 px-2 py-0.5 text-[10px] text-neutral-200 backdrop-blur">
             <span className={`h-1.5 w-1.5 rounded-full ${user?.isOnline ? 'bg-emerald-500' : 'bg-gray-500'}`} />
             {user?.isOnline ? "active now": `offline`}
-          </span>
+          </span>}
+          
         </div>
 
         {/* USER INFO */}
@@ -129,7 +130,7 @@ if(loading===true){
             </span>
 
             <span className="inline-flex items-center gap-1 rounded-full border border-neutral-800 bg-gradient-to-b from-neutral-900 to-neutral-950 px-2.5 py-0.5 text-[11px] font-medium text-emerald-400">
-              92% match
+              {user?.age}
             </span>
 
           </div>
@@ -219,6 +220,10 @@ if(loading===true){
                 recipientId={user?._id}
               />
             )}
+            {/* {
+              !isAdmin &&
+              <FreindRequest senderId={session?.user?.id} receiverId={user?._id}/>
+            } */}
 
           </div>
 

@@ -33,7 +33,7 @@ useEffect(() => {
   
 }, []);
 
-console.log("Posts in Home component:", posts)
+//console.log("Posts in Home component:", posts)
 
 if (status === "loading") {
   return (

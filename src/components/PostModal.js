@@ -7,7 +7,7 @@ import PostDeleteButton from "./post/postDeleteButton";
 const PostModal = ({ post, onClose }) => {
   const {data:session} = useSession();
   const isAdmin = session?.user?.id === post?.user?._id
-    console.log("Post data in modal:", post);
+    //console.log("Post data in modal:", post);
     const [menu,setMenu] = useState(false)
 
   return (
