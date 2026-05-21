@@ -1,5 +1,7 @@
 "use client"
 import React, { useEffect } from 'react'
+import UploadPhotos from './dating/uploadPhotos.js';
+import Ebdate from './dating/ebdate.js';
 import  Image  from 'next/image';
 import FreindRequest from './FreindRequest.js';
 import EditProfile from './editProfile.js'
@@ -24,7 +26,7 @@ const[showFollowing,setShowFollowing] = useState(false);
 const [loading,setLoading] = useState(true)
 const isAdmin = session?.user?.username === userName.username;
 const[postType,setPostType] = useState("user")
-
+const[uploadPhotos,setUploadPhotos] = useState(false)
 const [user,setUser] = useState({_id:"", username:"",bio:"",profilePic:"", interests:[],isOnline:false,lastSeen:""})
 
 
@@ -93,6 +95,10 @@ if(loading===true){
         >
           Edit Profile
         </button>
+      )}
+      {isAdmin&&
+      (
+        <Ebdate/>
       )}
 
       <div className="flex flex-col items-center gap-8 sm:flex-row sm:items-start sm:gap-10">
@@ -224,7 +230,8 @@ if(loading===true){
               !isAdmin &&
               <FreindRequest senderId={session?.user?.id} receiverId={user?._id}/>
             } */}
-
+          
+{uploadPhotos && <UploadPhotos setEdit={setUploadPhotos}/>}
           </div>
 
         </div>
@@ -272,7 +279,7 @@ if(loading===true){
       </div>
     )}
   </div>
-
+<button onClick={()=>setUploadPhotos(!uploadPhotos)}>upload</button>
 </div>
   )
 }

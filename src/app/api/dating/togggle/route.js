@@ -1,7 +1,7 @@
 import connectDB from "@/lib/connectDB";
 import User from "@/models/User.model.js";
 import { getServerSession } from "next-auth";
-import { authOptions } from "../../../auth/[...nextauth]/route";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route.js";
 import { NextResponse } from "next/server";
 
 

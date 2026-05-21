@@ -1,5 +1,5 @@
 "use client"
-import React, { useCallback, useState } from "react"
+import React, { useCallback, useEffect, useState } from "react"
 import { AnimatePresence } from "framer-motion";
 import SwipeCard from "./SwipeCard";
 import ActionBar from "./ActionBar";
@@ -7,18 +7,30 @@ import MatchModal from "./MatchModal";
 import { profiles as seed } from "./mockData";
 
 export const SwipeDeck = ({ currentUserAvatar }) => {
-  const [stack, setStack] = useState(seed);
+
+  const [stack, setStack] = useState([]);
   const [history, setHistory] = useState([]); // [{profile, dir}]
   const [exitingId, setExitingId] = useState(null);
   const [exitingDir, setExitingDir] = useState(null);
   const [match, setMatch] = useState(null);
 
-  const top = stack[0];
-
+  useEffect(()=>{
+    const fetchData = async()=>{
+      const res = await fetch('/api/swipe',{
+        method:'GET'
+      })
+      const data = await res.json();
+      console.log("line 24 sd ", data)
+      setStack(Array.isArray(data?.swipes) ? data.swipes : []);
+    }
+    fetchData();
+  },[])
+  
+  const top = Array.isArray(stack) && stack.length > 0 ? stack[0] : null;
   const commitSwipe = useCallback(
     (dir) => {
       if (!top || exitingId) return;
-      setExitingId(top.id);
+      setExitingId(top._id);
       setExitingDir(dir);
       // wait for exit animation
       setTimeout(() => {
@@ -49,7 +61,7 @@ export const SwipeDeck = ({ currentUserAvatar }) => {
     // small celebration — no-op for now, could trigger toast
   };
 
-  const visible = stack.slice(0, 3);
+  const visible = Array.isArray(stack) ? stack.slice(0, 3) : [];
 
   return (
     <div className="flex w-full flex-col items-center" data-testid="swipe-deck">
@@ -62,16 +74,16 @@ export const SwipeDeck = ({ currentUserAvatar }) => {
               .slice()
               .reverse() // render bottom cards first so top card paints last
               .map((p) => {
-                const idx = visible.findIndex((v) => v.id === p.id);
+                const idx = visible.findIndex((v) => v._id === p._id);
                 const isTop = idx === 0;
                 return (
                   <SwipeCard
-                    key={p.id}
+                    key={p._id}
                     profile={p}
                     isTop={isTop}
                     index={idx}
                     onSwipe={commitSwipe}
-                    controlledDir={exitingId === p.id ? exitingDir : null}
+                    controlledDir={exitingId === p._id ? exitingDir : null}
                   />
                 );
               })}

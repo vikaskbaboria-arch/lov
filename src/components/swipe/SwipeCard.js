@@ -104,7 +104,7 @@ export const SwipeCard = ({ profile, isTop, index, onSwipe, controlledDir }) => 
         >
           <img
             src={photo}
-            alt={profile.name}
+            alt={profile.username}
             className="h-full w-full object-cover"
             draggable={false}
           />
@@ -157,7 +157,7 @@ export const SwipeCard = ({ profile, isTop, index, onSwipe, controlledDir }) => 
             <div className="min-w-0">
               <div className="flex items-center gap-2">
                 <h2 className="font-display text-3xl font-semibold tracking-tight">
-                  {profile.name}{" "}
+                  {profile.username}{" "}
                   <span className="font-sans text-2xl font-light text-white/80">
                     {profile.age}
                   </span>
@@ -165,7 +165,7 @@ export const SwipeCard = ({ profile, isTop, index, onSwipe, controlledDir }) => 
                 {profile.verified && (
                   <BadgeCheck className="h-5 w-5 text-sky-400" />
                 )}
-                {profile.online && (
+                {profile.isOnline && (
                   <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
                 )}
               </div>

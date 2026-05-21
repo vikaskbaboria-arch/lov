@@ -3,14 +3,14 @@ import React from "react";
 import SwipeDeck from "@/components/swipe/SwipeDeck";
 import Navar from "@/components/navbar";
 
-import { useUser }
-from "@/context/UserContext";
+import { useUser }from "@/context/UserContext";
 const CURRENT_USER_AVATAR = "https://i.pravatar.cc/300?img=48";
 
 export default function Page() {
 
    const {adminUser,loading} = useUser();
-   if(!adminUser?.isDatingEnables){
+   console.log(adminUser)
+   if(!adminUser?.isDatingEnabled){
     return <div>
       enable dating to see 
     </div>

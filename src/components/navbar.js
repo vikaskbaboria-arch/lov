@@ -6,12 +6,16 @@ import Link from 'next/link'
 import { signOut } from 'next-auth/react'
 import { useRouter } from "next/navigation";
 import { useSession } from 'next-auth/react'
+import { useUser }from "@/context/UserContext";
 const Navar = () => {
     const router = useRouter();
+     const {adminUser,loading} = useUser();
+       console.log(adminUser)
     const {data:session,status} =useSession();
    const handleLink = ()=>{
     router.push(`/${session?.user?.username}`)
    }
+   
   if(status==="loading"){
     return
   }
@@ -47,9 +51,9 @@ const Navar = () => {
         </Link>
         </button>
          <button className="hover:text-pink-400 transition" >
-        <Link href="/dating">
+       {adminUser?.isDatingEnabled &&( <Link href="/dating">
          dating
-        </Link>
+        </Link>)}
         </button>
         {/* Notifications */}
         <button className="hover:text-pink-400 transition" onClick={()=>signOut()}>
