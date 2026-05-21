@@ -39,26 +39,25 @@ if(reverseSwipe){
 
    const existingMatch =
       await Match.findOne({
-         users:{
-            $all:[
-               session?.user?.id,
+         users: {
+            $all: [
+               fromUser,
                toUser
             ]
          }
       });
 
-   if(!existingMatch){
-
+   if (!existingMatch) {
       const match =
          await Match.create({
-            users:[
-               currentUser._id,
+            users: [
+               fromUser,
                toUser
             ]
          });
 
       return NextResponse.json({
-         matched:true,
+         matched: true,
          match
       });
    }
