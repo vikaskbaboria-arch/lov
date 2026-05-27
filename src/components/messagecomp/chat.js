@@ -117,13 +117,17 @@ let lastDate =""
           No messages yet. Say hi 👋
         </div>
       ) : (
-        <div className="flex-1 overflow-y-auto px-4 py-4 flex flex-col-reverse gap-2.5">
+        <div className="flex-1 overflow-y-auto px-4 py-4 flex flex-col gap-2.5">
 
-          {[...chat].reverse()?.map((m, i) => {
+          {[...chat]
+      
+            
+      
+            .map((m, i) => {
            const isMine =
   m?.senderId?._id === senderId ||
   m?.senderId === senderId;
-             const label = getDateLabel(m.createdAt);
+             const label = getDateLabel(m?.createdAt);
 
            const showDate = label !== lastDate;
            lastDate = label;

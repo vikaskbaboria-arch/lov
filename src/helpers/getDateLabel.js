@@ -6,7 +6,7 @@ function getDateLabel(date) {
   const msg = new Date(msgDate.getFullYear(), msgDate.getMonth(), msgDate.getDate());
   const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
-  const diff = (today - msg) / (1000 * 60 * 60 * 24);
+  const diff = Math.round((today - msg) / (1000 * 60 * 60 * 24));
 
   if (diff === 0) return "Today";
   if (diff === 1) return "Yesterday";
