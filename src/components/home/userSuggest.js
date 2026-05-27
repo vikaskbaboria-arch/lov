@@ -2,23 +2,12 @@
 
 import { useEffect, useState } from "react";
 
-const matchUsers = [
-  { id: 1, name: "Priya S.", meta: "NYU · 94% match", online: true, emoji: "🌿" },
-  { id: 2, name: "Sofia R.", meta: "Columbia · 89%", online: true, emoji: "☁️" },
-  { id: 3, name: "Marcus W.", meta: "Brooklyn · 81%", online: false, emoji: "🎸" },
-  { id: 4, name: "Leila H.", meta: "Parsons · 78%", online: true, emoji: "🍵" },
-  { id: 5, name: "Dev P.", meta: "NYU · 75%", online: false, emoji: "📐" },
-    { id: 6, name: "Dev P.", meta: "NYU · 75%", online: false, emoji: "📐" },
-      { id: 7, name: "Dev P.", meta: "NYU · 75%", online: false, emoji: "📐" },
-        { id: 8, name: "Dev P.", meta: "NYU · 75%", online: false, emoji: "📐" },
-          { id: 9, name: "Dev P.", meta: "NYU · 75%", online: false, emoji: "📐" },
-            { id: 10, name: "Dev P.", meta: "NYU · 75%", online: false, emoji: "📐" },
-];
-
 
 export default function UserSuggest() {
   const [followed, setFollowed] = useState(new Set());
-const [users,setUsers] = useState([]);
+  const[loading,setLoading] = useState(true);
+  const [users,setUsers] = useState([]);
+  const [isOpen, setIsOpen] = useState(true);
   const toggle = (id) => {
     setFollowed((prev) => {
       const next = new Set(prev);
@@ -37,22 +26,63 @@ useEffect(()=>{
     const userData = await res.json();
     //console.log("userData in p",userData)
     setUsers(userData.users);
+    setLoading(false);
   };
   fetchUsers();
 },[]);
+if(loading){
+  return   <section className="mx-auto w-full max-w-xl">
+  {/* HEADER */}
+  <div className="flex items-center justify-between px-5 pt-4 pb-2.5">
+    <div className="w-32 h-3 rounded bg-neutral-900 animate-pulse" />
 
+    <div className="w-14 h-3 rounded bg-neutral-900 animate-pulse" />
+  </div>
+
+  {/* USERS */}
+  <div className="flex gap-2.5 px-5 pb-4 overflow-x-auto border-b border-neutral-900">
+    
+    {[1, 2, 3, 4].map((i) => (
+      <div
+        key={i}
+        className="relative flex-none w-[140px] bg-neutral-950 border border-neutral-800 rounded-xl p-3.5 flex flex-col gap-2.5"
+      >
+        {/* ONLINE DOT */}
+        <div className="absolute top-2.5 right-2.5 w-1.5 h-1.5 rounded-full bg-neutral-800 animate-pulse" />
+
+        {/* AVATAR */}
+        <div className="w-11 h-11 rounded-full bg-neutral-900 animate-pulse" />
+
+        {/* INFO */}
+        <div className="space-y-2">
+          <div className="w-20 h-3 rounded bg-neutral-900 animate-pulse" />
+
+          <div className="w-14 h-2 rounded bg-neutral-900 animate-pulse" />
+        </div>
+
+        {/* BUTTON */}
+        <div className="w-full h-8 rounded-md bg-neutral-900 animate-pulse mt-1" />
+      </div>
+    ))}
+  </div>
+</section>
+}
   return (
     <section className="mx-auto w-full max-w-xl">
       <div className="flex items-center justify-between px-5 pt-4 pb-2.5">
         <span className="text-[11px] font-medium tracking-widest uppercase text-neutral-500">
           People you may know
         </span>
-        <button className="text-[11px] text-neutral-400 hover:text-white transition-colors duration-150">
-          Browse
+        <button 
+          onClick={() => setIsOpen(!isOpen)}
+          className="text-[11px] text-neutral-400 hover:text-white transition-colors duration-150 flex items-center gap-1"
+        >
+          {isOpen ? "^" : "v"}
         </button>
       </div>
 
-      <div className="flex gap-2.5 px-5 pb-4 overflow-x-auto border-b border-neutral-900">
+      {isOpen && (
+        <div className="flex gap-2.5 px-5 pb-4 overflow-x-auto border-b border-neutral-900">
         {users?.map((u) => (
           <div
             key={u._id}
@@ -91,7 +121,8 @@ useEffect(()=>{
             </button>
           </div>
         ))}
-      </div>
+        </div>
+      )}
     </section>
   );
 }

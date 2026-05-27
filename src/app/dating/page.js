@@ -2,7 +2,7 @@
 import React from "react";
 import SwipeDeck from "@/components/swipe/SwipeDeck";
 import Navar from "@/components/navbar";
-
+import Link from "next/link";
 import { useUser }from "@/context/UserContext";
 const CURRENT_USER_AVATAR = "https://i.pravatar.cc/300?img=48";
 
@@ -19,6 +19,10 @@ export default function Page() {
 
     <>
     <Navar/>
+    <div>
+      <span className="text-white">
+<Link href={`/dating/discover`}>discover</Link></span>
+
     <div
       className="dark min-h-[calc(100vh-63px)] bg-neutral-950 text-neutral-100 antialiased"
       data-testid="swipe-page"
@@ -36,6 +40,6 @@ export default function Page() {
 
     
       </main>
-    </div></>
+    </div></div></>
   );
 }

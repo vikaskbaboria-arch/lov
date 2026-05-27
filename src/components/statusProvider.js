@@ -4,6 +4,7 @@ import { useEffect } from "react";
 
 export default function StatusProvider({ session }) {
   
+if(session!=="authenticated") return null;
    const updateStatus = async(isOnline)=>{
 
       await fetch("/api/user/status",{

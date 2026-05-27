@@ -1,58 +1,7 @@
 
-"use client"
+"use client";
 
-import { signIn } from "next-auth/react"
-// import { useState } from "react"
-
-// export default function LoginPage() {
-
-//   const [email,setEmail] = useState("")
-//   const [password,setPassword] = useState("")
-
-  // const handleLogin = async () => {
-
-  //   const result = await signIn("credentials",{
-  //     email,
-  //     password,
-  //     redirect:false
-  //   })
-
-  //   if(result.error){
-  //     alert("Login failed")
-  //   }else{
-  //     alert("Login success")
-  //   }
-
-  // }
-
-//   return (
-
-//     <div>
-
-//       <input
-//         placeholder="Email"
-//         value={email}
-//         onChange={(e)=>setEmail(e.target.value)}
-//       />
-
-//       <input
-//         placeholder="Password"
-//         type="password"
-//         value={password}
-//         onChange={(e)=>setPassword(e.target.value)}
-//       />
-
-//       <button onClick={handleLogin}>
-//         Login
-//       </button>
-
-//     </div>
-
-//   )
-
-// }
-
-// "use client";
+import { signIn } from "next-auth/react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
@@ -60,31 +9,44 @@ const LoginPage = () => {
   const router = useRouter();
   const [form, setForm] = useState({ email: "", password: "" });
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
- 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-     const result = await signIn("credentials",{
-      email:form?.email,
-      password:form?.password,
-      
-    })
-
-    if(result.error){
-      alert("Login failed")
-    }else{
-      alert("Login success")
+    setError("");
+    if(!form.email || !form.password){
+      setError("Please fill in all fields.");   
+      return;
     }
-    // frontend only
-    setTimeout(() => {
+    if(form.password.length < 6){
+      setError("Password must be at least 6 characters long.");
+      return;
+    }
+    const result = await signIn("credentials", {
+      email: form?.email,
+      password: form?.password,
+      redirect: false,
+      callbackUrl: "/",
+    });
+    
+    if (result?.error) {
+      setError( result?.error || "Login failed. Please try again.");
       setLoading(false);
-      //console.log(form);
-    }, 1000);
+      return;
+    }
+
+    if (result?.ok) {
+      router.push(result.url || "/");
+      return;
+    }
+
+    setError("Login failed. Please try again.");
+    setLoading(false);
   };
 
 
@@ -167,6 +129,12 @@ const LoginPage = () => {
             onChange={handleChange}
             className="lov-input rounded-lg px-4 py-2"
           />
+
+          {error && (
+            <p className="text-center text-sm text-red-400 mt-1">
+              {error}
+            </p>
+          )}
 
           {/* Button */}
           <button

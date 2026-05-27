@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react";
+import HomeSkeleton from "@/components/loading/HomeSkelton";
 import CreateNgl from "@/components/nglComp/createNgl";
 import SidePanel from "@/components/home/sidePane"
 import Navar from "@/components/navbar";
@@ -44,7 +45,7 @@ if(!session){
     return <LandingPage/>
 }
 if(loading === true){
-  return <Loading/>
+  return <HomeSkeleton/>
 }
   return (
 

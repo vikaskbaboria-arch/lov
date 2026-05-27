@@ -10,10 +10,13 @@ try {
     const session = await getServerSession(authOptions);
     const currentUserId = session?.user?.id
     const user = await User.find({_id:session?.user?.id})
-    const alreadySwiped = await Swipe.find({fromUser:user?._id})
+    const alreadySwiped = await Swipe.find({fromUser:currentUserId})
+    
     const swipedUserIds = alreadySwiped.map(
-        swipe=>swipe?.toUser
+        (swipe)=>swipe?.toUser
+        
     )
+    console.log(swipedUserIds)
     const swipes = await User.find({
     _id:{
     $nin:[
@@ -24,7 +27,7 @@ try {
     isDatingEnabled:true,
 
     }).
-    select('username profilePic photos name bio age interests')
+    select('username profilePic photos name bio age interests _id') 
     return NextResponse.json({swipes},{status:200})
  } catch (error) {
     console.error(error)

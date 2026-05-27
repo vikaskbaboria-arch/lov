@@ -16,12 +16,12 @@ export const authOptions ={
                 await connectDB();
                 const user= await User.findOne({email:credentials.email})
                 if(!user){
-                    return null
+                    throw new Error("invalid credentials");
                 }
                 
                 if(user.isVerified===false){
                     //console.log("verify your email")
-                    return null
+                       throw new Error("Please verify your email first");
                 }
                  const isMatch = await user.isPasswordCorrect(
                credentials.password
@@ -30,7 +30,7 @@ export const authOptions ={
 
             if (!isMatch) {
               //console.log("Password incorrect")
-              return null
+                 throw new Error("invalid credentials");
             }
                 return{
                     id:user._id,

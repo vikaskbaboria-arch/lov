@@ -51,7 +51,7 @@ useEffect(()=>{
             className="flex items-center gap-2.5 py-2 group"
           >
             <div className="w-9 h-9 shrink-0 rounded-full bg-neutral-900 border border-neutral-800 flex items-center justify-center text-base group-hover:border-neutral-600 transition-colors duration-150">
-              <Image src={u?.author?.profilePic} width={36} height={36} className="w-9 h-9 rounded-full" alt="" />
+              <img src={u?.author?.profilePic} width={36} height={36} className="w-9 h-9 rounded-full" alt="" />
             </div>
 
             <div className="flex-1 min-w-0">

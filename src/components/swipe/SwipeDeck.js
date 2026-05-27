@@ -27,18 +27,42 @@ export const SwipeDeck = ({ currentUserAvatar }) => {
   },[])
   
   const top = Array.isArray(stack) && stack.length > 0 ? stack[0] : null;
+
+  const postSwipe = async (toUser, route) => {
+    const res = await fetch(`/api/swipe/${route}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ toUser }),
+    });
+
+    if (!res.ok) {
+      const data = await res.json().catch(() => ({}));
+      throw new Error(data.error || data.message || "Swipe request failed.");
+    }
+
+    return res.json();
+  };
+
   const commitSwipe = useCallback(
-    (dir) => {
+    async (dir) => {
       if (!top || exitingId) return;
       setExitingId(top._id);
       setExitingDir(dir);
-      // wait for exit animation
+
+      const route = dir === "nope" ? "pass" : dir === "like" ? "like" : null;
+      const payload = route ? postSwipe(top._id, route) : Promise.resolve(null);
+
+      try {
+        await payload;
+      } catch (error) {
+        console.error("Swipe API error:", error);
+      }
+
       setTimeout(() => {
         setStack((s) => s.slice(1));
         setHistory((h) => [...h, { profile: top, dir }]);
         setExitingId(null);
         setExitingDir(null);
-        // Determine match (only for like/super, ~ likelihood weighted by matchPercent)
         if (dir === "like" || dir === "super") {
           const threshold = dir === "super" ? 70 : 88;
           if (top.matchPercent >= threshold) {

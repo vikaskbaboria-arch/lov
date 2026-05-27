@@ -84,7 +84,7 @@ const isAdmin = session?.user?.id=== post?.user?._id
   {/* HEADER (from your article UI) */}
   <div className="flex items-center gap-2.5 mb-3 cursor-pointer" onClick={handleClick}>
     
-    <Image
+    <img
       src={post?.user?.profilePic}
       alt="avatar"
       width={36}

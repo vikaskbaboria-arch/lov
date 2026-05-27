@@ -6,10 +6,30 @@ import { signIn } from "next-auth/react";
 export default function RegisterPage() {
   const [otpSent, setOtpSent] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-   
+    const [form, setForm] = useState({
+    name: "",
+    email: "",
+    password: "",
+    otp:""
+ 
+  });
   const sendOtp= async()=>{
     setOtpSent(true);
+    if(form.name===""|| form.email==="" || form.password===""){
+      return <>
+      <div>enter the form</div>
+      </>
+    }
     try {
+            const res2 = await fetch('/api/register',{
+            method:"POST",
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body: JSON.stringify({username:form.name,email:form.email,password:form.password}),
+
+        })
+        const data2 = await res2.json();
         const res = await fetch('/api/send-otp',{
         method:'POST',
         headers:{
@@ -30,17 +50,9 @@ export default function RegisterPage() {
   const register =async()=>{
     
     try{
-        const res = await fetch('/api/register',{
-            method:"POST",
-            headers:{
-                'Content-Type':'application/json'
-            },
-            body: JSON.stringify({username:form.name,email:form.email,password:form.password}),
-
-        })
-        const data = await res.json();
+    
         //console.log('conversation:', data)
-           const login = await signIn("credentials", {
+    await signIn("credentials", {
       email: form.email,
       password: form.password,
       redirect: true,
@@ -53,13 +65,7 @@ export default function RegisterPage() {
        console.error(error)
         }
   }
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    password: "",
-    otp:""
  
-  });
 
   const handleChange = (e) => {
     setForm({

@@ -28,7 +28,7 @@ export async function PATCH(req){
       {
          userId,
          isOnline,
-         lastSeen: user.lastSeen
+         lastSeen: user.lastseen
       }
    );
 

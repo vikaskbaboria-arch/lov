@@ -55,7 +55,7 @@ const Comment = ({postId,comment}) => {
         <div key={c._id} className="flex gap-3">
           
           {/* AVATAR */}
-          <Image
+          <img
             src={c.user.profilePic}
             alt={c.user.name}
             width={32}

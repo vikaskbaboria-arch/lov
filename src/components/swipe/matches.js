@@ -9,58 +9,8 @@ import {
 import Navar from "@/components/navbar";
 const FILTERS = ["All", "New", "Online", "Nearby", "Anonymous"];
 
-const MATCHES = [
-  {
-    id: 1, name: "Aria Chen", age: 24, matchPct: 97,
-    bio: "Chasing sunsets and deep conversations. Lover of abstract art and late-night philosophy.",
-    tags: ["Philosophy", "Art", "Sunsets", "Coffee"],
-    online: true, isNew: true, isAnon: false, isNearby: true,
-    lastActive: "Active now",
-    img: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=400&q=80"
-  },
-  {
-    id: 2, name: "Milo Park", age: 26, matchPct: 93,
-    bio: "Indie music producer by day, rooftop wanderer by night. ENFP energy always.",
-    tags: ["Music", "Night Owl", "ENFP", "Rooftops"],
-    online: true, isNew: true, isAnon: false, isNearby: false,
-    lastActive: "Active now",
-    img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&q=80"
-  },
-  {
-    id: 3, name: "Anonymous", age: null, matchPct: 89,
-    bio: "Sometimes the mystery is the message. Meet me at the edge of curiosity.",
-    tags: ["Mystery", "Deep Talks", "INTJ"],
-    online: false, isNew: false, isAnon: true, isNearby: false,
-    lastActive: "3h ago",
-    img: null
-  },
-  {
-    id: 4, name: "Sofia Reyes", age: 23, matchPct: 91,
-    bio: "Poet who codes, coder who writes poetry. Looking for someone to co-create with.",
-    tags: ["Poetry", "Code", "Minimalism", "Jazz"],
-    online: true, isNew: false, isAnon: false, isNearby: true,
-    lastActive: "Active now",
-    img: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=400&q=80"
-  },
-  {
-    id: 5, name: "Kai Nakamura", age: 27, matchPct: 88,
-    bio: "Architect of spaces and feelings. I believe every room has an emotion waiting inside.",
-    tags: ["Architecture", "Emotions", "Film", "Matcha"],
-    online: false, isNew: false, isAnon: false, isNearby: true,
-    lastActive: "1d ago",
-    img: "https://images.unsplash.com/photo-1521119989659-a83eee488004?w=400&q=80"
-  },
-  {
-    id: 6, name: "Zara Osei", age: 25, matchPct: 95,
-    bio: "Afrofuturist. Tells stories through textiles and digital worlds. Vibe-checker certified.",
-    tags: ["Design", "Afrofuturism", "Fashion", "Stories"],
-    online: true, isNew: true, isAnon: false, isNearby: false,
-    lastActive: "Active now",
-    img: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=400&q=80"
-  },
-];
 
-const NEW_MATCHES = MATCHES.filter(m => m.isNew || m.matchPct > 90).slice(0, 5);
+
 
 function SkeletonCard() {
   return (
@@ -111,7 +61,7 @@ function MatchCard({ match, index }) {
         ) : (
           <motion.div
             className="card-img"
-            style={{ backgroundImage: `url(${match.img})` }}
+            style={{ backgroundImage: `url(${match?.profilePic})` }}
             animate={{ scale: hovered ? 1.06 : 1 }}
             transition={{ duration: 0.5 }}
           />
@@ -129,7 +79,7 @@ function MatchCard({ match, index }) {
           <Zap size={11} fill="#10b981" color="#10b981" />
           {match.matchPct}%
         </div>
-        {match.online && <span className="online-dot" />}
+        {match?.isOnline && (<span className="online-dot " ></span>)}
       </div>
 
       <div className="card-body">
@@ -138,7 +88,7 @@ function MatchCard({ match, index }) {
             <h3 className="card-name">{match.name}{match.age ? `, ${match.age}` : ""}</h3>
             <div className="card-active">
               <Clock size={11} />
-              <span>{match.lastActive}</span>
+              <span>{match?.lastSeen}</span>
               {match.isNearby && <><MapPin size={11} /><span>Nearby</span></>}
             </div>
           </div>
@@ -147,7 +97,7 @@ function MatchCard({ match, index }) {
         <p className="card-bio">{match.bio}</p>
 
         <div className="card-tags">
-          {match.tags.map(t => (
+          {match?.tags?.map(t => (
             <span key={t} className="tag">{t}</span>
           ))}
         </div>
@@ -191,20 +141,83 @@ function NewMatchBubble({ match }) {
 export default function MatchesPage() {
   const [filter, setFilter] = useState("All");
   const [query, setQuery] = useState("");
+  const [match,setMatch] = useState([])
   const [loading, setLoading] = useState(true);
+  useEffect(()=>{
 
-  useEffect(() => {
-    const t = setTimeout(() => setLoading(false), 1800);
-    return () => clearTimeout(t);
-  }, []);
+ const fetchData = async()=>{
 
-  const filtered = MATCHES.filter(m => {
+   try{
+
+      const res = await fetch(
+         "/api/dating/matches",
+         {
+            method:"GET"
+         }
+      );
+
+      const data =
+         await res.json();
+
+      console.log(data);
+
+      const formattedMatches =
+         data.matchesData.map((m)=>({
+
+            _id:m._id,
+
+            name:
+               m.user?.username || "",
+
+            age:
+               m.user?.age || null,
+
+            bio:
+               m.user?.bio || "",
+
+            tags:
+               m.user?.interests || [],
+
+            profilePic:
+               m?.user?.profilePic ||
+               "https://placehold.co/400",
+
+            isOnline:
+               m?.user?.isOnline || false,
+
+            isNew:true,
+
+            isAnon:false,
+
+            isNearby:false,
+
+            matchPct:90,
+
+            lastSeen:new Date(m?.user?.lastSeen).toLocaleDateString()
+         }));
+
+      setMatch(formattedMatches);
+
+   }catch(error){
+
+      console.log(error);
+
+   }finally{
+
+      setLoading(false);
+   }
+}
+    fetchData()
+  },[])
+
+
+  const filtered = match?.filter(m => {
     const q = query.toLowerCase();
-    const nameMatch = m.name.toLowerCase().includes(q) || m.bio.toLowerCase().includes(q);
+   const nameMatch = (m.name || "").toLowerCase().includes(q) || (m.bio || "").toLowerCase().includes(q);
     if (!nameMatch) return false;
     if (filter === "All") return true;
     if (filter === "New") return m.isNew;
-    if (filter === "Online") return m.online;
+    if (filter === "Online") return m.isOnline;
     if (filter === "Nearby") return m.isNearby;
     if (filter === "Anonymous") return m.isAnon;
     return true;
@@ -372,9 +385,7 @@ export default function MatchesPage() {
         }
       `}</style>
 <Navar/>
-      <div className="blob blob1" />
-      <div className="blob blob2" />
-      <div className="blob blob3" />
+    
 
      
 
@@ -386,7 +397,7 @@ export default function MatchesPage() {
           transition={{ duration: 0.6 }}
         >
           <div className="hero-tag"><Sparkles size={12} /> Connections</div>
-          <h1 className="hero-title">Your <span>Matches</span></h1>
+          <h1 className="hero-title">Your Matches </h1>
           <p className="hero-sub">People who matched your vibe.</p>
         </motion.div>
 
@@ -413,14 +424,6 @@ export default function MatchesPage() {
           </div>
         </motion.div>
 
-        {!loading && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.25 }}>
-            <p className="section-label"><Sparkles size={11} /> New Matches</p>
-            <div className="new-scroll">
-              {NEW_MATCHES.map(m => <NewMatchBubble key={m.id} match={m} />)}
-            </div>
-          </motion.div>
-        )}
 
         <p className="section-label" style={{ marginBottom: 24 }}>
           <Heart size={11} /> {filter === "All" ? "All Matches" : filter}
@@ -430,7 +433,7 @@ export default function MatchesPage() {
           <div className="grid">
             {Array.from({ length: 6 }).map((_, i) => <SkeletonCard key={i} />)}
           </div>
-        ) : filtered.length === 0 ? (
+        ) : filtered?.length === 0 ? (
           <div className="empty-state">
             <div className="empty-icon"><Search size={28} color="#10b981" opacity={0.6} /></div>
             <h2 className="empty-title">No matches here yet</h2>
@@ -442,7 +445,7 @@ export default function MatchesPage() {
         ) : (
           <div className="grid">
             <AnimatePresence>
-              {filtered.map((m, i) => <MatchCard key={m.id} match={m} index={i} />)}
+              {filtered?.map((m, i) => <MatchCard key={m._id} match={m} index={i} />)}
             </AnimatePresence>
           </div>
         )}

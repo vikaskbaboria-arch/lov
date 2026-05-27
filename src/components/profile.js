@@ -3,6 +3,7 @@ import React, { useEffect } from 'react'
 import UploadPhotos from './dating/uploadPhotos.js';
 import Ebdate from './dating/ebdate.js';
 import  Image  from 'next/image';
+
 import FreindRequest from './FreindRequest.js';
 import EditProfile from './editProfile.js'
 import PostDeleteButton from './post/postDeleteButton.js'
@@ -77,7 +78,8 @@ if(loading===true){
 }
 
   return (
-     <div className="min-h-screen bg-neutral-950 text-neutral-100 pt-20">
+     <div className="min-h-screen bg-neutral-950 text-neutral-100 pt-8
+     ">
 
   {/* EDIT MODAL */}
   {edit && <EditProfile setEdit={setEdit} />}
@@ -106,7 +108,7 @@ if(loading===true){
         {/* AVATAR */}
         <div className="relative shrink-0">
           <div className="rounded-full p-[2px] ring-1 ring-neutral-800">
-            <Image
+            <img
               src={user?.profilePic || "https://via.placeholder.com/150"}
               alt="profile"
               width={160}

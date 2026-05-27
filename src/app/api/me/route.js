@@ -16,8 +16,9 @@ export const GET = async (req)=>{
               return NextResponse.json({error:"user not authorized"},{status:401})
         }
         const user = await User.findById(currentUser)
-        .select('username name profilePic isDatingEnabled  ')
-
+        .select('username name profilePic isDatingEnabled  bio email   ')
+        .lean()
+       
    
         return NextResponse.json({user},{status:200})
     } catch (error) {

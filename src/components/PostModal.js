@@ -75,7 +75,7 @@ const PostModal = ({ post, onClose }) => {
     
     {/* LEFT IMAGE */}
     <div className="w-[58%] bg-neutral-950 flex items-center justify-center border-r border-neutral-800">
-      <Image
+      <img
         src={post.photo}
         alt="post"
         width={600}
@@ -90,7 +90,7 @@ const PostModal = ({ post, onClose }) => {
 
       {/* HEADER */}
       <div className="flex items-center gap-3 px-5 py-4 border-b border-neutral-900">
-        <Image
+        <img
           src={post.user?.profilePic}
           alt={post.user?.username}
           width={40}
@@ -116,7 +116,7 @@ const PostModal = ({ post, onClose }) => {
       {/* CAPTION */}
       <div className="px-5 py-4 border-b border-neutral-900">
         <div className="flex gap-3">
-          <Image
+          <img
             src={post.user?.profilePic}
             width={32}
             height={32}
@@ -136,7 +136,7 @@ const PostModal = ({ post, onClose }) => {
       <div className="flex-1 overflow-y-auto px-5 py-4 space-y-5 scrollbar-hide">
         {post.comments?.map((c) => (
           <div key={c._id} className="flex gap-3">
-            <Image
+            <img
               src={c.user?.profilePic}
               alt={c.user?.name}
               width={32}

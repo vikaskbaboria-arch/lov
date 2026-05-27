@@ -8,9 +8,11 @@ import Match from "@/models/Match.model.js"
 export const POST=async(req)=>{
     try {
          await connectDB();
+         
          const session = await getServerSession(authOptions)
          const fromUser = session?.user?.id
-       const {toUser,}= await req.json();
+       const {toUser}= await req.json();
+       console.log(toUser)
        const  isFromUser = await  User.findById(fromUser)
        if(!isFromUser){
            return NextResponse.json({message:"no user is found "},{status:401})
@@ -29,11 +31,11 @@ export const POST=async(req)=>{
        const reverseSwipe =
        await Swipe.findOne({
 
-      fromUser:toUser,
+      fromUser: toUser,
 
-      toUser:currentUser._id,
+      toUser: fromUser,
 
-      action:"like"
+      action: "like"
    });
 if(reverseSwipe){
 
@@ -64,6 +66,7 @@ if(reverseSwipe){
 }
        return NextResponse.json({swipe},{status:200})
     } catch (error) {
+      
        return NextResponse.json({error:"Server session error"},{status:500})
     }
 }

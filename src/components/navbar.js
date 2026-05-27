@@ -63,7 +63,7 @@ const Navar = () => {
         {/* Profile */}
         <div className="rounded-full ring-1 ring-neutral-800 cursor-pointer" >
          <Link href={`/${session?.user?.username}`}>
-          <Image src={session?.user?.profilePic} alt="" width={36} height={36} className='rounded-full h-9 w-9'/></Link>
+          <img src={session?.user?.profilePic} alt="" width={36} height={36} className='rounded-full h-9 w-9'/></Link>
         </div>
       </div>
     </nav>

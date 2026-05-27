@@ -37,7 +37,7 @@ export default async function RootLayout({ children }) {
      <StatusProvider session={session}/>
      {/* <StatusListener/> */}
        <Providers> 
-     
+     {/* <Navar/> */}
      {/* spacer */}
         
           {children}

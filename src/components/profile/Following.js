@@ -28,7 +28,7 @@ const Following = ({ following = [] ,onClose}) => {
               key={user._id || user.username}
               className="flex items-center gap-3 mb-3"
             >
-              <Image
+              <img
                 src={user.profilePic || "https://via.placeholder.com/48"}
                 alt={user.username}
                 width={40}

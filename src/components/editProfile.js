@@ -101,7 +101,7 @@ setProfile(prev => ({
 
       {/* Profile Image */}
       <div className="flex flex-col items-center mb-4">
-        <Image
+        <img
           src={session?.user?.profilePic }
           alt="profile"
           width={96}

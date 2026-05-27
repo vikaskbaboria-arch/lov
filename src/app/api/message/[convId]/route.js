@@ -20,11 +20,12 @@ export const GET = async(req,{params})=>{
         }
         const messages = await Message.find({conversationId:convId}).
         populate("senderId","username ").
-       sort({ createdAt: 1 })
+       sort({ createdAt: -1 })
+       .limit(30)
       .lean();
      
       
-      return NextResponse.json(messages,{status:200})
+      return NextResponse.json(messages.reverse(),{status:200})
     } catch (error) {
         console.error(error)
         return NextResponse.json({error:"the error is 500"},{status:500})

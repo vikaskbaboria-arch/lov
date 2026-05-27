@@ -116,10 +116,29 @@ const UserSchema = new Schema({
 isDatingEnabled:{
     type:Boolean,
     default:false
+},
+address:{
+    city:String,
+state:String,
+country:String
 }
-
+,
+location:{
+    type:{
+        type:String,
+        enum:["Point"],
+        default:"Point"
+    },
+    coordinates:{
+        type:[Number],
+        default:[0,0]
+    }
+}
 },{timestamps:true});
 
+UserSchema.index({
+   location:"2dsphere"
+});
 
 UserSchema.pre('save', async function() {
     if (!this.isModified("password")) return;

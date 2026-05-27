@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect, useState ,useRef} from 'react'
+import React, { useEffect, useState } from 'react'
 import SentMessage from './sentMessage';
 import Link from 'next/link';
 import getDateLabel from "@/helpers/getDateLabel"
@@ -10,9 +10,6 @@ const Chat = ({convId, members}) => {
   const [chat,setChat]= useState([]);
   const [loading,setLoading] = useState(true);
   const {data:session,status} = useSession()
-   const bottomRef = useRef(null);
-
-  // 🔥 auto scroll to latest message
  
   
   const senderId = session?.user?.id
@@ -26,7 +23,7 @@ const Chat = ({convId, members}) => {
     }
 
     const data = await res.json();
-   
+     console.log(data)
     setChat(Array.isArray(data) ? data : []);
   } catch (error) {
     //console.log(error);
@@ -73,12 +70,7 @@ const Chat = ({convId, members}) => {
 
 }, [convId]);
      
-  // 🔥 auto scroll to latest message
-  useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [chat]);
-  
-   if(status==="loading" || loading){
+  if(status==="loading" || loading){
     return <ChatSkeleton/>
   }
 
@@ -125,9 +117,9 @@ let lastDate =""
           No messages yet. Say hi 👋
         </div>
       ) : (
-        <div className="flex-1 overflow-y-auto px-4 py-4 flex flex-col gap-2.5">
+        <div className="flex-1 overflow-y-auto px-4 py-4 flex flex-col-reverse gap-2.5">
 
-          {chat?.map((m, i) => {
+          {[...chat].reverse()?.map((m, i) => {
            const isMine =
   m?.senderId?._id === senderId ||
   m?.senderId === senderId;
@@ -190,7 +182,6 @@ let lastDate =""
             );
           })}
 
-          <div ref={bottomRef} />
         </div>
         
       )}

@@ -58,8 +58,19 @@ export const SwipeCard = ({ profile, isTop, index, onSwipe, controlledDir }) => 
           ? { x: 0, y: -700, rotate: 0, opacity: 0 }
           : { opacity: 0 };
 
-  const photo = profile.photos[photoIdx];
-  const photoCount = profile.photos.length;
+  const photos =
+   profile?.photos?.length
+   ? profile.photos
+   : [
+      profile?.profilePic ||
+      "https://picsum.photos/400/600"
+   ];
+
+const photo =
+   photos[photoIdx];
+
+const photoCount =
+   photos.length;
 
   const handlePhotoTap = (e) => {
     if (!isTop) return;
@@ -93,18 +104,18 @@ export const SwipeCard = ({ profile, isTop, index, onSwipe, controlledDir }) => 
       onDragEnd={handleDragEnd}
       animate={controlledDir ? exit : undefined}
       transition={{ type: "spring", stiffness: 260, damping: 28 }}
-      data-testid={`swipe-card-${profile.id}`}
+      data-testid={`swipe-card-${profile?._id}`}
     >
       <div className="relative h-full w-full overflow-hidden rounded-3xl border border-neutral-900 bg-neutral-900 shadow-[0_30px_80px_-30px_rgba(0,0,0,0.8)]">
         {/* Photo */}
         <div
           className="absolute inset-0 cursor-pointer"
           onClick={handlePhotoTap}
-          data-testid={`card-photo-${profile.id}`}
+          data-testid={`card-photo-${profile?._id}`}
         >
           <img
             src={photo}
-            alt={profile.username}
+            alt={profile?.username}
             className="h-full w-full object-cover"
             draggable={false}
           />
@@ -115,7 +126,7 @@ export const SwipeCard = ({ profile, isTop, index, onSwipe, controlledDir }) => 
 
         {/* Photo progress bars */}
         <div className="pointer-events-none absolute left-3 right-3 top-3 flex gap-1">
-          {profile.photos.map((_, i) => (
+          {profile?.photos?.map((_, i) => (
             <div
               key={i}
               className={`h-[2.5px] flex-1 rounded-full ${
@@ -128,7 +139,7 @@ export const SwipeCard = ({ profile, isTop, index, onSwipe, controlledDir }) => 
         {/* Match % */}
         <div className="absolute right-3 top-7 inline-flex items-center gap-1 rounded-full border border-white/15 bg-black/45 px-2.5 py-1 text-[11px] font-medium text-white backdrop-blur-md">
           <Heart className="h-3 w-3 fill-rose-400 text-rose-400" />
-          {profile.matchPercent}% match
+          {profile?.matchPercent}% match
         </div>
 
         {/* Drag direction overlays */}
@@ -157,47 +168,47 @@ export const SwipeCard = ({ profile, isTop, index, onSwipe, controlledDir }) => 
             <div className="min-w-0">
               <div className="flex items-center gap-2">
                 <h2 className="font-display text-3xl font-semibold tracking-tight">
-                  {profile.username}{" "}
+                  {profile?.username}{" "}
                   <span className="font-sans text-2xl font-light text-white/80">
-                    {profile.age}
+                    {profile?.age}
                   </span>
                 </h2>
-                {profile.verified && (
+                {profile?.verified && (
                   <BadgeCheck className="h-5 w-5 text-sky-400" />
                 )}
-                {profile.isOnline && (
+                {profile?.isOnline && (
                   <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
                 )}
               </div>
               <div className="mt-1 flex items-center gap-1.5 text-[12px] text-white/70">
                 <MapPin className="h-3 w-3" />
-                <span>{profile.distance}</span>
+                <span>{profile?.distance}</span>
                 <span className="text-white/30">·</span>
-                <span>{profile.college}</span>
+                <span>{profile?.college}</span>
               </div>
             </div>
           </div>
 
           <p className="mt-3 max-w-[34ch] text-[14px] leading-relaxed text-white/85">
-            {profile.bio}
+            {profile?.bio}
           </p>
 
           {/* Prompt (first one) */}
-          {profile.prompts?.[0] && (
+          {profile?.prompts?.[0] && (
             <div className="mt-3 rounded-2xl border border-white/10 bg-white/5 p-3 backdrop-blur-sm">
               <div className="flex items-center gap-1.5 text-[10px] uppercase tracking-[0.18em] text-white/55">
                 <Sparkles className="h-3 w-3" />
-                {profile.prompts[0].q}
+                {profile?.prompts[0].q}
               </div>
               <div className="mt-1 text-[14px] leading-snug text-white">
-                {profile.prompts[0].a}
+                {profile?.prompts[0].a}
               </div>
             </div>
           )}
 
           {/* Interests */}
           <div className="mt-3 flex flex-wrap gap-1.5">
-            {profile.interests.slice(0, 4).map((t) => (
+            {profile?.interests.slice(0, 4).map((t) => (
               <span
                 key={t}
                 className="rounded-full border border-white/15 bg-white/5 px-2.5 py-0.5 text-[11px] text-white/85 backdrop-blur-sm"

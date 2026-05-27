@@ -17,7 +17,7 @@ const UserPosts = ({ posts = [], isAdmin , type}) => {
             className="relative h-[300px] cursor-pointer group "
             onClick={() => setSelectedPost(post)}
           >
-            <Image
+            <img
               src={post.photo}
               alt="post"
               width={300}

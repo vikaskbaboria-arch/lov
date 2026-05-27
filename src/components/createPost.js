@@ -114,7 +114,7 @@ const CreatePost = ({setOpen}) => {
 
             {preview ? (
               <div className="overflow-hidden rounded-xl border border-neutral-800">
-                <Image src={preview} alt="preview" width={192} height={192} className="h-48 w-full object-cover" />
+                <img src={preview} alt="preview" width={192} height={192} className="h-48 w-full object-cover" />
               </div>
             ) : (
               <div className="flex min-h-48 items-center justify-center rounded-xl border border-dashed border-neutral-800 bg-neutral-900/50 text-sm text-neutral-500">
