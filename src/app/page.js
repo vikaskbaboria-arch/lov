@@ -75,7 +75,7 @@ if(loading === true){
   ) : (
     <button
       onClick={() => setOpenCreatePost(true)}
-      className="fixed bottom-6 right-6 bg-white/10 text-2xl text-white px-5 py-3 rounded-full shadow-lg hover:bg-white/20 transition z-50"
+      className="fixed bottom-8 right-8 bg-white/10 text-2xl text-white px-5 py-3 rounded-full shadow-lg hover:bg-white/20 transition z-50"
     >
       +
     </button>

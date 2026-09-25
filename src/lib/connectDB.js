@@ -1,8 +1,12 @@
 import mongoose from "mongoose";
+import dns from "dns";
+
+dns.setDefaultResultOrder("ipv4first");
 
 let isConnected = false;
 
  const connectDB =async()=>{
+  
     if(isConnected===true){
         //console.log("database already connected");
         return;

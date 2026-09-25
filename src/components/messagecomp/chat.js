@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef, useMemo } from 'react'
 import SentMessage from './sentMessage';
 import Link from 'next/link';
 import getDateLabel from "@/helpers/getDateLabel"
@@ -9,10 +9,21 @@ import { pusherClient } from "@/lib/pusherClient";
 const Chat = ({convId, members}) => {
   const [chat,setChat]= useState([]);
   const [loading,setLoading] = useState(true);
+  const bottomRef = useRef(null);
   const {data:session,status} = useSession()
  
   
   const senderId = session?.user?.id
+  const sortedChat = useMemo(() => {
+    return [...chat].sort(
+      (a, b) => new Date(a?.createdAt || 0) - new Date(b?.createdAt || 0)
+    );
+  }, [chat]);
+
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }, [sortedChat]);
+
   useEffect(()=>{
        const fetchMessage=async()=>{
          try {
@@ -119,18 +130,20 @@ let lastDate =""
       ) : (
         <div className="flex-1 overflow-y-auto px-4 py-4 flex flex-col gap-2.5">
 
-          {[...chat]
-      
-            
-      
+          {sortedChat
             .map((m, i) => {
            const isMine =
   m?.senderId?._id === senderId ||
   m?.senderId === senderId;
              const label = getDateLabel(m?.createdAt);
 
-           const showDate = label !== lastDate;
-           lastDate = label;
+  const prevMessage = sortedChat[i - 1];
+
+  const prevLabel = prevMessage
+    ? getDateLabel(prevMessage.createdAt)
+    : null;
+
+  const showDate = prevLabel !== label;
             return (
               <div
                 key={m._id}
@@ -186,6 +199,7 @@ let lastDate =""
             );
           })}
 
+          <div ref={bottomRef} />
         </div>
         
       )}

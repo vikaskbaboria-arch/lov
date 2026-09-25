@@ -73,7 +73,7 @@ const CreatePost = ({setOpen}) => {
               onClick={() => setIsAnonymous(!isAnonymous)}
               className={`inline-flex items-center justify-center rounded-full px-4 py-2 text-sm font-medium transition ${
                 isAnonymous
-                  ? 'bg-pink-500 text-white'
+                  ? 'bg-red-500 text-white'
                   : 'border border-neutral-700 bg-neutral-900 text-neutral-200 hover:bg-neutral-800'
               }`}
             >
@@ -108,7 +108,7 @@ const CreatePost = ({setOpen}) => {
                 type="file"
                 accept="image/*"
                 onChange={handleImage}
-                className="mt-3 w-full cursor-pointer rounded-lg border border-dashed border-neutral-700 bg-neutral-950 p-3 text-sm text-neutral-300 file:mr-4 file:rounded-full file:border-0 file:bg-pink-500 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white hover:file:bg-pink-600"
+                className="mt-3 w-full cursor-pointer rounded-lg border border-dashed border-neutral-700 bg-neutral-950 p-3 text-sm text-neutral-300 file:mr-4 file:rounded-full file:border-0 file:bg-red-500 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white hover:file:bg-red-600"
               />
             </div>
 

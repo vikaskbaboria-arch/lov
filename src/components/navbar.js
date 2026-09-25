@@ -3,14 +3,17 @@ import React from 'react'
 import  Image  from 'next/image';
 import GlitchText from './ui/GlitchText'
 import Link from 'next/link'
+import { useUser }
+from "@/context/UserContext";
 import { signOut } from 'next-auth/react'
 import { useRouter } from "next/navigation";
 import { useSession } from 'next-auth/react'
-import { useUser }from "@/context/UserContext";
+
 const Navar = () => {
     const router = useRouter();
      const {adminUser,loading} = useUser();
        console.log(adminUser)
+        
     const {data:session,status} =useSession();
    const handleLink = ()=>{
     router.push(`/${session?.user?.username}`)
@@ -33,7 +36,7 @@ const Navar = () => {
         <input
           type="text"
           placeholder="Search users..."
-          className="w-full px-4 py-2 rounded-lg bg-neutral-900 text-white outline-none focus:ring-2 focus:ring-pink-500/30"
+          className="w-full px-4 py-2 rounded-lg bg-neutral-900 text-white outline-none focus:ring-2 focus:ring-red-500/30"
         />
       </div> */}
 
@@ -45,26 +48,39 @@ const Navar = () => {
     
    
         {/* Messages */}
-        <button className="hover:text-pink-400 transition" >
+        <button className="hover:text-red-400 transition" >
         <Link href="/direct/inbox">
           Messages
         </Link>
         </button>
-         <button className="hover:text-pink-400 transition" >
+         <button className="hover:text-red-400 transition" >
        {adminUser?.isDatingEnabled &&( <Link href="/dating">
          dating
         </Link>)}
         </button>
         {/* Notifications */}
-        <button className="hover:text-pink-400 transition" onClick={()=>signOut()}>
+        <button className="hover:text-red-400 transition" onClick={()=>signOut()}>
           Logout
         </button>
 
         {/* Profile */}
-        <div className="rounded-full ring-1 ring-neutral-800 cursor-pointer" >
-         <Link href={`/${session?.user?.username}`}>
-          <img src={session?.user?.profilePic} alt="" width={36} height={36} className='rounded-full h-9 w-9'/></Link>
-        </div>
+  <div
+  className={`rounded-full cursor-pointer transition-all duration-300 ${
+    adminUser?.isDatingEnabled
+      ? "ring-2 ring-accent shadow-[0_0_12px_rgba(239,35,60,0.6)]"
+      : "ring-1 ring-neutral-800"
+  }`}
+>
+  <Link href={`/${session?.user?.username}`}>
+    <img
+      src={session?.user?.profilePic}
+      alt=""
+      width={38}
+      height={38}
+      className="rounded-full h-9 w-9"
+    />
+  </Link>
+</div>
       </div>
     </nav>
     {/* {session && (

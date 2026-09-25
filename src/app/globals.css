@@ -38,11 +38,11 @@ body {
 }
 
 .lov-input {
-  @apply w-full rounded-lg border border-neutral-800 bg-neutral-900/80 px-3 py-2 text-neutral-100 placeholder:text-neutral-500 outline-none transition focus:border-pink-500/50 focus:ring-2 focus:ring-pink-500/20;
+  @apply w-full rounded-lg border border-neutral-800 bg-neutral-900/80 px-3 py-2 text-neutral-100 placeholder:text-neutral-500 outline-none transition focus:border-red-500/50 focus:ring-2 focus:ring-red-500/20;
 }
 
 .lov-btn-primary {
-  @apply rounded-lg bg-pink-500 px-4 py-2 font-medium text-white transition hover:bg-pink-600 disabled:opacity-50;
+  @apply rounded-lg bg-red-500 px-4 py-2 font-medium text-white transition hover:bg-red-600 disabled:opacity-50;
 }
 
 .lov-btn-ghost {
@@ -74,4 +74,11 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #525252;
+}
+
+.colorred{
+  background: #ef233c;
+}
+.colortextred{
+  color: #ef233c;
 }

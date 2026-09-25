@@ -96,10 +96,10 @@ const LoginPage = () => {
          {hearts.map((s, i) => <FloatingHeart key={i} style={s} />)}
 
       {/* Card */}
-      <div className="relative z-10 w-full max-w-md p-8 rounded-2xl backdrop-blur-xl border border-pink-500/20 bg-white/5 shadow-[0_0_40px_rgba(255,45,120,0.2)]">
+      <div className="relative z-10 w-full max-w-md p-8 rounded-2xl backdrop-blur-xl border border-red-500/20 bg-white/5 shadow-[0_0_40px_rgba(255,45,120,0.2)]">
 
         {/* Logo */}
-        <h1 className="text-4xl font-bold text-center mb-2 font-mono tracking-widest bg-gradient-to-r from-pink-500 to-emerald-400 bg-clip-text text-transparent">
+        <h1 className="text-4xl font-bold text-center mb-2 font-mono tracking-widest bg-gradient-to-r from-red-500 to-emerald-400 bg-clip-text text-transparent">
           LOV
         </h1>
 
@@ -117,7 +117,7 @@ const LoginPage = () => {
             placeholder="email"
             value={form.email}
             onChange={handleChange}
-            className="bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white outline-none focus:border-pink-500 focus:shadow-[0_0_10px_rgba(255,45,120,0.5)] transition"
+            className="bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white outline-none focus:border-red-500 focus:shadow-[0_0_10px_rgba(255,45,120,0.5)] transition"
           />
 
           {/* Password */}
@@ -140,7 +140,7 @@ const LoginPage = () => {
           <button
             type="submit"
             disabled={loading}
-            className="mt-2 py-2 rounded-lg font-mono font-bold tracking-wide bg-pink-500 hover:bg-pink-600 transition disabled:opacity-50"
+            className="mt-2 py-2 rounded-lg font-mono font-bold tracking-wide bg-red-500 hover:bg-red-600 transition disabled:opacity-50"
           >
             {loading ? "logging in..." : "login"}
           </button>
@@ -151,7 +151,7 @@ const LoginPage = () => {
           don’t have an account?{" "}
           <span
             onClick={() => router.push("/register")}
-            className="text-pink-400 cursor-pointer hover:underline"
+            className="text-red-400 cursor-pointer hover:underline"
           >
             register
           </span>

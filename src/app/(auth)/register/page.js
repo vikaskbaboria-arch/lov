@@ -155,7 +155,7 @@ const FloatingHeart = ({ style }) => (
 
 
       {/* Card */}
-      <div    className="relative z-10 w-full max-w-md p-8 rounded-2xl backdrop-blur-xl border border-pink-500/20 bg-white/5 shadow-[0_0_40px_rgba(255,45,120,0.2)]">
+      <div    className="relative z-10 w-full max-w-md p-8 rounded-2xl backdrop-blur-xl border border-red-500/20 bg-white/5 shadow-[0_0_40px_rgba(255,45,120,0.2)]">
 
         <h1 className="text-2xl font-semibold text-center mb-6">
           Create Account

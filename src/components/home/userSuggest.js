@@ -2,19 +2,13 @@
 
 import { useEffect, useState } from "react";
 
-
+import FollowButton from "../followButton";
 export default function UserSuggest() {
-  const [followed, setFollowed] = useState(new Set());
+  const [followed, setFollowed] = useState({});
   const[loading,setLoading] = useState(true);
   const [users,setUsers] = useState([]);
   const [isOpen, setIsOpen] = useState(true);
-  const toggle = (id) => {
-    setFollowed((prev) => {
-      const next = new Set(prev);
-      next.has(id) ? next.delete(id) : next.add(id);
-      return next;
-    });
-  };
+
 useEffect(()=>{
   const fetchUsers = async()=>{
     const res = await fetch('/api/user/suggest',{
@@ -25,7 +19,8 @@ useEffect(()=>{
     });
     const userData = await res.json();
     //console.log("userData in p",userData)
-    setUsers(userData.users);
+    setUsers(userData.user);
+    console.log("users in suggest",userData.user);
     setLoading(false);
   };
   fetchUsers();
@@ -89,7 +84,7 @@ if(loading){
             className="relative flex-none w-[140px] bg-neutral-950 border border-neutral-800 rounded-xl p-3.5 flex flex-col gap-2.5 hover:border-neutral-600 hover:bg-neutral-900 hover:-translate-y-px transition-all duration-150 cursor-pointer"
           >
             {/* Online dot */}
-            {u?.online && (
+            {u?.isOnline && (
               <span className="absolute top-2.5 right-2.5 w-1.5 h-1.5 bg-green-400 rounded-full" />
             )}
 
@@ -109,16 +104,9 @@ if(loading){
             </div>
 
             {/* Follow button */}
-            <button
-              onClick={() => toggle(u.id)}
-              className={`w-full py-1.5 rounded-md text-[11px] font-medium border transition-colors duration-150 ${
-                followed.has(u.id)
-                  ? "border-neutral-800 text-neutral-500"
-                  : "border-neutral-700 text-neutral-300 hover:border-neutral-400 hover:text-white"
-              }`}
-            >
-              {followed.has(u?.id) ? "Following" : "Follow"}
-            </button>
+        
+          <FollowButton userId={u._id} isFollowingInitial={u?.isFollowing} styles={'w-26 h-[26px] text-[11px] rounded-md'} />
+         
           </div>
         ))}
         </div>

@@ -30,7 +30,7 @@ const SentMessage = ({ convId, senderId, setChat }) => {
         <button
           type="button"
           onClick={handleSend}
-          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-pink-500 text-white transition hover:bg-pink-600"
+          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-red-500 text-white transition hover:bg-red-600"
           aria-label="Send message"
         >
           ♥

@@ -5,7 +5,7 @@ export default function HomeHero() {
   return (
     <div className="min-h-screen bg-neutral-950 text-neutral-100 flex items-center justify-center px-6 relative overflow-hidden">
 
-      <div className="absolute w-[500px] h-[500px] bg-pink-500/15 blur-3xl rounded-full top-[-100px] left-[-100px]" />
+      <div className="absolute w-[500px] h-[500px] bg-red-500/15 blur-3xl rounded-full top-[-100px] left-[-100px]" />
       <div className="absolute w-[400px] h-[400px] bg-emerald-500/10 blur-3xl rounded-full bottom-[-100px] right-[-100px]" />
 
       <div className="max-w-6xl w-full grid md:grid-cols-2 gap-10 items-center z-10">
@@ -18,7 +18,7 @@ export default function HomeHero() {
           <h1 className="text-5xl md:text-6xl font-bold leading-tight">
             Connect. <br />
             Share. <br />
-            <span className="text-pink-400">Express.</span>
+            <span className="text-red-400">Express.</span>
           </h1>
 
           <p className="mt-6 text-neutral-400 max-w-md">
@@ -27,7 +27,7 @@ export default function HomeHero() {
           </p>
 
           <div className="mt-8 flex gap-4">
-            <button type="button" className="bg-pink-500 hover:bg-pink-600 transition px-6 py-3 rounded-full font-medium shadow-lg">
+            <button type="button" className="bg-red-500 hover:bg-red-600 transition px-6 py-3 rounded-full font-medium shadow-lg">
               Get Started
             </button>
             <button type="button" className="border border-neutral-700 hover:border-neutral-500 transition px-6 py-3 rounded-full">
@@ -50,7 +50,7 @@ export default function HomeHero() {
           </motion.div>
 
           <motion.div
-            className="absolute bottom-10 left-0 bg-pink-500 text-white px-4 py-2 rounded-xl shadow-lg"
+            className="absolute bottom-10 left-0 bg-red-500 text-white px-4 py-2 rounded-xl shadow-lg"
             initial={{ opacity: 0, x: -40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.4 }}

@@ -45,7 +45,7 @@ const Inbox = ({ chats }) => {
       {/* HEADER */}
       <div className="flex items-center justify-between px-5 pt-5 pb-3">
         <h1 className="text-xl font-semibold tracking-tight text-neutral-100">
-          Messages
+         Inbox
         </h1>
 
         <button
@@ -140,7 +140,7 @@ ${
 
                 {/* unread dot example */}
                 {conv?.unread > 0 && (
-                  <span className="ml-2 inline-flex h-2 w-2 rounded-full bg-pink-500" />
+                  <span className="ml-2 inline-flex h-2 w-2 rounded-full bg-red-500" />
                 )}
               </div>
             </div>

@@ -98,10 +98,7 @@ if(loading===true){
           Edit Profile
         </button>
       )}
-      {isAdmin&&
-      (
-        <Ebdate/>
-      )}
+   
 
       <div className="flex flex-col items-center gap-8 sm:flex-row sm:items-start sm:gap-10">
 

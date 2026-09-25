@@ -9,6 +9,7 @@ import { authOptions } from "./api/auth/[...nextauth]/route.js";
 import Navar from "@/components/navbar";
 import StatusProvider from "@/components/statusProvider";
 import Providers from "@/components/providers";
+import Ebdate from "@/components/dating/ebdate";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -41,6 +42,7 @@ export default async function RootLayout({ children }) {
      {/* spacer */}
         
           {children}
+          <Ebdate  />
         </Providers></UserProvider>
       </body>
     </html>

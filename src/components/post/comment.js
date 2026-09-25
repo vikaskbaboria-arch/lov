@@ -37,7 +37,7 @@ const Comment = ({postId,comment}) => {
 
     <button
       onClick={handleSubmit}
-      className="text-[13px] font-medium text-pink-500 hover:text-pink-400 transition"
+      className="text-[13px] font-medium text-red-500 hover:text-red-400 transition"
     >
       Comment
     </button>

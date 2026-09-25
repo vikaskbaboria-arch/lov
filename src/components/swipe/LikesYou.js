@@ -121,7 +121,7 @@ const LikesYou = ()=>{
                         </p>
                      </div>
 
-                     <div className="absolute right-4 top-4 flex items-center gap-1 rounded-full bg-pink-500 px-3 py-1 text-sm font-medium text-white">
+                     <div className="absolute right-4 top-4 flex items-center gap-1 rounded-full bg-red-500 px-3 py-1 text-sm font-medium text-white">
 
                         <Heart
                            size={14}
@@ -135,7 +135,7 @@ const LikesYou = ()=>{
                   <div className="flex items-center justify-between p-4">
 
                      <button
-                        className="rounded-full bg-pink-500 px-5 py-2 text-sm font-medium text-white transition hover:bg-pink-600"
+                        className="rounded-full bg-red-500 px-5 py-2 text-sm font-medium text-white transition hover:bg-red-600"
                      >
                         Match Back
                      </button>

@@ -20,9 +20,9 @@ export const GET = async()=>{
         }
 
         const match = await Match.find({
-          users:currentUser
+          users:"69e3f38779c56a0880f4ce4e"
         }).populate('users','username isOnline interests bio lastSeen  age gender profilePic')  
-        console.log(match)   
+        console.log("jnn",match)   
       const matchesData =
    match.map((match)=>{
 

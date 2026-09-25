@@ -40,7 +40,7 @@ const Loading = () => {
         <div className="w-20 h-20 rounded-full border border-white/10"></div>
 
         {/* rotating accent */}
-        <div className="absolute inset-0 rounded-full border border-transparent border-t-purple-500 border-r-pink-500 spinner"></div>
+        <div className="absolute inset-0 rounded-full border border-transparent border-t-purple-500 border-r-red-500 spinner"></div>
 
         {/* inner logo */}
         <div className="absolute inset-0 flex items-center justify-center">
@@ -60,7 +60,7 @@ const Loading = () => {
 
       {/* Progress indicator */}
       <div className="w-40 h-[2px] bg-white/10 mt-8 overflow-hidden rounded-full">
-        <div className="w-1/3 h-full bg-gradient-to-r from-pink-500 to-purple-500 progress-bar"></div>
+        <div className="w-1/3 h-full bg-gradient-to-r from-red-500 to-purple-500 progress-bar"></div>
       </div>
 
       {/* Status text */}
