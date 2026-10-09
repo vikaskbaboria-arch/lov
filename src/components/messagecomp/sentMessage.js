@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import { Send } from "lucide-react";
 
 const SentMessage = ({ convId, senderId, setChat }) => {
   const [text, setText] = useState("");
@@ -30,10 +31,10 @@ const SentMessage = ({ convId, senderId, setChat }) => {
         <button
           type="button"
           onClick={handleSend}
-          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-red-500 text-white transition hover:bg-red-600"
+          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-rose-500 text-white transition hover:bg-rose-400"
           aria-label="Send message"
         >
-          ♥
+          <Send className="h-4 w-4" />
         </button>
       </div>
     </div>

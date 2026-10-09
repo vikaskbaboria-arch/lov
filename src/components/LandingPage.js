@@ -79,7 +79,7 @@ const FloatingHeart = ({ style }) => (
 const NavBar = () => (
   <nav style={{
     position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
-    padding: "1rem 2rem",
+    padding: "0.75rem clamp(1rem, 5vw, 2rem)",
     display: "flex", alignItems: "center", justifyContent: "space-between",
    
     backdropFilter: "blur(16px)",
@@ -99,7 +99,7 @@ const NavBar = () => (
         letterSpacing: "0.1em",
       }}>BETA</span>
     </div>
-    <div style={{ display: "flex", gap: "2rem" }}>
+    <div className="hidden sm:flex" style={{ gap: "clamp(0.75rem, 3vw, 2rem)" }}>
       {["Features", "How it Works", "Preview"].map(item => (
         <a key={item} href={`#${item.toLowerCase().replace(/ /g, "-")}`} style={{
           color: "rgba(255,255,255,0.6)", fontSize: "0.85rem",
@@ -148,7 +148,7 @@ const HeroSection = () => {
       minHeight: "100vh", display: "flex", flexDirection: "column",
       alignItems: "center", justifyContent: "center",
       position: "relative", overflow: "hidden",
-      padding: "6rem 2rem 4rem",
+      padding: "5.5rem clamp(1rem, 5vw, 2rem) 3rem",
     }}>
       {/* Glow blobs */}
       {/* <div style={{
@@ -188,7 +188,7 @@ const HeroSection = () => {
         }}>★ NOW IN BETA — JOIN FOR FREE ★</div>
 
         <h1 style={{
-          fontSize: "clamp(2.8rem, 7vw, 5.5rem)",
+          fontSize: "clamp(2.1rem, 8vw, 5.5rem)",
           fontWeight: 900,
           lineHeight: 1.1,
           marginBottom: "1.5rem",
@@ -299,7 +299,7 @@ const FeatureCard = ({ icon, title, desc }) => {
 };
 
 const FeaturesSection = () => (
-  <section id="features" style={{ padding: "6rem 2rem", maxWidth: "1100px", margin: "0 auto" }}>
+  <section id="features" style={{ padding: "6rem clamp(1rem, 5vw, 2rem)", maxWidth: "1100px", margin: "0 auto" }}>
     <div style={{ textAlign: "center", marginBottom: "3.5rem" }}>
       <div style={{
         fontSize: "0.75rem", fontFamily: "monospace", color: "#a855f7",
@@ -345,7 +345,7 @@ const StepCard = ({ number, title, desc, color }) => (
 
 const HowItWorksSection = () => (
   <section id="how-it-works" style={{
-    padding: "6rem 2rem",
+    padding: "6rem clamp(1rem, 5vw, 2rem)",
     background: "linear-gradient(180deg, transparent 0%, rgba(168,85,247,0.04) 50%, transparent 100%)",
   }}>
     <div style={{ maxWidth: "900px", margin: "0 auto" }}>
@@ -488,7 +488,7 @@ const MockFeed = () => {
 const PreviewSection = () => {
   const [tab, setTab] = useState("chat");
   return (
-    <section id="preview" style={{ padding: "6rem 2rem", maxWidth: "1100px", margin: "0 auto" }}>
+    <section id="preview" style={{ padding: "6rem clamp(1rem, 5vw, 2rem)", maxWidth: "1100px", margin: "0 auto" }}>
       <div style={{ textAlign: "center", marginBottom: "3rem" }}>
         <div style={{ fontSize: "0.75rem", fontFamily: "monospace", color: "#ff2d78", letterSpacing: "0.2em", marginBottom: "0.8rem" }}>— APP PREVIEW —</div>
         <h2 style={{ fontFamily: "'VT323', 'Courier New', monospace", fontSize: "clamp(2rem, 5vw, 3.2rem)", color: "white" }}>
@@ -519,7 +519,7 @@ const PreviewSection = () => {
 const Footer = () => (
   <footer style={{
     borderTop: "1px solid rgba(255,45,120,0.12)",
-    padding: "2.5rem 2rem",
+    padding: "2.5rem clamp(1rem, 5vw, 2rem)",
     background: "rgba(5,2,15,0.8)",
   }}>
     <div style={{ maxWidth: "1100px", margin: "0 auto", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "1.5rem" }}>

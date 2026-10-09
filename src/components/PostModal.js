@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import  Image  from 'next/image';
 import { useSession } from "next-auth/react";
 import Comment from "./post/comment";
 import PostDeleteButton from "./post/postDeleteButton";
@@ -14,11 +13,11 @@ const PostModal = ({ post, onClose }) => {
     <>
   
   <div
-  className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center px-4"
+  className="fixed inset-0 z-[80] flex items-center justify-center bg-black/80 px-3 py-3 backdrop-blur-sm sm:px-4"
   onClick={onClose}
 >
      {menu && (
-      <div onClick={() => setmenu(false)} className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center px-4">
+      <div onClick={() => setMenu(false)} className="fixed inset-0 z-[90] flex items-center justify-center bg-black/70 px-4 backdrop-blur-sm">
         <div onClick={(e) => e.stopPropagation()} className="w-full max-w-sm overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-950 text-neutral-100 shadow-2xl">
           
           {/* HEADER */}
@@ -70,11 +69,11 @@ const PostModal = ({ post, onClose }) => {
     )}
   <div
     onClick={(e) => e.stopPropagation()}
-    className="w-full max-w-6xl h-[90vh] bg-neutral-950 border border-neutral-800 rounded-2xl overflow-hidden flex text-neutral-100 shadow-2xl"
+    className="flex h-[90dvh] max-h-[900px] w-full max-w-6xl flex-col overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-950 text-neutral-100 shadow-2xl md:h-[90vh] md:flex-row"
   >
     
     {/* LEFT IMAGE */}
-    <div className="w-[58%] bg-neutral-950 flex items-center justify-center border-r border-neutral-800">
+    <div className="flex h-[30dvh] w-full shrink-0 items-center justify-center border-b border-neutral-800 bg-neutral-950 md:h-full md:w-[58%] md:border-b-0 md:border-r">
       <img
         src={post.photo}
         alt="post"
@@ -86,7 +85,7 @@ const PostModal = ({ post, onClose }) => {
     </div>
 
     {/* RIGHT PANEL */}
-    <div className="w-[42%] flex flex-col bg-neutral-950">
+    <div className="flex min-h-0 min-w-0 flex-1 flex-col bg-neutral-950 md:w-[42%] md:flex-none">
 
       {/* HEADER */}
       <div className="flex items-center gap-3 px-5 py-4 border-b border-neutral-900">
@@ -123,7 +122,7 @@ const PostModal = ({ post, onClose }) => {
             className="w-8 h-8 rounded-full object-cover"
           />
 
-          <p className="text-[14px] leading-6 text-neutral-300">
+          <p className="min-w-0 break-words text-[14px] leading-6 text-neutral-300">
             <span className="font-semibold text-white mr-1">
               {post.user?.username}
             </span>
@@ -145,7 +144,7 @@ const PostModal = ({ post, onClose }) => {
             />
 
             <div className="flex-1">
-              <p className="text-[14px] text-neutral-300 leading-6">
+              <p className="break-words text-[14px] leading-6 text-neutral-300">
                 <span className="font-semibold text-white mr-1">
                   {c.user?.name}
                 </span>

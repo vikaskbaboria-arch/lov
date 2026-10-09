@@ -10,11 +10,11 @@ const UserPosts = ({ posts = [], isAdmin , type}) => {
   return (
     <>
       {/* 🔹 Grid */}
-      <div className=" max-w-5xl mx-auto mt-4 grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3  gap-3  p-2   ">
+      <div className="mx-auto mt-4 grid max-w-5xl grid-cols-3 gap-1 p-1 sm:gap-3 sm:p-2">
         {filteredPosts.map((post) => (
           <div
             key={post._id}
-            className="relative h-[300px] cursor-pointer group "
+            className="group relative aspect-square cursor-pointer overflow-hidden rounded-md sm:rounded-xl"
             onClick={() => setSelectedPost(post)}
           >
             <img
@@ -23,7 +23,7 @@ const UserPosts = ({ posts = [], isAdmin , type}) => {
               width={300}
               height={300}
               loading="lazy"
-              className=" w-full h-full rounded-xl object-cover "
+              className="h-full w-full object-cover"
             />
 
             {/* 🔹 Hover overlay */}

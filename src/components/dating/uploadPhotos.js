@@ -77,7 +77,7 @@ const UploadPhotos = ({ setEdit }) => {
 
   return (
     <div className="lov-overlay">
-      <div className="lov-modal w-full max-w-4xl p-6 relative">
+      <div className="lov-modal relative max-h-[90dvh] w-full max-w-4xl overflow-y-auto p-4 sm:p-6">
         <button
           onClick={() => setEdit(false)}
           className="absolute top-3 right-3 text-neutral-500 hover:text-neutral-100"
@@ -100,7 +100,7 @@ const UploadPhotos = ({ setEdit }) => {
             accept="image/*"
             multiple
             onChange={handleImage}
-            className="block w-full rounded-lg border border-neutral-800 bg-neutral-950 p-2 text-sm text-neutral-100"
+            className="block w-full max-w-full rounded-lg border border-neutral-800 bg-neutral-950 p-2 text-sm text-neutral-100"
           />
 
           {error && <p className="text-sm text-rose-400">{error}</p>}

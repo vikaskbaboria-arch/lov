@@ -5,7 +5,6 @@ import {
   Search, MessageCircle, Sparkles, MapPin, Clock,
   Shield, Heart, Zap, X, Eye
 } from "lucide-react";
-import Navar from "@/components/navbar";
 
 const FILTERS = ["All", "New", "Online", "Nearby", "Anonymous"];
 
@@ -228,13 +227,11 @@ export default function MatchesPage() {
 
   return (
     <div className="min-h-screen bg-neutral-950 text-neutral-100">
-      <Navar />
-
       {/* Ambient accent glow — red to match brand, not green */}
       <div className="pointer-events-none fixed -left-24 -top-48 z-0 h-[600px] w-[600px] rounded-full bg-red-500/[0.06] blur-[120px]" />
       <div className="pointer-events-none fixed -right-36 bottom-24 z-0 h-[500px] w-[500px] rounded-full bg-red-500/[0.04] blur-[120px]" />
 
-      <main className="relative z-10 mx-auto max-w-6xl px-6 pb-20 pt-12">
+      <main className="relative z-10 mx-auto max-w-6xl px-4 pb-8 pt-8 sm:px-6 md:pb-12 md:pt-12">
         <motion.div
           className="mb-9"
           initial={{ opacity: 0, y: 20 }}
@@ -244,7 +241,7 @@ export default function MatchesPage() {
           <span className="px-1 lov-pill mb-4 uppercase rounded-full tracking-wide text-2xl text-red-600 border-red-600/70 bg-red-500/20">
             Connections
           </span>
-          <h1 className="lov-display mt-4 text-5xl sm:text-6xl leading-none tracking-tight text-neutral-50">
+          <h1 className="lov-display mt-4 text-4xl leading-tight tracking-tight text-neutral-50 sm:text-6xl">
             Your <span className="text-red-600">Matches</span>
           </h1>
           <p className="mt-3 text-neutral-500">People who matched your vibe.</p>

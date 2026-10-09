@@ -6,6 +6,7 @@ import getDateLabel from "@/helpers/getDateLabel"
 import ChatSkeleton from '@/components/loading/chatSkelton';
 import { useSession } from 'next-auth/react';
 import { pusherClient } from "@/lib/pusherClient";
+import { ArrowLeft } from "lucide-react";
 const Chat = ({convId, members}) => {
   const [chat,setChat]= useState([]);
   const [loading,setLoading] = useState(true);
@@ -97,6 +98,10 @@ let lastDate =""
       {/* 🔥 HEADER */}
       <div className="flex-shrink-0 justify-between px-4 py-3 flex items-center gap-3 border-b border-neutral-800">
 
+ <Link href="/direct/inbox" aria-label="Back to conversations" className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-neutral-300 transition hover:bg-neutral-800 md:hidden">
+  <ArrowLeft className="h-5 w-5" />
+ </Link>
+
  <div className='flex gap-4'>
 
 
@@ -117,9 +122,6 @@ let lastDate =""
           </div>
         </div>
  </div>
-<span>
-  :
-</span>
       </div>
 
       {/* 🔥 MESSAGES */}

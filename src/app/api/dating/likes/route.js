@@ -16,9 +16,13 @@ export const GET = async()=>{
         if(!user){
             return NextResponse.json({error:"no user found"},{status:401})
         }
+        const respondedToUser = await Swipe.distinct("fromUser", {
+            toUser: session.user.id
+        });
         const likes = await Swipe.find({
             fromUser:session?.user?.id,
-            action:'like'
+            action:'like',
+            toUser: { $nin: respondedToUser }
         }).
         populate('toUser','username name profilePic age bio')
         .sort({createdAt:-1})

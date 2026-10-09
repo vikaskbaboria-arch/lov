@@ -89,14 +89,14 @@ const LoginPage = () => {
 );
   
   return (
-    <div className="min-h-[91vh] flex items-center justify-center bg-neutral-950 relative overflow-hidden">
+    <div className="relative flex min-h-[91vh] items-center justify-center overflow-hidden bg-neutral-950 px-4 py-8 sm:px-6">
       
       {/* Glow background (same vibe as your hero) */}
      
          {hearts.map((s, i) => <FloatingHeart key={i} style={s} />)}
 
       {/* Card */}
-      <div className="relative z-10 w-full max-w-md p-8 rounded-2xl backdrop-blur-xl border border-red-500/20 bg-white/5 shadow-[0_0_40px_rgba(255,45,120,0.2)]">
+      <div className="relative z-10 w-full max-w-md rounded-2xl border border-red-500/20 bg-white/5 p-5 shadow-[0_0_40px_rgba(255,45,120,0.2)] backdrop-blur-xl sm:p-8">
 
         {/* Logo */}
         <h1 className="text-4xl font-bold text-center mb-2 font-mono tracking-widest bg-gradient-to-r from-red-500 to-emerald-400 bg-clip-text text-transparent">

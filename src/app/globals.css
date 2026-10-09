@@ -28,9 +28,16 @@ body {
   overflow-x: hidden;
 }
 
+@media (max-width: 767px) {
+  body.has-mobile-bottom-nav {
+    padding-bottom: calc(4.25rem + env(safe-area-inset-bottom));
+  }
+}
+
 /* Shared primitives */
 .lov-overlay {
   @apply fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm px-4;
+  z-index: 80;
 }
 
 .lov-modal {

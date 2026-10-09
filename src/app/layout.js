@@ -32,15 +32,13 @@ export default async function RootLayout({ children }) {
      
       <body
 
-        className={`${geistSans.variable} ${geistMono.variable} antialiased  `} 
+        className={`${geistSans.variable} ${geistMono.variable} antialiased ${session ? "has-mobile-bottom-nav" : ""}`} 
       >
      <UserProvider>
      <StatusProvider session={session}/>
      {/* <StatusListener/> */}
-       <Providers> 
-     {/* <Navar/> */}
-     {/* spacer */}
-        
+       <Providers session={session}> 
+          {session && <Navar />}
           {children}
           <Ebdate  />
         </Providers></UserProvider>

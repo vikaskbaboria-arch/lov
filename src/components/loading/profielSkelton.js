@@ -8,7 +8,7 @@ const ProfileSkeleton = () => {
       {/* Profile Section */}
       <div className="max-w-4xl mx-auto p-6">
 
-        <div className="flex items-center gap-6">
+        <div className="flex flex-col items-center gap-6 sm:flex-row sm:items-start">
           
           {/* Profile Image */}
           <div className="w-[150px] h-[150px] rounded-full bg-neutral-800"></div>
@@ -54,11 +54,11 @@ const ProfileSkeleton = () => {
       </div>
 
       {/* Posts Grid */}
-      <div className="max-w-4xl mx-auto mt-4 grid grid-cols-3 gap-3 p-2">
+      <div className="mx-auto mt-4 grid max-w-4xl grid-cols-3 gap-1 p-1 sm:gap-3 sm:p-2">
         {[...Array(9)].map((_, i) => (
           <div
             key={i}
-            className="bg-neutral-800 h-32 rounded-lg"
+            className="aspect-square rounded-md bg-neutral-800 sm:rounded-lg"
           ></div>
         ))}
       </div>

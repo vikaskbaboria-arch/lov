@@ -1,6 +1,5 @@
 "use client";
 import { Heart, MessageCircle, Share2 } from "lucide-react";
-import  Image  from 'next/image';
 import { useSession } from 'next-auth/react'
 import PostDeleteButton from "./post/postDeleteButton";
 import { motion } from "framer-motion";
@@ -21,7 +20,7 @@ const isAdmin = session?.user?.id=== post?.user?._id
   return (
     <>
     {menu && (
-      <div onClick={() => setmenu(false)} className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center px-4">
+      <div onClick={() => setmenu(false)} className="fixed inset-0 z-[90] flex items-center justify-center bg-black/70 px-4 backdrop-blur-sm">
         <div onClick={(e) => e.stopPropagation()} className="w-full max-w-sm overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-950 text-neutral-100 shadow-2xl">
           
           {/* HEADER */}

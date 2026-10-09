@@ -84,7 +84,7 @@ setProfile(prev => ({
   return (
     
   <div className="lov-overlay">
-    <div className="lov-modal w-full max-w-4xl p-6 relative">
+    <div className="lov-modal relative max-h-[90dvh] w-full max-w-4xl overflow-y-auto p-4 sm:p-6">
       
       {/* Close Button */}
       <button
@@ -108,7 +108,7 @@ setProfile(prev => ({
           height={96}
           className="w-24 h-24 rounded-full border border-neutral-800 mb-2"
         />
-        <input type="file" accept="image/*" onChange={handleImage} className="text-sm text-neutral-200 bg-neutral-900 border border-neutral-800 rounded px-2 py-1" />
+        <input type="file" accept="image/*" onChange={handleImage} className="max-w-full rounded border border-neutral-800 bg-neutral-900 px-2 py-1 text-sm text-neutral-200" />
       </div>
 
       {/* Username */}

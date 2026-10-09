@@ -6,7 +6,6 @@ import {
   Wifi, Star, Shield, ChevronRight, Heart, Zap, Filter,
   Bell, Settings, X, Eye
 } from "lucide-react";
-import Navar from "@/components/navbar";
 const FILTERS = ["All", "New", "Online", "Nearby", "Anonymous"];
 
 
@@ -36,7 +35,7 @@ function AnonAvatar({ size = 200 }) {
     <div className="anon-avatar" style={{ width: size, height: size }}>
       <div className="anon-ring" />
       <div className="anon-inner">
-        <Shield size={size * 0.28} color="#10b981" opacity={0.8} />
+      <Shield size={size * 0.28} color="#ff2d78" opacity={0.8} />
       </div>
       <div className="anon-pulse" />
     </div>
@@ -76,7 +75,7 @@ function MatchCard({ match, index }) {
           )}
         </div>
         <div className="match-pct">
-          <Zap size={11} fill="#10b981" color="#10b981" />
+          <Zap size={11} fill="#ff2d78" color="#ff2d78" />
           {match.matchPct}%
         </div>
         {match?.isOnline && (<span className="online-dot " ></span>)}
@@ -126,7 +125,7 @@ function NewMatchBubble({ match }) {
     >
       <div className="bubble-img-wrap">
         {match.isAnon ? (
-          <div className="bubble-img anon-mini"><Shield size={22} color="#10b981" /></div>
+          <div className="bubble-img anon-mini"><Shield size={22} color="#ff2d78" /></div>
         ) : (
           <div className="bubble-img" style={{ backgroundImage: `url(${match.img})` }} />
         )}
@@ -226,11 +225,9 @@ export default function MatchesPage() {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500&display=swap');
-
         *, *::before, *::after { box-sizing: border-box;  }
 
-        body, #root { background: #050508; min-height: 100vh; font-family: 'DM Sans', sans-serif; color: #f0f0f0; }
+        body, #root { background: #0a0a0a; min-height: 100vh; font-family: var(--font-geist-sans), sans-serif; color: #f0f0f0; }
 
         .blob {
           position: fixed; border-radius: 50%; filter: blur(120px);
@@ -299,7 +296,7 @@ export default function MatchesPage() {
 
         .bubble-wrap { display: flex; flex-direction: column; align-items: center; gap: 8px; cursor: pointer; flex-shrink: 0; }
         .bubble-img-wrap { position: relative; }
-        .bubble-img { width: 72px; height: 72px; border-radius: 50%; background-size: cover; background-position: center; border: 2px solid rgba(16,185,129,0.4); transition: border-color 0.2s; }
+          .bubble-img { width: 72px; height: 72px; border-radius: 50%; background-size: cover; background-position: center; border: 2px solid rgba(255,45,120,0.4); transition: border-color 0.2s; }
         .bubble-img.anon-mini { display: flex; align-items: center; justify-content: center; background: rgba(16,185,129,0.08); }
         .bubble-online { position: absolute; bottom: 2px; right: 2px; width: 12px; height: 12px; border-radius: 50%; background: #10b981; border: 2px solid #050508; }
         .bubble-pct { position: absolute; top: -4px; right: -8px; background: rgba(16,185,129,0.9); color: #fff; font-size: 10px; font-weight: 700; padding: 2px 5px; border-radius: 100px; }
@@ -374,8 +371,8 @@ export default function MatchesPage() {
         @keyframes pulse { 0%,100%{transform:scale(1);opacity:0.5} 50%{transform:scale(1.15);opacity:1} }
 
         @media (max-width: 600px) {
-          .page { padding: 32px 16px 64px; }
-          .grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+          .page { padding: 24px 8px 32px; }
+          .grid { grid-template-columns: 1fr; gap: 12px; }
           .card-img-wrap { height: 180px; }
           .card-name { font-size: 15px; }
           .btn { padding: 8px 6px; font-size: 12px; }
@@ -383,24 +380,21 @@ export default function MatchesPage() {
         @media (max-width: 400px) {
           .grid { grid-template-columns: 1fr; }
         }
-      `}</style>
-<Navar/>
-    
 
-     
+        .hero-tag { color: #ff2d78; background: rgba(255,45,120,0.1); border-color: rgba(255,45,120,0.2); }
+        .chip:hover { border-color: rgba(255,45,120,0.3); }
+        .chip.active { background: rgba(255,45,120,0.12); border-color: rgba(255,45,120,0.4); color: #ff8ab4; }
+        .match-card.hovered { border-color: rgba(255,45,120,0.25); box-shadow: 0 0 40px rgba(255,45,120,0.08), 0 20px 60px rgba(0,0,0,0.4); }
+        .badge-new { background: rgba(255,45,120,0.9); }
+        .match-pct { border-color: rgba(255,45,120,0.3); color: #ff8ab4; }
+        .btn-msg { background: rgba(255,45,120,0.12); color: #ff8ab4; border-color: rgba(255,45,120,0.25); }
+        .btn-msg:hover { background: rgba(255,45,120,0.2); box-shadow: 0 0 20px rgba(255,45,120,0.15); }
+        .empty-icon { background: rgba(255,45,120,0.08); border-color: rgba(255,45,120,0.15); }
+        .empty-btn { background: rgba(255,45,120,0.1); border-color: rgba(255,45,120,0.3); color: #ff8ab4; }
+        .empty-btn:hover { background: rgba(255,45,120,0.18); }
+      `}</style>
 
       <main className="page">
-        <motion.div
-          className="hero"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          <div className="hero-tag"><Sparkles size={12} /> Connections</div>
-          <h1 className="hero-title">Your Matches </h1>
-          <p className="hero-sub">People who matched your vibe.</p>
-        </motion.div>
-
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15 }}>
           <div className="search-wrap">
             <Search size={16} className="search-icon" />
@@ -435,7 +429,7 @@ export default function MatchesPage() {
           </div>
         ) : filtered?.length === 0 ? (
           <div className="empty-state">
-            <div className="empty-icon"><Search size={28} color="#10b981" opacity={0.6} /></div>
+            <div className="empty-icon"><Search size={28} color="#ff2d78" opacity={0.6} /></div>
             <h2 className="empty-title">No matches here yet</h2>
             <p className="empty-sub">Try a different filter or broaden your search — your person is out there.</p>
             <button className="empty-btn" onClick={() => { setFilter("All"); setQuery(""); }}>

@@ -1,6 +1,5 @@
 
 import React from 'react'
-import Providers from '@/components/providers.js'
 import { getServerSession } from 'next-auth'
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import Chat from '@/components/messagecomp/chat'
@@ -13,9 +12,8 @@ const {convId} = await params
   const data = await res.json()
     
   return (
-    <div className='text-white h-full'>
-     <Providers><Chat convId ={convId }  members={data}/></Providers>
-      
+    <div className="h-full min-h-0 text-white">
+      <Chat convId={convId} members={data} />
     </div>
   )
 }

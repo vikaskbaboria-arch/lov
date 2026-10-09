@@ -132,7 +132,7 @@ const FloatingHeart = ({ style }) => (
      display: "flex", flexDirection: "column",
       alignItems: "center", justifyContent: "center",
       position: "relative", overflow: "hidden",
-      padding: "6rem 2rem 4rem",
+      padding: "clamp(2rem, 8vh, 6rem) clamp(1rem, 5vw, 2rem) clamp(2rem, 6vh, 4rem)",
       
     }} className="min-h-[91vh] ">
   <style>{`
@@ -155,7 +155,7 @@ const FloatingHeart = ({ style }) => (
 
 
       {/* Card */}
-      <div    className="relative z-10 w-full max-w-md p-8 rounded-2xl backdrop-blur-xl border border-red-500/20 bg-white/5 shadow-[0_0_40px_rgba(255,45,120,0.2)]">
+  <div    className="relative z-10 w-full max-w-md rounded-2xl border border-red-500/20 bg-white/5 p-5 shadow-[0_0_40px_rgba(255,45,120,0.2)] backdrop-blur-xl sm:p-8">
 
         <h1 className="text-2xl font-semibold text-center mb-6">
           Create Account
@@ -174,20 +174,20 @@ const FloatingHeart = ({ style }) => (
           />
 
           {/* Email + OTP */}
-          <div className="flex gap-2">
+          <div className="flex min-w-0 flex-col gap-2 sm:flex-row">
             <input
               type="email"
               name="email"
               placeholder="Email"
               value={form.email}
               onChange={handleChange}
-              className="lov-input flex-1 p-3"
+              className="lov-input min-w-0 flex-1 p-3"
             />
 
             <button  
               onClick={sendOtp}
               style={{
-            padding: "0.85rem 2.2rem",
+            padding: "0.7rem clamp(1rem, 4vw, 2.2rem)",
             background: "transparent",
             border: "1px solid rgba(255,255,255,0.25)", borderRadius: "8px",
             color: "rgba(255,255,255,0.8)", fontSize: "1rem",
@@ -198,7 +198,7 @@ const FloatingHeart = ({ style }) => (
           }}
             onMouseEnter={e => { e.target.style.borderColor = "#ff2d78"; e.target.style.color = "#ff2d78"; e.target.style.boxShadow = "0 0 20px rgba(255,45,120,0.3)"; }}
             onMouseLeave={e => { e.target.style.borderColor = "rgba(255,255,255,0.25)"; e.target.style.color = "rgba(255,255,255,0.8)"; e.target.style.boxShadow = "none"; }}
-              className=" px-4 rounded-lg font-medium "
+              className="w-full shrink-0 rounded-lg px-4 font-medium sm:w-auto"
             >
               Send
             </button>
@@ -227,7 +227,7 @@ const FloatingHeart = ({ style }) => (
           {/* OTP */}
           {otpSent && (
             <>
-            <div className=" flex gap-2">
+            <div className="flex min-w-0 flex-col gap-2 sm:flex-row">
 
 
             <input
@@ -236,10 +236,10 @@ const FloatingHeart = ({ style }) => (
               placeholder="Enter OTP"
               value={form.otp}
               onChange={handleChange}
-              className="lov-input flex-1 p-3"
+              className="lov-input min-w-0 flex-1 p-3"
             />
               <button style={{
-            padding: "0.85rem 2.2rem",
+            padding: "0.7rem clamp(1rem, 4vw, 2.2rem)",
             background: "transparent",
             border: "1px solid rgba(255,255,255,0.25)", borderRadius: "8px",
             color: "rgba(255,255,255,0.8)", fontSize: "1rem",
@@ -250,7 +250,7 @@ const FloatingHeart = ({ style }) => (
           }}
             onMouseEnter={e => { e.target.style.borderColor = "#ff2d78"; e.target.style.color = "#ff2d78"; e.target.style.boxShadow = "0 0 20px rgba(255,45,120,0.3)"; }}
             onMouseLeave={e => { e.target.style.borderColor = "rgba(255,255,255,0.25)"; e.target.style.color = "rgba(255,255,255,0.8)"; e.target.style.boxShadow = "none"; }} onClick={()=>verifyOtp()}
-               className =" px-4 rounded-lg font-medium "
+               className ="w-full shrink-0 rounded-lg px-4 font-medium sm:w-auto"
             >
               verify
             </button>            </div></>

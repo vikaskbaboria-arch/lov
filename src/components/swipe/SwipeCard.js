@@ -138,14 +138,23 @@ const photoCount =
 
         {/* Match % */}
         <div className="absolute right-3 top-7 inline-flex items-center gap-1 rounded-full border border-white/15 bg-black/45 px-2.5 py-1 text-[11px] font-medium text-white backdrop-blur-md">
-          <Heart className="h-3 w-3 fill-rose-400 text-rose-400" />
-          {profile?.matchPercent}% match
+          {typeof profile?.matchPercent === "number" ? (
+            <>
+              <Heart className="h-3 w-3 fill-rose-400 text-rose-400" />
+              {profile.matchPercent}% match
+            </>
+          ) : (
+            <>
+              <Sparkles className="h-3 w-3 text-rose-300" />
+              New around you
+            </>
+          )}
         </div>
 
         {/* Drag direction overlays */}
         <motion.div
           style={{ opacity: likeOpacity }}
-          className="pointer-events-none absolute left-6 top-10 rotate-[-12deg] rounded-xl border-2 border-emerald-400 px-4 py-1.5 text-2xl font-extrabold tracking-widest text-emerald-400"
+          className="pointer-events-none absolute left-6 top-10 rotate-[-12deg] rounded-xl border-2 border-rose-400 px-4 py-1.5 text-2xl font-extrabold tracking-widest text-rose-400"
         >
           LIKE
         </motion.div>
@@ -166,8 +175,8 @@ const photoCount =
         <div className="absolute inset-x-0 bottom-0 p-5 text-white">
           <div className="flex items-end justify-between gap-3">
             <div className="min-w-0">
-              <div className="flex items-center gap-2">
-                <h2 className="font-display text-3xl font-semibold tracking-tight">
+              <div className="flex min-w-0 flex-wrap items-center gap-2">
+                <h2 className="break-words font-display text-2xl font-semibold tracking-tight sm:text-3xl">
                   {profile?.username}{" "}
                   <span className="font-sans text-2xl font-light text-white/80">
                     {profile?.age}
@@ -208,7 +217,7 @@ const photoCount =
 
           {/* Interests */}
           <div className="mt-3 flex flex-wrap gap-1.5">
-            {profile?.interests.slice(0, 4).map((t) => (
+            {profile?.interests?.slice(0, 4).map((t) => (
               <span
                 key={t}
                 className="rounded-full border border-white/15 bg-white/5 px-2.5 py-0.5 text-[11px] text-white/85 backdrop-blur-sm"

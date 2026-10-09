@@ -1,12 +1,7 @@
 export default function HomeSkeleton() {
   return (
     <div className="bg-neutral-950 min-h-screen">
-      {/* NAVBAR */}
-      <div className="h-[60px] border-b border-neutral-900 px-6 flex items-center">
-        <div className="w-28 h-6 rounded bg-neutral-900 animate-pulse" />
-      </div>
-
-      <div className="max-w-6xl mx-auto flex gap-6 px-4 pr-32">
+      <div className="mx-auto flex max-w-6xl gap-4 px-4 sm:gap-6 sm:px-6">
         
         {/* FEED */}
         <div className="flex-1 flex flex-col gap-6 max-w-xl mx-auto">
@@ -84,7 +79,7 @@ export default function HomeSkeleton() {
         </div>
 
         {/* SIDEBAR */}
-        <div className="hidden lg:block fixed top-[70px] right-6 w-[300px]">
+        <div className="fixed right-6 top-[70px] hidden w-[300px] xl:block">
           <div className="p-5 flex flex-col gap-4">
             {[1,2,3,4,5].map((i) => (
               <div

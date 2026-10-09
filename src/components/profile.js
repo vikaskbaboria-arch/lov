@@ -78,14 +78,14 @@ if(loading===true){
 }
 
   return (
-     <div className="min-h-screen bg-neutral-950 text-neutral-100 pt-8
+     <div className="min-h-screen bg-neutral-950 text-neutral-100 pt-6 sm:pt-8
      ">
 
   {/* EDIT MODAL */}
   {edit && <EditProfile setEdit={setEdit} />}
 
   {/* PROFILE SECTION */}
-  <div className="max-w-5xl mx-auto px-6">
+  <div className="mx-auto max-w-5xl px-4 sm:px-6">
 
     <div className="relative">
 
@@ -126,7 +126,7 @@ if(loading===true){
           {/* Username */}
           <div className="flex flex-wrap items-center justify-center gap-2 sm:justify-start">
 
-            <h1 className="text-3xl font-semibold tracking-tight text-neutral-50 sm:text-4xl">
+            <h1 className="max-w-full break-words text-3xl font-semibold tracking-tight text-neutral-50 sm:text-4xl">
               {user?.username}
             </h1>
 
@@ -239,9 +239,9 @@ if(loading===true){
   </div>
 
   {/* TABS */}
-  <div className="max-w-5xl mx-auto mt-10 border-b border-neutral-800">
+  <div className="mx-auto mt-10 max-w-5xl border-b border-neutral-800 px-2 sm:px-0">
 
-    <div className="flex items-center justify-center gap-10 p-3 text-sm">
+    <div className="flex items-center justify-center gap-4 p-3 text-xs sm:gap-10 sm:text-sm">
 
       <button 
         className={`
